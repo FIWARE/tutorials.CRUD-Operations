@@ -181,8 +181,12 @@ Batch operations are always made using a POST request, where the payload is an o
 
 The following examples assume that the Orion Context Broker is listening on port 1026 of `localhost`, and the initial seed data has been imported from the previous tutorial. 
 
-All examples refer to the **Product** entity as defined in the stock management system. CRUD operations will therefore relate to adding, reading,  amending and deleting a product or series of products. This is a typical uses case for a regional manager of  store for example. 
-The actual responses you receive in each case will depend on the state of the context data in your system at the time. If you find that you have already deleted an entity by mistake, you can restore the initial context by stopping and starting the services.
+All examples refer to the **Product** entity as defined in the stock management system. CRUD operations will therefore relate to adding, reading,  amending and deleting a product or series of products. This is a typical use case for a regional manager of store for example - setting prices and deciding what products can be sold.
+The actual responses you receive in each case will depend on the state of the context data in your system at the time. If you find that you have already deleted an entity by mistake, you can restore the initial context by reloading the data from the command line
+
+```bash
+./import-data
+```
 
 
 ## Create Operations
@@ -193,14 +197,12 @@ Create Operations map to HTTP POST.
 
 Any newly created entity must have a `id` and `type` attributes, each additional attributes are optional and will depend on the system being described. Each additional attribute should also have a defined `type` and a `value` attribute.
 
+The response will be **204 - No Content** if the operation is successful or  **422 - Unprocessable Entity** error response if the operation fails
+
 
 ### Create a New Data Entity
 
 This example adds a new **Product** entity to the context.
-
-New entities can be added by making a POST request to the /v2/entities/ endpoint.
-
-The request will fail if any of the attributes already exist in the context.
 
 #### Request:
 
@@ -216,17 +218,14 @@ curl --request POST \
 }'
 ```
 
+New entities can be added by making a POST request to the /v2/entities/ endpoint.
+
+The request will fail if any of the attributes already exist in the context.
+
+
 ### Create a New Attribute
 
 This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`
-
-New attributes can be added by making a POST request to the `/v2/entities/<entity>/attrs` endpoint.
-
-The payload should consist of a JSON object holding the attribute names and values as shown.
-
-If no `type` is specified a default type (`Boolean`, `Text` , `Number` or `StructuredValue`) will be assigned.
-
-Subsequent requests using the same id will update the value of the attribute in the context.
 
 #### Request:
 
@@ -239,20 +238,18 @@ curl --request POST \
 }'
 ```
 
+New attributes can be added by making a POST request to the `/v2/entities/<entity>/attrs` endpoint.
+
+The payload should consist of a JSON object holding the attribute names and values as shown.
+
+If no `type` is specified a default type (`Boolean`, `Text` , `Number` or `StructuredValue`) will be assigned.
+
+Subsequent requests using the same id will update the value of the attribute in the context.
+
 
 ### Batch Create New Data Entities or Attributes
 
 This example uses the convenience batch processing endpoint to add two new **Product** entities and one new attribute (`offerPrice`) to the context.
-
-The request will fail if any of the attributes already exist in the context.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes
-
-* `actionType=APPEND_STRICT` means that the request only succeed all entities / attributes are new.
-* The `entities` attribute holds an array of entities we wish to create.
-
-Subsequent request using the same data with the `actionType=APPEND_STRICT` batch operation will result in an error response.
-
 
 #### Request:
 
@@ -283,20 +280,22 @@ curl --request POST \
 }'
 ```
 
+The request will fail if any of the attributes already exist in the context.
+
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes
+
+* `actionType=APPEND_STRICT` means that the request only succeed all entities / attributes are new.
+* The `entities` attribute holds an array of entities we wish to create.
+
+Subsequent request using the same data with the `actionType=APPEND_STRICT` batch operation will result in an error response.
+
+
 ### Batch Create/Overwrite New Data Entities
 
 This example uses the convenience batch processing endpoint to adds or amend two *Product* entities and one attribute (`offerPrice`) to the context.
 
 * if the entities already exist - the request will update the attributes of an entity.
-
 * if the entities do not exist, a new entity will be created.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes:
-
-* `actionType=APPEND` means we will overwrite existing entities if they exist
-* The entities attribute holds an array of entities we wish to create/overwrite.
-
-A Subsequent request using the same data with the `actionType=APPEND` batch operation can applied without changing the result beyond the initial application.
 
 #### Request:
 
@@ -323,6 +322,14 @@ curl --request POST \
 }'
 ```
 
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes:
+
+* `actionType=APPEND` means we will overwrite existing entities if they exist
+* The entities attribute holds an array of entities we wish to create/overwrite.
+
+A Subsequent request using the same data with the `actionType=APPEND` batch operation can applied without changing the result beyond the initial application.
+
+
 ## Read Operations
 
 * The `/v2/entities` endpoint is used for listing operations
@@ -337,8 +344,6 @@ curl --request POST \
 
 This example reads the full context from an existing Product entity with a known `id`.
 
-Context data can be retrieved by making a GET request to the `/v2/entities/<entity>` endpoint.
-
 #### Request:
 
 ```bash
@@ -346,13 +351,26 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
+#### Response:
+
+Product `urn:ngsi-ld:Product:010` is "Lemonade" at 99 cents. The response is as shown:
+
+```json
+{
+    "id": "urn:ngsi-ld:Product:010",
+    "type": "Product",
+    "name": { "type": "Text","value": "Lemonade","metadata": {}},
+    "price": { "type": "Integer","value": 99,"metadata": {}},
+    "size": { "type": "Text","value": "S","metadata": {}}
+}
+```
+
+Context data can be retrieved by making a GET request to the `/v2/entities/<entity>` endpoint.
 
 
 ### Read an Attribute from a Data Entity
 
 This example reads the value of a single attribute (`name`) from an existing **Product** entity with a known `id`.
-
-Context data can be retrieved by making a GET request to the `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
 
 #### Request:
 
@@ -361,11 +379,20 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value'
 ```
 
+#### Response:
+
+Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is as shown:
+
+```json
+"Beer"
+```
+
+Context data can be retrieved by making a GET request to the `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
+
+
 ### Read a Data Entity (key value pairs)
 
 This example reads the key-value pairs for two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known `id`.
-
-Combine the `options=keyValues` parameter and the `attrs` parameter to obtain key-value pairs.
 
 #### Request:
 
@@ -374,11 +401,26 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price'
 ```
 
+#### Response:
+
+Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is as shown:
+
+```json
+{
+    "id": "urn:ngsi-ld:Product:001",
+    "type": "Product",
+    "name": "Beer",
+    "price": 99
+}
+```
+
+Combine the `options=keyValues` parameter and the `attrs` parameter to obtain key-value pairs.
+
+
+
 ### Read Multiple attributes values from a Data Entity
 
-This example reads the value of two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known id.
-
-Combine the `options=values` parameter and the `attrs` parameter to return a list of values in an array
+This example reads the value of two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known id. 
 
 #### Request:
 
@@ -387,9 +429,25 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price'
 ```
 
+#### Response:
+
+Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is as shown:
+
+```json
+[
+    "Beer",
+    99
+]
+```
+
+Combine the `options=values` parameter and the `attrs` parameter to return a list of values in an array
+
+
+
+
 ### List all Data Entities (verbose)
 
-This example lists the full context of all **Product** entities.
+This example lists the full context of all **Product** entities.  
 
 #### Request:
 
@@ -398,11 +456,104 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/?type=Product'
 ```
 
+### Response:
+
+On Start up the context held nine products, three more have been added by the create operations so the full context will return twelve products.
+
+```json
+[
+    {
+        "id": "urn:ngsi-ld:Product:001",
+        "type": "Product",
+        "name": {"type": "Text","value": "Beer","metadata": {}},
+        "offerPrice": {"type": "Integer","value": 89,"metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}},
+        "specialOffer": {"type": "Boolean","value": true,"metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:002",
+        "type": "Product",
+        "name": {"type": "Text","value": "Red Wine","metadata": {}},
+        "price": {"type": "Integer","value": 1099,"metadata": {}},
+        "size": {"type": "Text","value": "M","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:003",
+        "type": "Product",
+        "name": {"type": "Text","value": "White Wine","metadata": {}},
+        "price": {"type": "Integer","value": 1499,"metadata": {}},
+        "size": {"type": "Text","value": "M","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:004",
+        "type": "Product",
+        "name": {"type": "Text","value": "Vodka","metadata": {}},
+        "price": {"type": "Integer","value": 5000,"metadata": {}},
+        "size": {"type": "Text","value": "XL","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:005",
+        "type": "Product",
+        "name": {"type": "Text","value": "Lager","metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:006",
+        "type": "Product",
+        "name": {"type": "Text","value": "Whisky","metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:007",
+        "type": "Product",
+        "name": {"type": "Text","value": "Gin","metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:008",
+        "type": "Product",
+        "name": {"type": "Text","value": "Apple Juice","metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:009",
+        "type": "Product",
+        "name": {"type": "Text","value": "Orange Juice","metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:010",
+        "type": "Product",
+        "name": {"type": "Text","value": "Lemonade","metadata": {}},
+        "price": {"type": "Integer","value": 99,"metadata": {}},
+        "size": {"type": "Text","value": "S","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:011",
+        "type": "Product",
+        "name": {"type": "Text","value": "Brandy","metadata": {}},
+        "price": {"type": "Integer","value": 1199,"metadata": {}},
+        "size": {"type": "Text","value": "M","metadata": {}}
+    },
+    {
+        "id": "urn:ngsi-ld:Product:012",
+        "type": "Product",
+        "name": {"type": "Text","value": "Port","metadata": {}},
+        "price": {"type": "Integer","value": 1099,"metadata": {}},
+        "size": {"type": "Text","value": "M","metadata": {}}
+    }
+]
+```
+
 ### List all Data Entities (key value pairs)
 
 This example lists the `name` and `price` attributes of all **Product** entities.
-
-Full context data for a specified entity type can be retrieved by making a GET request to the /v2/entities/ endpoint and supplying the type parameter combine this with the options=keyValues parameter and the attrs parameter to obtain key-values.
 
 #### Request:
 
@@ -411,11 +562,92 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
 ```
 
+#### Response:
+On Start up the context held nine products, three more have been added by the create operations so the full context will return twelve products.
+
+```json
+[
+    {
+        "id": "urn:ngsi-ld:Product:001",
+        "type": "Product",
+        "name": "Beer",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:002",
+        "type": "Product",
+        "name": "Red Wine",
+        "price": 1099
+    },
+    {
+        "id": "urn:ngsi-ld:Product:003",
+        "type": "Product",
+        "name": "White Wine",
+        "price": 1499
+    },
+    {
+        "id": "urn:ngsi-ld:Product:004",
+        "type": "Product",
+        "name": "Vodka",
+        "price": 5000
+    },
+    {
+        "id": "urn:ngsi-ld:Product:005",
+        "type": "Product",
+        "name": "Lager",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:006",
+        "type": "Product",
+        "name": "Whisky",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:007",
+        "type": "Product",
+        "name": "Gin",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:008",
+        "type": "Product",
+        "name": "Apple Juice",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:009",
+        "type": "Product",
+        "name": "Orange Juice",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:010",
+        "type": "Product",
+        "name": "Lemonade",
+        "price": 99
+    },
+    {
+        "id": "urn:ngsi-ld:Product:011",
+        "type": "Product",
+        "name": "Brandy",
+        "price": 1199
+    },
+    {
+        "id": "urn:ngsi-ld:Product:012",
+        "type": "Product",
+        "name": "Port",
+        "price": 1099
+    }
+]
+```
+
+Full context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities/` endpoint and supplying the `type` parameter, combine this with the o`ptions=keyValues` parameter and the `attrs` parameter to obtain key-values.
+
+
 ### List Data Entity by id
 
 This example lists the `id` and `type` of all **Product** entities.
-
-Context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities/` endpoint and supplying the `type` parameter. Combine this with `options=count` and `attrs=id` to return the `id` attributes of the given `type`
 
 #### Request:
 
@@ -424,6 +656,65 @@ curl --request GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
 ```
 
+#### Response:
+On Start up the context held nine products, three more have been added by the create operations so the full context will return twelve products.
+
+```json
+[
+    {
+        "id": "urn:ngsi-ld:Product:001",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:002",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:003",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:004",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:005",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:006",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:007",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:008",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:009",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:010",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:011",
+        "type": "Product"
+    },
+    {
+        "id": "urn:ngsi-ld:Product:012",
+        "type": "Product"
+    }
+]
+```
+
+Context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities/` endpoint and supplying the `type` parameter. Combine this with `options=count` and `attrs=id` to return the `id` attributes of the given `type`
+
+
 ## Update Operations
 
 Overwrite operations are mapped to HTTP PUT. HTTP PATCH can be used to update several attributes at once.
@@ -431,11 +722,10 @@ Overwrite operations are mapped to HTTP PUT. HTTP PATCH can be used to update se
 * The `/v2/entities/<entity>/attrs/<attribute>/value` endpoint is used to update an attribute
 * The `/v2/entities/<entity>/attrs` endpoint is used to update multiple attributes
 
+
 ### Overwrite the value of an Attribute value
 
 This example updates the value of the price attribute of the Entity with `id=urn:ngsi-ld:Product:001`
-
-Existing attribute values can be altered by making a PUT request to the `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
 
 #### Request:
 
@@ -446,12 +736,12 @@ curl --request PUT \
   --data 89
 ```
 
+Existing attribute values can be altered by making a PUT request to the `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
+
+
 ### Overwrite Multiple Attributes of a Data Entity
 
 This example simultaneously updates the values of both the price and name attributes of the Entity with `id=urn:ngsi-ld:Product:001`
-
-Multiple Existing attribute values can be updated by making a PATCH request to the `/v2/entities/<entity>/attrs` endpoint.
-
 
 #### Request:
 
@@ -464,11 +754,10 @@ curl --request PATCH \
 }'
 ```
 
+
 ### Batch Overwrite Attributes of Multiple Data Entities
 
 This example uses the convenience batch processing endpoint to create a series of available products.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
 
 #### Request:
 
@@ -492,11 +781,12 @@ curl --request POST \
 }'
 ```
 
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
+
+
 ### Batch Create/Overwrite Attributes of Multiple Data Entities
 
 This example uses the convenience batch processing endpoint to create a series of available products.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
 
 #### Request:
 
@@ -520,12 +810,13 @@ curl --request POST \
 }'
 ```
 
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
+
+
+
 ### Batch Replace Entity Data
 
 This example uses the convenience batch processing endpoint to create a series of available products.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=REPLACE` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
-
 
 #### Request:
 
@@ -544,11 +835,16 @@ curl --request POST \
 }'
 ```
 
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=REPLACE` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
+
+
 ## Delete Operations
 Delete Operations map to HTTP DELETE.
 
 * The `/v2/entities/<entity>` endpoint is used to delete an entity
 * The `/v2/entities/<entity>/attrs/<attribute>` endpoint is used to delete an attribute
+
+The response will be **204 - No Content** if the operation is successful or  **404 - Not Found** error response if the operation fails
 
 
 ### Data Relationships
@@ -560,10 +856,6 @@ Organizing a cascade of deletions is beyond the scope of this tutorial, but it w
 
 This example deletes the Entity with `id=urn:ngsi-ld:Product:001` from the context
 
-Entities be deleted by making a DELETE request to the `/v2/entities/<entity>` endpoint.
-
-Subsequent requests using the same `id` will result in an error response since the entity no longer exists in the context.
-
 #### Request:
 
 ```bash
@@ -571,13 +863,14 @@ curl --request DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
+Entities be deleted by making a DELETE request to the `/v2/entities/<entity>` endpoint.
+
+Subsequent requests using the same `id` will result in an error response since the entity no longer exists in the context.
+
+
 ### Delete an Attribute from a Data Entity
 
 This example remove the `specialOffer` attribute from the entity with `id=urn:ngsi-ld:Product:010`
-
-Attributes can be deleted by making a DELETE request to the `/v2/entities/<entity>/attrs/<attribute>` endpoint.
-
-If the attribute does not exist in the context, the result in an error response.
 
 #### Request:
 
@@ -586,14 +879,13 @@ curl --request DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010/attrs/specialOffer'
 ```
 
+Attributes can be deleted by making a DELETE request to the `/v2/entities/<entity>/attrs/<attribute>` endpoint.
+
+If the attribute does not exist in the context, the result in an error response.
+
 ### Batch Delete Multiple Data Entities
 
 This example uses the convenience batch processing endpoint to delete a series of available **Product** entities.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=DELETE` means we will delete something from the context and the `entities` attribute holds the `id` of the entities we wish to update.
-
-If any entity does not exist in the context, the result in an error response.
-
 
 #### Request:
 
@@ -614,13 +906,13 @@ curl --request POST \
 }'
 ```
 
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=DELETE` means we will delete something from the context and the `entities` attribute holds the `id` of the entities we wish to update.
+
+If any entity does not exist in the context, the result in an error response.
+
 ### Batch Delete Multiple Attributes from a Data Entity
 
 This example uses the convenience batch processing endpoint to delete a series of attributes from an available **Product** entity.
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=DELETE` means we will delete something from the context and the `entities` attribute holds an array of attributes we wish to update.
-
-If any attribute does not exist in the context, the result will be an error response.
 
 #### Request:
 
@@ -640,12 +932,46 @@ curl --request POST \
 }'
 ```
 
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=DELETE` means we will delete something from the context and the `entities` attribute holds an array of attributes we wish to update.
+
+If any attribute does not exist in the context, the result will be an error response.
+
 ### Find existing data relationships
 
 This example returns the key of all entities directly associated with the `urn:ngsi-ld:Product:001`.
 
+#### Request:
+
+```bash
+curl --request GET \
+  --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
+```
+
+#### Response:
+
+```json
+[
+    {
+        "id": "urn:ngsi-ld:InventoryItem:001",
+        "type": "InventoryItem"
+    },
+    {
+        "id": "urn:ngsi-ld:InventoryItem:004",
+        "type": "InventoryItem"
+    },
+    {
+        "id": "urn:ngsi-ld:InventoryItem:006",
+        "type": "InventoryItem"
+    },
+    {
+        "id": "urn:ngsi-ld:InventoryItem:401",
+        "type": "InventoryItem"
+    }
+]
+```
+
 * If this request returns an empty array, the entity has no associates - it can be safely deleted
-* If the response lists a series of InventoryItem entities they should be deleted before the product is removed from the context.
+* If the response lists a series of **InventoryItem** entities they should be deleted before the associated **Product** entity is removed from the context.
 
 
 
