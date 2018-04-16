@@ -99,13 +99,24 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 The Orion Context Broker server uses [NGSI](http://fiware.github.io/specifications/ngsiv2/latest/) to manipulate the context data. As a RESTful API, it follows the standard conventions when mapping HTTP verbs to requests to manipulate the data held within the context. 
 
+## Entity CRUD Operations
 
-| HTTP Verb   | `/v2/entities`  | `/v2/entities/<entity-id>`  | `/v2/entities/<entity-id>/attrs`  | `/v2/entities/<entity-id>/attrs/<attribute>`  | `/v2/entities/<entity-id>/attrs/<attribute>/value`  |
-|-----------  |:------------------------------------------------------------------------------------------------------------: |:----------------------------------------------------------------------------------------------------------------------: |:---------------------------------------------------------------- |------------------------------------------------------: |:-----------------------------------------------------------------------------------------:  |
-| **POST**  | CREATE a new entity and add to the context.  | CREATE or UPDATE an attribute of a specified entity.   | :x:   | :x:   | :x:   |
-| **GET**   | READ entity data from the context.<br>This will return data from multiple entities. The data can be filtered.  | READ entity data from a specified entity.<br>This will return data from a single entity only.<br>The data can be filtered.  | :x:   | :x:   | READ the value of an attribute from a specified entity.<br>This will return a single field.   |
-| **PUT**   | :x:   | :x:   | :x:   | :x:   | UPDATE the value of single attribute from a specified entity.   |
-| **PATCH**   | :x:   | :x:   | UPDATE one or more existing attributes from an existing entity.  | :x:   | :x:   |
-| **DELETE**  | :x:  | DELETE an entity from the context   |  :x: | DELETE an existing attribute from an existing entity.  | :x:  |
+| HTTP Verb   | `/v2/entities`  | `/v2/entities/<entity-id>`  |
+|-----------  |:--------------: |:--------------------------: |
+| **POST**    | CREATE a new entity and add to the context.  | CREATE or UPDATE an attribute of a specified entity. |
+| **GET**     | READ entity data from the context.<br><br>This will return data from multiple entities. The data can be filtered.  | READ entity data from a specified entity.<br><br>This will return data from a single entity only.<br><br>The data can be filtered.  | 
+| **PUT**     | :x:   | :x:   |
+| **PATCH**   | :x:   | :x:   |
+| **DELETE**  | :x:  | DELETE an entity from the context   | 
+
+## Attribute CRUD Operations
+
+| HTTP Verb   | `/v2/entities/<entity-id>/attrs`  | `/v2/entities/<entity-id>/attrs/<attribute>`  | `/v2/entities/<entity-id>/attrs/<attribute>/value`  |
+|-----------  |:--------------------------------: |:--------------------------------------------: |:------------------------------------------------------: |
+| **POST**  |  :x:   | :x:   | :x:   |
+| **GET**   |  :x:   | :x:   | READ the value of an attribute from a specified entity.<br>This will return a single field.   |
+| **PUT**   |  :x:   | :x:   | UPDATE the value of single attribute from a specified entity.   |
+| **PATCH** |  UPDATE one or more existing attributes from an existing entity.  | :x:   | :x:   |
+| **DELETE**|  :x: | DELETE an existing attribute from an existing entity.  | :x:  |
 
 
