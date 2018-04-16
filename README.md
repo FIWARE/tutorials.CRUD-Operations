@@ -202,7 +202,7 @@ The response will be **204 - No Content** if the operation is successful or  **4
 
 ### Create a New Data Entity
 
-This example adds a new **Product** entity to the context.
+This example adds a new **Product** entity ("Lemonade" at 99 cents) to the context.
 
 #### Request:
 
@@ -218,14 +218,23 @@ curl --request POST \
 }'
 ```
 
-New entities can be added by making a POST request to the /v2/entities/ endpoint.
+New entities can be added by making a POST request to the `/v2/entities/` endpoint.
 
 The request will fail if any of the attributes already exist in the context.
+
+You can check to see if the new **Product** can be found in the context by making a GET request
+
+```bash
+curl --request GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
+```
+
+
 
 
 ### Create a New Attribute
 
-This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`
+This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`. 
 
 #### Request:
 
@@ -244,7 +253,17 @@ The payload should consist of a JSON object holding the attribute names and valu
 
 If no `type` is specified a default type (`Boolean`, `Text` , `Number` or `StructuredValue`) will be assigned.
 
-Subsequent requests using the same id will update the value of the attribute in the context.
+Subsequent requests using the same `id` will update the value of the attribute in the context.
+
+You can check to see if the new **Product** attribute can be found in the context by making a GET request
+
+```bash
+curl --request GET \
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
+```
+
+As you can see there is now  boolean `specialOffer` flag attached to the "Beer" **Product** entity
+
 
 
 ### Batch Create New Data Entities or Attributes
@@ -299,7 +318,7 @@ This example uses the convenience batch processing endpoint to adds or amend two
 
 #### Request:
 
-```bash`
+```bash
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
