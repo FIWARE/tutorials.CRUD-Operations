@@ -157,8 +157,8 @@ To perform CRUD operations on attributes, the `<entity>` must be known. Each att
 *  `/v2/entities/<entity>/attrs/<attribute>/value`  is used to read or update the `value` of an attribute, leaving the `type` untouched.
 
 
-| HTTP Verb   | `/v2/entities/<entity>/attrs`  | `/v2/entities/<entity>/attrs/<attribute>`  | `/v2/entities/<entity>/attrs/<attribute>/value`  |
-|-----------  |:-----------------------------: |:-----------------------------------------: |:-----------------------------------------------: |
+| HTTP Verb   | `.../attrs`  | `.../attrs/<attribute>`  | `.../attrs/<attribute>/value`  |
+|-----------  |:-----------: |:-----------------------: |:-----------------------------: |
 | **POST**    |  :x:   | :x:   | :x:   |
 | **GET**     |  :x:   | :x:   | READ the value of an attribute from a specified entity. This will return a single field.   |
 | **PUT**     |  :x:   | :x:   | UPDATE the value of single attribute from a specified entity.   |
