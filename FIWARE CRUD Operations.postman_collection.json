@@ -1,0 +1,724 @@
+{
+	"info": {
+		"_postman_id": "9945b75a-b028-41d4-8be4-683bfec0390f",
+		"name": "FIWARE CRUD Operations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create Operations",
+			"description": "",
+			"item": [
+				{
+					"name": "Create a New Data Entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n      \"id\":\"urn:ngsi-ld:Product:010\", \"type\":\"Product\",\n      \"name\":{\"type\":\"Text\", \"value\":\"Lemonade\"},\n      \"size\":{\"type\":\"Text\", \"value\": \"S\"},\n      \"price\":{\"type\":\"Integer\", \"value\": 99}\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Create New Data Entities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"APPEND_STRICT\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:011\", \"type\":\"Product\",\n      \"name\":{\"type\":\"Text\", \"value\":\"Brandy\"},\n      \"size\":{\"type\":\"Text\", \"value\": \"M\"},\n      \"price\":{\"type\":\"Integer\", \"value\": 1199}\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:012\", \"type\":\"Product\",\n      \"name\":{\"type\":\"Text\", \"value\":\"Port\"},\n      \"size\":{\"type\":\"Text\", \"value\": \"M\"},\n      \"price\":{\"type\":\"Integer\", \"value\": 1099}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update/",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update",
+								""
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Create/Overwrite New Data Entities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:011\", \"type\":\"Product\",\n      \"name\":{\"type\":\"Text\", \"value\":\"Brandy\"},\n      \"size\":{\"type\":\"Text\", \"value\": \"M\"},\n      \"price\":{\"type\":\"Integer\", \"value\": 1199}\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:012\", \"type\":\"Product\",\n      \"name\":{\"type\":\"Text\", \"value\":\"Port\"},\n      \"size\":{\"type\":\"Text\", \"value\": \"M\"},\n      \"price\":{\"type\":\"Integer\", \"value\": 1099}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update/",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update",
+								""
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Add new Attributes to a Data Entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"APPEND_STRICT\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\",\n      \"specialOffer\":{\"type\":\"Boolean\", \"value\": true}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Create/Overwrite Entity Attributes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\",\n      \"specialOffer\":{\"type\":\"Boolean\", \"value\": true}\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:002\", \"type\":\"Product\",\n      \"specialOffer\":{\"type\":\"Boolean\", \"value\": false}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Read Operations",
+			"description": "",
+			"item": [
+				{
+					"name": "Read a Data Entity (verbose)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read a Data Entity (key value pairs)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:001",
+								""
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "keyValues"
+								},
+								{
+									"key": "attrs",
+									"value": "name,price"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read an Attribute from a Data Entity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:001",
+								"attrs",
+								"name",
+								"value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Multiple attributes from a Data Entity",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:001",
+								""
+							],
+							"query": [
+								{
+									"key": "options",
+									"value": "values"
+								},
+								{
+									"key": "attrs",
+									"value": "name,price"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all Data Entities (verbose)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/?type=Product",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Product"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List all Data Entities (key value pairs)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/?type=Product&options=keyValues&attrs=name,price",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Product"
+								},
+								{
+									"key": "options",
+									"value": "keyValues"
+								},
+								{
+									"key": "attrs",
+									"value": "name,price"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Data Entity Ids",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/?type=Product&options=count&attrs=type",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "type",
+									"value": "Product"
+								},
+								{
+									"key": "options",
+									"value": "count"
+								},
+								{
+									"key": "attrs",
+									"value": "type"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Update Operations",
+			"description": "",
+			"item": [
+				{
+					"name": "Update an Attribute value",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\n      \"price\":{\"type\":\"Integer\", \"value\": 89}\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001/attrs",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:001",
+								"attrs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update an Attribute value (short form)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/plain"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "89"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:001/attrs/price/value",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:001",
+								"attrs",
+								"price",
+								"value"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Update Attributes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"UPDATE\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\",\n      \"price\":{\"type\":\"Integer\", \"value\": 1199}\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:002\", \"type\":\"Product\",\n      \"price\":{\"type\":\"Integer\", \"value\": 1199},\n      \"size\": {\"type\":\"Text\", \"value\": \"L\"}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Batch  Create/Overwrite Attributes",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"APPEND\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\",\n      \"price\":{\"type\":\"Integer\", \"value\": 1199}\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:002\", \"type\":\"Product\",\n      \"price\":{\"type\":\"Integer\", \"value\": 1199},\n      \"specialOffer\": {\"type\":\"Boolean\", \"value\":  true}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Replace Entity Data",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"REPLACE\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\",\n      \"price\":{\"type\":\"Integer\", \"value\": 1199}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Delete Operations",
+			"description": "",
+			"item": [
+				{
+					"name": "Delete a Data Entity",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/urn:ngsi-ld:Product:010",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								"urn:ngsi-ld:Product:010"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete an Attribute from a Data Entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"DELETE\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:010\", \"type\":\"Product\",\n      \"specialOffer\":{\"type\":\"Boolean\", \"value\": true}\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Delete  Multiple Attributes from a Data Entity",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"DELETE\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\"\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:002\", \"type\":\"Product\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Batch Delete Multiple Data Entities",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\":\"DELETE\",\n  \"entities\":[\n    {\n      \"id\":\"urn:ngsi-ld:Product:001\", \"type\":\"Product\"\n    },\n    {\n      \"id\":\"urn:ngsi-ld:Product:002\", \"type\":\"Product\"\n    }\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/op/update",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"op",
+								"update"
+							]
+						},
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [draft recommendation](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)  and has been assigned `type=Product`."
+					},
+					"response": []
+				},
+				{
+					"name": "Find existing data relationships",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"actionType\": \"APPEND\",\n  \"entities\": [\n    {\n    \"id\": \"7770\",\n    \"type\": \"Shelf\",\n    \"store\": { \n      \"type\": \"Relationship\",\n      \"value\": \"urn:ngsi-ld:Store:store1\"\n    },\n    \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n           \"type\": \"Point\",\n           \"coordinates\": [13.3986112, 52.554699]\n        }\n    },\n    \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Corner Unit\"\n    },\n    \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 50\n    }\n},\n\n {\n      \"id\": \"7771\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 1\"\n      },\n      \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    },\n    \n    {\n      \"id\": \"7772\",\n      \"type\": \"Shelf\",\n      \"store\": {\n        \"type\": \"Relationship\",\n        \"value\": \"urn:ngsi-ld:Store:store1\"\n      },\n      \"location\": {\n        \"type\": \"geo:json\",\n        \"value\": {\n          \"type\": \"Point\",\n          \"coordinates\": [\n            13.3987221,\n            52.5546640\n          ]\n        }\n      },\n      \"name\": {\n        \"type\": \"Text\",\n        \"value\": \"Wall Unit 2\"\n      },\n      \"maxCapacity\": {\n        \"type\": \"Integer\",\n        \"value\": 100\n      }\n    }\n    \n    \n\n\n\n\n  ]\n}"
+						},
+						"url": {
+							"raw": "http://{{orion}}/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type",
+							"protocol": "http",
+							"host": [
+								"{{orion}}"
+							],
+							"path": [
+								"v2",
+								"entities",
+								""
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "refProduct==urn:ngsi-ld:Product:001"
+								},
+								{
+									"key": "options",
+									"value": "count",
+									"description": "* `keyValues` option in order to get a more compact and brief representation, including just attribute values\n* `values` option combined with a list of attribute values  `attrs`  for an ordered list of attributes only"
+								},
+								{
+									"key": "attrs",
+									"value": "type",
+									"description": "Ordered list of attribute names to display"
+								}
+							]
+						},
+						"description": "This example returns the key of all entities directly associated with the `urn:ngsi-ld:Store:001`.\n\nThe response lists a series of Shelf and InventoryItem entities - there are no products since there is no direct relationship between product and store.\n\nIf this request returns an empty array, the entity has no associates."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "dff76437-6762-4f0f-9258-d0e5c77cca33",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "afdd2592-13bb-436d-a728-8af2d8c3d958",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "a81b0ce2-e853-4ab1-b6fc-d6e7342acdd4",
+			"key": "orion",
+			"value": "localhost:1026",
+			"type": "string",
+			"description": ""
+		}
+	]
+}
