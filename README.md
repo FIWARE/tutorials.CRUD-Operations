@@ -115,7 +115,7 @@ We will start up our services using a simple bash script. Windows users should d
 
 All services can be initialised from the command line by running the bash script provided within the repository:
 
-```bash
+```console
 ./services start
 ```
 
@@ -184,7 +184,7 @@ The following examples assume that the Orion Context Broker is listening on port
 All examples refer to the **Product** entity as defined in the stock management system. CRUD operations will therefore relate to adding, reading,  amending and deleting a product or series of products. This is a typical use case for a regional manager of store for example - setting prices and deciding what products can be sold.
 The actual responses you receive in each case will depend on the state of the context data in your system at the time. If you find that you have already deleted an entity by mistake, you can restore the initial context by reloading the data from the command line
 
-```bash
+```console
 ./import-data
 ```
 
@@ -206,7 +206,7 @@ This example adds a new **Product** entity ("Lemonade" at 99 cents) to the conte
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/entities/' \
   --header 'Content-Type: application/json' \
@@ -224,7 +224,7 @@ The request will fail if any of the attributes already exist in the context.
 
 You can check to see if the new **Product** can be found in the context by making a GET request
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
@@ -238,7 +238,7 @@ This example adds a new `specialOffer` attribute to the existing **Product** ent
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
@@ -257,7 +257,7 @@ Subsequent requests using the same `id` will update the value of the attribute i
 
 You can check to see if the new **Product** attribute can be found in the context by making a GET request
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
 ```
@@ -272,7 +272,7 @@ This example uses the convenience batch processing endpoint to add two new **Pro
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
@@ -318,7 +318,7 @@ This example uses the convenience batch processing endpoint to adds or amend two
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
@@ -365,7 +365,7 @@ This example reads the full context from an existing Product entity with a known
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
@@ -393,7 +393,7 @@ This example reads the value of a single attribute (`name`) from an existing **P
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value'
 ```
@@ -415,7 +415,7 @@ This example reads the key-value pairs for two requested attributes (`name` and 
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price'
 ```
@@ -443,7 +443,7 @@ This example reads the value of two requested attributes (`name` and `price`) fr
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price'
 ```
@@ -470,7 +470,7 @@ This example lists the full context of all **Product** entities.
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/?type=Product'
 ```
@@ -576,7 +576,7 @@ This example lists the `name` and `price` attributes of all **Product** entities
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
 ```
@@ -670,7 +670,7 @@ This example lists the `id` and `type` of all **Product** entities.
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
 ```
@@ -748,7 +748,7 @@ This example updates the value of the price attribute of the Entity with `id=urn
 
 #### Request:
 
-```bash
+```console
 curl --request PUT \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/price/value' \
   --header 'Content-Type: text/plain' \
@@ -764,7 +764,7 @@ This example simultaneously updates the values of both the price and name attrib
 
 #### Request:
 
-```bash
+```console
 curl --request PATCH \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
@@ -780,7 +780,7 @@ This example uses the convenience batch processing endpoint to create a series o
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
@@ -809,7 +809,7 @@ This example uses the convenience batch processing endpoint to create a series o
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
@@ -839,7 +839,7 @@ This example uses the convenience batch processing endpoint to create a series o
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
@@ -877,7 +877,7 @@ This example deletes the Entity with `id=urn:ngsi-ld:Product:001` from the conte
 
 #### Request:
 
-```bash
+```console
 curl --request DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
@@ -893,7 +893,7 @@ This example remove the `specialOffer` attribute from the entity with `id=urn:ng
 
 #### Request:
 
-```bash
+```console
 curl --request DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010/attrs/specialOffer'
 ```
@@ -908,7 +908,7 @@ This example uses the convenience batch processing endpoint to delete a series o
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
@@ -935,7 +935,7 @@ This example uses the convenience batch processing endpoint to delete a series o
 
 #### Request:
 
-```bash
+```console
 curl --request POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
@@ -961,7 +961,7 @@ This example returns the key of all entities directly associated with the `urn:n
 
 #### Request:
 
-```bash
+```console
 curl --request GET \
   --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
 ```
