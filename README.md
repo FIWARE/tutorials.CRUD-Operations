@@ -6,6 +6,9 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/825950653bc2350307c3)
 
+
+* このチュートリアルは[日本語](https://github.com/Fiware/tutorials.CRUD-Operations/blob/master/README.ja.md)でもご覧いただけます。
+
 # Contents
 
 - [Data Entities](#data-entities)
