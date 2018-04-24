@@ -6,11 +6,17 @@
 
 set -e
 
+
+curl () {
+  docker run --network fiware_default --rm appropriate/curl -s \
+    "$@"
+}
+
 #
 # Create four Store Entities in various locations across Berlin
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -g -d '{
   "actionType": "APPEND",
@@ -47,7 +53,7 @@ curl -X POST \
 # Each shelf is designed to hold one product.
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -g -d '{
   "actionType": "APPEND",
@@ -130,7 +136,7 @@ curl -X POST \
 # These are a series of alcoholc and non-alcoholic drinks which are available to sell.
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
   "actionType":"APPEND",
@@ -198,7 +204,7 @@ curl -X POST \
 # These the drinks on order in Store:001
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
   "actionType":"APPEND",
@@ -235,7 +241,7 @@ curl -X POST \
 # These the drinks on order in Store:002
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
   "actionType":"APPEND",
@@ -264,7 +270,7 @@ curl -X POST \
 # Note that Shelf Unit009 is currently unused
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
   "actionType":"APPEND",
@@ -301,7 +307,7 @@ curl -X POST \
 # These the drinks on order in Store:004
 #
 curl -X POST \
-  'http://localhost:1026/v2/op/update' \
+  'http://orion:1026/v2/op/update' \
   -H 'Content-Type: application/json' \
   -d '{
   "actionType":"APPEND",
