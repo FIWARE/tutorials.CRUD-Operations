@@ -1,4 +1,4 @@
-![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/Fiware.png)
+![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png)
 
 このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。
 

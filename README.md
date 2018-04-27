@@ -1,4 +1,4 @@
-![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/Fiware.png)
+![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png)
 
 This tutorial teaches FIWARE users about CRUD Operations.
 
@@ -126,6 +126,12 @@ All services can be initialised from the command line by running the bash script
 
 This command will also import seed data from the previous [Store Finder tutorial](https://github.com/Fiware/tutorials.Entity-Relationships) on startup.
 
+>:information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+>
+>```console
+>./services stop
+>``` 
+>
 
 # What is CRUD?
 
