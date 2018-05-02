@@ -140,7 +140,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 
 **Create**, **Read**, **Update**, **Delete** は、永続ストレージの4つの基本機能です。これらのオペレーションは、通常、頭文字の CRUD を使用して参照されます。データベース内では、これらのオペレーションはそれぞれ一連のコマンドに直接マッピングされますが、RESTful API との関係はやや複雑です。
 
-Orion Context Broker サーバは、[NGSI](http://fiware.github.io/specifications/ngsiv2/latest/) を使用してコンテキスト・データをオペレーションします。RESTful APIとして、コンテキスト内に保持されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーションにマッピングする際に見られる標準的な規則に従います。
+Orion Context Broker サーバは、[NSGI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json) を使用してコンテキスト・データをオペレーションします。RESTful APIとして、コンテキスト内に保持されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーションにマッピングする際に見られる標準的な規則に従います。
 
 <a name="entity-crud-operations"></a>
 ## エンティティ CRUD オペレーション

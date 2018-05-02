@@ -215,7 +215,7 @@ curl -X POST \
   		"refShelf":{"type":"Relationship","value":"urn:ngsi-ld:Shelf:unit001"},
   		"refProduct":{"type":"Relationship","value":"urn:ngsi-ld:Product:001"},
   		"stockCount":{"type":"Integer","value":10000},
-  		"shelfCount":{"type":"Integer","value":50}
+  		"shelfCount":{"type":"Integer","value":15}
   	},
   	{
   		"id":"urn:ngsi-ld:InventoryItem:002","type":"InventoryItem",
@@ -223,7 +223,7 @@ curl -X POST \
   		"refShelf":{"type":"Relationship","value":"urn:ngsi-ld:Shelf:unit002"},
   		"refProduct":{"type":"Relationship","value":"urn:ngsi-ld:Product:003"},
   		"stockCount":{"type":"Integer","value":10000},
-  		"shelfCount":{"type":"Integer","value":50}
+  		"shelfCount":{"type":"Integer","value":15}
   	},
   	{
   		"id":"urn:ngsi-ld:InventoryItem:003","type":"InventoryItem",
@@ -231,7 +231,7 @@ curl -X POST \
   		"refShelf":{"type":"Relationship","value":"urn:ngsi-ld:Shelf:unit003"},
   		"refProduct":{"type":"Relationship","value":"urn:ngsi-ld:Product:004"},
   		"stockCount":{"type":"Integer","value":10000},
-  		"shelfCount":{"type":"Integer","value":50}
+  		"shelfCount":{"type":"Integer","value":15}
   	}
    
   ]
@@ -252,7 +252,7 @@ curl -X POST \
   		"refShelf":{"type":"Relationship","value":"urn:ngsi-ld:Shelf:unit004"},
   		"refProduct":{"type":"Relationship","value":"urn:ngsi-ld:Product:001"},
   		"stockCount":{"type":"Integer","value":10000},
-  		"shelfCount":{"type":"Integer","value":50}
+  		"shelfCount":{"type":"Integer","value":12}
   	},
   	{
   		"id":"urn:ngsi-ld:InventoryItem:005","type":"InventoryItem",
@@ -260,7 +260,7 @@ curl -X POST \
   		"refShelf":{"type":"Relationship","value":"urn:ngsi-ld:Shelf:unit005"},
   		"refProduct":{"type":"Relationship","value":"urn:ngsi-ld:Product:002"},
   		"stockCount":{"type":"Integer","value":10000},
-  		"shelfCount":{"type":"Integer","value":50}
+  		"shelfCount":{"type":"Integer","value":15}
   	}
   ]
 }'
