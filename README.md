@@ -113,7 +113,7 @@ services for the application. This means all container sevices can be brought up
 
 ## Cygwin 
 
-We will start up our services using a simple bash script. Windows users should download [cygwin](www.cygwin.com) to provide a command line functionality similar to a Linux distribution on Windows. 
+We will start up our services using a simple bash script. Windows users should download [cygwin](http://www.cygwin.com/) to provide a command line functionality similar to a Linux distribution on Windows. 
 
 
 # Start Up

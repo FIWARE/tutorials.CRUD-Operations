@@ -120,7 +120,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 <a name="cygwin"></a>
 ## Cygwin 
 
-シンプルな bash スクリプトを使用してサービスを開始します。Windows ユーザは [cygwin](www.cygwin.com) をダウンロードして、Windows 上の Linux ディストリビューションと同様のコマンドライン機能を提供する必要があります。
+シンプルな bash スクリプトを使用してサービスを開始します。Windows ユーザは [cygwin](http://www.cygwin.com/) をダウンロードして、Windows 上の Linux ディストリビューションと同様のコマンドライン機能を提供する必要があります。
 
 
 <a name="start-up"></a>
