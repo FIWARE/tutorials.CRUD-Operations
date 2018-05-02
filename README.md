@@ -142,14 +142,14 @@ The Orion Context Broker server uses [NGSI](http://fiware.github.io/specificatio
 ## Entity CRUD Operations
 
 
-For operations where the `<entity>` is not yet known within the context, or is unspecified, the `/v2/entities` endpoint is used.
+For operations where the `<entity-id>` is not yet known within the context, or is unspecified, the `/v2/entities` endpoint is used.
 
-Once an `<entity>` is known within the context, individual data entities can be manipulated using the `/v2/entities/<entity>`  endpoint.
+Once an `<entity-id>` is known within the context, individual data entities can be manipulated using the `/v2/entities/<entity-id>`  endpoint.
 
 It is recommended that entity identifiers should be a URN following [NGSI-LD guidelines](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf), therefore each `id` is a URN follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This will mean that every `id` in the context data will be unique.
 
 
-| HTTP Verb   | `/v2/entities`  | `/v2/entities/<entity>`  |
+| HTTP Verb   | `/v2/entities`  | `/v2/entities/<entity-id>`  |
 |-----------  |:--------------: |:-----------------------: |
 | **POST**    | CREATE a new entity and add to the context.  | CREATE or UPDATE an attribute of a specified entity. |
 | **GET**     | READ entity data from the context. This will return data from multiple entities. The data can be filtered.  | READ entity data from a specified entity. This will return data from a single entity only. The data can be filtered.  | 
@@ -157,15 +157,17 @@ It is recommended that entity identifiers should be a URN following [NGSI-LD gui
 | **PATCH**   | :x:   | :x:   |
 | **DELETE**  | :x:  | DELETE an entity from the context   | 
 
+A complete list of entity endpoints can be found by looking at the [NSGI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Entities)
+
 ## Attribute CRUD Operations
 
-To perform CRUD operations on attributes, the `<entity>` must be known. Each attribute is effectively a key value pair.
+To perform CRUD operations on attributes, the `<entity-id>` must be known. Each attribute is effectively a key value pair.
 
   There are three endpoints:
 
-*  `/v2/entities/<entity>/attrs`  is only used for a patch operation to update one or more exisiting attributes.
-*  `/v2/entities/<entity>/attrs/<attribute>`  is used to manipulate an attribute as a whole.
-*  `/v2/entities/<entity>/attrs/<attribute>/value`  is used to read or update the `value` of an attribute, leaving the `type` untouched.
+*  `/v2/entities/<entity-id>/attrs`  is only used for a patch operation to update one or more exisiting attributes.
+*  `/v2/entities/<entity-id>/attrs/<attribute>`  is used to manipulate an attribute as a whole.
+*  `/v2/entities/<entity-id>/attrs/<attribute>/value`  is used to read or update the `value` of an attribute, leaving the `type` untouched.
 
 
 | HTTP Verb   | `.../attrs`  | `.../attrs/<attribute>`  | `.../attrs/<attribute>/value`  |
@@ -177,7 +179,7 @@ To perform CRUD operations on attributes, the `<entity>` must be known. Each att
 | **DELETE**. |  :x: | DELETE an existing attribute from an existing entity.  | :x:  |
 
 
-A complete list of available endpoints can be found by looking at the [NSGI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json)
+A complete list of attribute endpoints can be found by looking at the [NSGI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Attributes)
 
 ## Batch CRUD Operations
 
