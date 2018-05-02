@@ -91,7 +91,7 @@ This application will only make use of one FIWARE component - the [Orion Context
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
-* The Orion Context Broker server which will receive requests using [NSGI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json)
+* The Orion Context Broker server which will receive requests using [NGSI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json)
 * The underlying MongoDB database associated to the Orion Context Broker server
 
 Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
@@ -137,7 +137,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 **Create**, **Read**, **Update** and **Delete** are the four basic functions of persistent storage.  These operations are usually referred to using the acronym **CRUD**. Within a database each of these operations map directly to a series of commands, however the relationship with a RESTful API is slightly more complex.
 
-The Orion Context Broker server uses [NSGI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json) to manipulate the context data. As a RESTful API, requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to CRUD operations. 
+The Orion Context Broker server uses [NGSI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json) to manipulate the context data. As a RESTful API, requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to CRUD operations. 
 
 ## Entity CRUD Operations
 
@@ -157,7 +157,7 @@ It is recommended that entity identifiers should be a URN following [NGSI-LD gui
 | **PATCH**   | :x:   | :x:   |
 | **DELETE**  | :x:  | DELETE an entity from the context   | 
 
-A complete list of entity endpoints can be found by looking at the [NSGI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Entities)
+A complete list of entity endpoints can be found by looking at the [NGSI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Entities)
 
 ## Attribute CRUD Operations
 
@@ -179,7 +179,7 @@ To perform CRUD operations on attributes, the `<entity-id>` must be known. Each 
 | **DELETE**. |  :x: | DELETE an existing attribute from an existing entity.  | :x:  |
 
 
-A complete list of attribute endpoints can be found by looking at the [NSGI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Attributes)
+A complete list of attribute endpoints can be found by looking at the [NGSI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Attributes)
 
 ## Batch CRUD Operations
 
