@@ -137,7 +137,7 @@ This command will also import seed data from the previous [Store Finder tutorial
 
 **Create**, **Read**, **Update** and **Delete** are the four basic functions of persistent storage.  These operations are usually referred to using the acronym **CRUD**. Within a database each of these operations map directly to a series of commands, however the relationship with a RESTful API is slightly more complex.
 
-The Orion Context Broker server uses [NGSI](http://fiware.github.io/specifications/ngsiv2/latest/) to manipulate the context data. As a RESTful API, requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to CRUD operations. 
+The Orion Context Broker server uses [NSGI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json) to manipulate the context data. As a RESTful API, requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to CRUD operations. 
 
 ## Entity CRUD Operations
 
