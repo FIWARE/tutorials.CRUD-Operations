@@ -146,14 +146,14 @@ Orion Context Broker サーバは、[NGSI](https://swagger.lab.fiware.org/?url=h
 ## エンティティ CRUD オペレーション
 
 
-`<entity>` がコンテキスト内で認識されていない、または未指定のオペレーションでは、`/v2/entities` エンドポイントが使用されます。
+`<entity-id>` がコンテキスト内で認識されていない、または未指定のオペレーションでは、`/v2/entities` エンドポイントが使用されます。
 
-`<entity>` がコンテキスト内で認識されると、個々のデータ・エンティティは、`/v2/entities/<entity>` エンドポイントを使用してオペレーションできます。
+`<entity-id>` がコンテキスト内で認識されると、個々のデータ・エンティティは、`/v2/entities/<entity-id>` エンドポイントを使用してオペレーションできます。
 
 エンティティ識別子は、NGSI-LD ガイドラインに従った URN であることが推奨されます。したがって、各 `id` は、標準形式に従った URN です : `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、コンテキスト・データ内のすべての `id` が一意であることを意味します。
 
 
-| HTTP 動詞   | `/v2/entities`  | `/v2/entities/<entity>`  |
+| HTTP 動詞   | `/v2/entities`  | `/v2/entities/<entity-id>`  |
 |-----------  |:--------------: |:-----------------------: |
 | **POST**    | 新しいエンティティを作成し、コンテキストに追加します。 | 指定されたエンティティの属性を作成または更新します。 |
 | **GET**     | コンテキストからエンティティ・データを読み込みます。これにより、複数のエンティティからのデータが返されます。データはフィルタリングできます。 | 指定されたエンティティからエンティティ・データを読み込みます。これは、単一のエンティティからのデータのみを返します。データはフィルタリングできます。 | 
@@ -161,16 +161,18 @@ Orion Context Broker サーバは、[NGSI](https://swagger.lab.fiware.org/?url=h
 | **PATCH**   | :x:   | :x:   |
 | **DELETE**  | :x:  | コンテキストからエンティティを削除します。 | 
 
+エンティティ・エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Entities) で、見つけることができます。
+
 <a name="attribute-crud-operations"></a>
 ## 属性 CRUD オペレーション
 
-属性に対して CRUD オペレーションを実行するには、`<entity>` を知る必要があります。各属性は実質的にキーと値 のペアです。
+属性に対して CRUD オペレーションを実行するには、`<entity-id>` を知る必要があります。各属性は実質的にキーと値 のペアです。
 
 3つのエンドポイントがあります :
 
-* `/v2/entities/<entity>/attrs` は、1つ以上の既存の属性を更新するパッチオペレーションにのみ使用されます。
-* `/v2/entities/<entity>/attrs/<attribute>` は、属性を全体としてオペレーションするために使用されます。
-* `/v2/entities/<entity>/attrs/<attribute>/value` は、属性の `value` を読み取りまたは更新に使用され、`type` をそのまま残します。
+* `/v2/entities/<entity-id>/attrs` は、1つ以上の既存の属性を更新するパッチオペレーションにのみ使用されます。
+* `/v2/entities/<entity-id>/attrs/<attribute>` は、属性を全体としてオペレーションするために使用されます。
+* `/v2/entities/<entity-id>/attrs/<attribute>/value` は、属性の `value` を読み取りまたは更新に使用され、`type` をそのまま残します。
 
 
 | HTTP 動詞   | `.../attrs`  | `.../attrs/<attribute>`  | `.../attrs/<attribute>/value`  |
@@ -181,6 +183,7 @@ Orion Context Broker サーバは、[NGSI](https://swagger.lab.fiware.org/?url=h
 | **PATCH**   |  既存のエンティティから1つまたは複数の既存の属性を更新します。 | :x:   | :x:   |
 | **DELETE**. |  :x: |  既存のエンティティから既存の属性を削除します。 | :x:  |
 
+属性エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Attributes) で見つけることができます。
 
 <a name="batch-crud-operations"></a>
 ## バッチ CRUD オペレーション
