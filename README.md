@@ -3,7 +3,6 @@
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
 
 This tutorial teaches FIWARE users about CRUD Operations.
-
 The tutorial builds on the data created in the previous [stock management example](https://github.com/Fiware/tutorials.Entity-Relationships/) and introduces the concept of [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete), allowing users to manipulate the data held within the context.
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.CRUD-Operations/).
