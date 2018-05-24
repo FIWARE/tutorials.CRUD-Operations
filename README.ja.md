@@ -142,7 +142,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 
 **Create**, **Read**, **Update**, **Delete** は、永続ストレージの4つの基本機能です。これらのオペレーションは、通常、頭文字の CRUD を使用して参照されます。データベース内では、これらのオペレーションはそれぞれ一連のコマンドに直接マッピングされますが、RESTful API との関係はやや複雑です。
 
-Orion Context Broker サーバは、[NGSI](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json) を使用してコンテキスト・データをオペレーションします。RESTful APIとして、コンテキスト内に保持されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーションにマッピングする際に見られる標準的な規則に従います。
+Orion Context Broker サーバは、[NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してコンテキスト・データをオペレーションします。RESTful APIとして、コンテキスト内に保持されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーションにマッピングする際に見られる標準的な規則に従います。
 
 <a name="entity-crud-operations"></a>
 ## エンティティ CRUD オペレーション
@@ -163,7 +163,7 @@ Orion Context Broker サーバは、[NGSI](https://swagger.lab.fiware.org/?url=h
 | **PATCH**   | :x:   | :x:   |
 | **DELETE**  | :x:  | コンテキストからエンティティを削除します。 | 
 
-エンティティ・エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Entities) で、見つけることができます。
+エンティティ・エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://fiware.github.io/specifications/OpenAPI/ngsiv2#/Entities) で、見つけることができます。
 
 <a name="attribute-crud-operations"></a>
 ## 属性 CRUD オペレーション
@@ -185,7 +185,7 @@ Orion Context Broker サーバは、[NGSI](https://swagger.lab.fiware.org/?url=h
 | **PATCH**   |  既存のエンティティから1つまたは複数の既存の属性を更新します。 | :x:   | :x:   |
 | **DELETE**. |  :x: |  既存のエンティティから既存の属性を削除します。 | :x:  |
 
-属性エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://swagger.lab.fiware.org/?url=https://raw.githubusercontent.com/Fiware/specifications/master/OpenAPI/ngsiv2/ngsiv2-openapi.json#/Attributes) で見つけることができます。
+属性エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://fiware.github.io/specifications/OpenAPI/ngsiv2#/Attributes) で見つけることができます。
 
 <a name="batch-crud-operations"></a>
 ## バッチ CRUD オペレーション
