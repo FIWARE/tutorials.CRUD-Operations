@@ -95,7 +95,7 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 
 現在、Orion Context Broker はオープンソースの [MongoDB](https://www.mongodb.com/) 技術を利用して、コンテキスト・データの永続性を維持しています。したがって、アーキテクチャは2つの要素で構成されます。
 
-* [NGSI](http://fiware.github.io/specifications/ngsiv2/latest/) を使用してリクエストを受信するOrion Context Broker サーバ
+* [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してリクエストを受信するOrion Context Broker サーバ
 * Orion Context Broker サーバに関連付けられている MongoDB データベース
 
 2つの要素間のすべての対話は HTTP リクエストによって開始されるため、エンティティはコンテナ化され、公開されたポートから実行されます。
