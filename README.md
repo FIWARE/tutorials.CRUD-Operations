@@ -100,6 +100,43 @@ Since all interactions between the two elements are initiated by HTTP requests, 
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
 
+The necessary configuration information can be seen in the services section of the associated `docker-compose.yml`  file:
+
+```yaml
+  orion:
+    image: fiware/orion:latest
+    hostname: orion
+    container_name: orion
+    depends_on:
+      - context-db
+    networks:
+        - default
+    expose:
+        - "1026"
+    ports:
+        - "1026:1026"
+    command: -dbhost context-db -logLevel DEBUG
+```
+
+```yaml
+  context-db:
+    image: mongo:3.6
+    hostname: context-db
+    container_name: context-db
+    expose:
+        - "27017"
+    ports:
+        - "27017:27017"
+    networks:
+        - default
+    command: --bind_ip_all --smallfiles
+```
+
+Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026` 
+and MongoDB is listening on the default port `271071`. Both containers are also exposing the same ports
+externally - this is purely for the tutorial access - so that cUrl or Postman can access them without
+being part of the same network. The command line initialization should be self explanatory.
+
 # Prerequisites
 
 ## Docker
