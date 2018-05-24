@@ -92,7 +92,7 @@ This application will only make use of one FIWARE component - the [Orion Context
 
 Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep persistence of the context data it holds. Therefore, the architecture will consist of two elements:
 
-* The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)which will receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+* The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 * The underlying [MongoDB](https://www.mongodb.com/) database :
   + Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and registrations
 
