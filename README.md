@@ -98,7 +98,7 @@ Currently, the Orion Context Broker relies on open source [MongoDB](https://www.
 
 Since all interactions between the two elements are initiated by HTTP requests, the entities can be containerized and run from exposed ports. 
 
-![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
+![](https://fiware.github.io/tutorials.CRUD-Operations/img/architecture.png)
 
 The necessary configuration information can be seen in the services section of the associated `docker-compose.yml`  file:
 
