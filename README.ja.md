@@ -51,6 +51,7 @@
     + [複数のデータ・エンティティの一括削除](#batch-delete-multiple-data-entities)
     + [データ・エンティティからの複数の属性のバッチ削除](#batch-delete-multiple-attributes-from-a-data-entity)
     + [既存のデータ関係を見つける](#find-existing-data-relationships)
+- [次のステップ](#next-steps)
 
 <a name="data-entities"></a>
 # データ・エンティティ
@@ -91,17 +92,52 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 <a name="architecture"></a>
 # アーキテクチャ
 
-このアプリケーションは、[Orion Context Broker](https://catalogue.fiware.org/enablers/publishsubscribe-context-broker-orion-context-broker) という1つの FIWARE コンポーネントのみを使用します。アプリケーションが *"Powered by FIWARE"* と認定するには、Orion Context Broker を使用するだけで十分です。
+このアプリケーションは、[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) という1つの FIWARE コンポーネントのみを使用します。アプリケーションが *"Powered by FIWARE"* と認定するには、Orion Context Broker を使用するだけで十分です。
 
 現在、Orion Context Broker はオープンソースの [MongoDB](https://www.mongodb.com/) 技術を利用して、コンテキスト・データの永続性を維持しています。したがって、アーキテクチャは2つの要素で構成されます。
 
-* [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してリクエストを受信するOrion Context Broker サーバ
-* Orion Context Broker サーバに関連付けられている MongoDB データベース
+* [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してリクエストを受信する [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)
+* バックエンドの [MongoDB](https://www.mongodb.com/) データベース
+  + Orion Context Broker が、データ・エンティティなどのコンテキスト・データ情報、サブスクリプション、登録などを保持するために使用します
 
 2つの要素間のすべての対話は HTTP リクエストによって開始されるため、エンティティはコンテナ化され、公開されたポートから実行されます。
 
 
-![](https://fiware.github.io/tutorials.Entity-Relationships/img/architecture.png)
+![](https://fiware.github.io/tutorials.CRUD-Operations/img/architecture.png)
+
+必要な設定情報は、関連する `docker-compose.yml` ファイルの services セクションにあります:
+
+```yaml
+  orion:
+    image: fiware/orion:latest
+    hostname: orion
+    container_name: orion
+    depends_on:
+      - context-db
+    networks:
+        - default
+    expose:
+        - "1026"
+    ports:
+        - "1026:1026"
+    command: -dbhost context-db -logLevel DEBUG
+```
+
+```yaml
+  context-db:
+    image: mongo:3.6
+    hostname: context-db
+    container_name: context-db
+    expose:
+        - "27017"
+    ports:
+        - "27017:27017"
+    networks:
+        - default
+    command: --bind_ip_all --smallfiles
+```
+
+両方のコンテナが同じネットワークに常駐しています。Orion Context Broker はポート `1026` でリッスンしており、MongoDB はデフォルト・ポート `271071` でリッスンしています。 どちらのコンテナも同じポートを外部に公開しています。これはチュートリアルのアクセス専用です。これにより、cUrl または Postman は同じネットワークに参加することなくアクセスできます。 コマンドラインの初期化は、一目瞭然でなければなりません。
 
 <a name="prerequisites"></a>
 # 前提条件
@@ -142,7 +178,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 
 **Create**, **Read**, **Update**, **Delete** は、永続ストレージの4つの基本機能です。これらのオペレーションは、通常、頭文字の CRUD を使用して参照されます。データベース内では、これらのオペレーションはそれぞれ一連のコマンドに直接マッピングされますが、RESTful API との関係はやや複雑です。
 
-Orion Context Broker サーバは、[NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してコンテキスト・データをオペレーションします。RESTful APIとして、コンテキスト内に保持されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーションにマッピングする際に見られる標準的な規則に従います。
+[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) は、[NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してコンテキスト・データをオペレーションします。RESTful APIとして、コンテキスト内に保持されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーションにマッピングする際に見られる標準的な規則に従います。
 
 <a name="entity-crud-operations"></a>
 ## エンティティ CRUD オペレーション

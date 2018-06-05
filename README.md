@@ -51,6 +51,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
     + [Batch Delete Multiple Data Entities](#batch-delete-multiple-data-entities)
     + [Batch Delete Multiple Attributes from a Data Entity](#batch-delete-multiple-attributes-from-a-data-entity)
     + [Find existing data relationships](#find-existing-data-relationships)
+- [Next Steps](#next-steps)
 
 # Data Entities
 
