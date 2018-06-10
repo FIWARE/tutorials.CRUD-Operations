@@ -113,21 +113,21 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
     hostname: orion
     container_name: orion
     depends_on:
-      - context-db
+      - mongo-db
     networks:
         - default
     expose:
         - "1026"
     ports:
         - "1026:1026"
-    command: -dbhost context-db -logLevel DEBUG
+    command: -dbhost mongo-db -logLevel DEBUG
 ```
 
 ```yaml
-  context-db:
+  mongo-db:
     image: mongo:3.6
-    hostname: context-db
-    container_name: context-db
+    hostname: mongo-db
+    container_name: db-mongo
     expose:
         - "27017"
     ports:
