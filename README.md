@@ -263,7 +263,7 @@ This example adds a new **Product** entity ("Lemonade" at 99 cents) to the conte
 
 ```console
 curl --request POST \
-  --url 'http://localhost:1026/v2/entities/' \
+  --url 'http://localhost:1026/v2/entities' \
   --header 'Content-Type: application/json' \
   --data ' {
       "id":"urn:ngsi-ld:Product:010", "type":"Product",
@@ -273,7 +273,7 @@ curl --request POST \
 }'
 ```
 
-New entities can be added by making a POST request to the `/v2/entities/` endpoint.
+New entities can be added by making a POST request to the `/v2/entities` endpoint.
 
 The request will fail if any of the attributes already exist in the context.
 
@@ -786,7 +786,7 @@ On Start up the context held nine products, three more have been added by the cr
 ]
 ```
 
-Context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities/` endpoint and supplying the `type` parameter. Combine this with `options=count` and `attrs=id` to return the `id` attributes of the given `type`
+Context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities` endpoint and supplying the `type` parameter. Combine this with `options=count` and `attrs=id` to return the `id` attributes of the given `type`
 
 
 ## Update Operations
