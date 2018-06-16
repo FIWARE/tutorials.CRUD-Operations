@@ -269,7 +269,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 
 ```console
 curl --request POST \
-  --url 'http://localhost:1026/v2/entities/' \
+  --url 'http://localhost:1026/v2/entities' \
   --header 'Content-Type: application/json' \
   --data ' {
       "id":"urn:ngsi-ld:Product:010", "type":"Product",
@@ -279,7 +279,7 @@ curl --request POST \
 }'
 ```
 
-新しいエンティティは、`/v2/entities/` エンドポイントに POST リクエストを行うことで追加できます。
+新しいエンティティは、`/v2/entities` エンドポイントに POST リクエストを行うことで追加できます。
 
 いずれかの属性がすでにコンテキストに存在する場合、リクエストは失敗します。
 
@@ -733,7 +733,7 @@ curl --request GET \
 ]
 ```
 
-指定されたエンティティ・タイプのフル・コンテキスト・データは、`/v2/entities/` エンドポイントへの GET リクエストを行い、`type` パラメータを指定することによって取得できます。`options=keyValues` パラメータおよび `attrs` パラメータと組み合わせて、キーと値を取得します。
+指定されたエンティティ・タイプのフル・コンテキスト・データは、`/v2/entities` エンドポイントへの GET リクエストを行い、`type` パラメータを指定することによって取得できます。`options=keyValues` パラメータおよび `attrs` パラメータと組み合わせて、キーと値を取得します。
 
 
 <a name="list-data-entity-by-id"></a>
@@ -804,7 +804,7 @@ curl --request GET \
 ]
 ```
 
-指定されたエンティティ・タイプのコンテキスト・データは、`/v2/entities/` エンドポイントへの GET リクエストを行い、`type` パラメータを指定することによって取得できます。これと、`options=count`, `attrs=id` を組み合わせidて指定された `type` の `id` 属性を返します。
+指定されたエンティティ・タイプのコンテキスト・データは、`/v2/entities` エンドポイントへの GET リクエストを行い、`type` パラメータを指定することによって取得できます。これと、`options=count`, `attrs=id` を組み合わせidて指定された `type` の `id` 属性を返します。
 
 
 <a name="update-operations"></a>

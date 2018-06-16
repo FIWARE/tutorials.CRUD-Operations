@@ -716,7 +716,7 @@ On Start up the context held nine products, three more have been added by the cr
 ]
 ```
 
-Full context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities/` endpoint and supplying the `type` parameter, combine this with the o`ptions=keyValues` parameter and the `attrs` parameter to obtain key-values.
+Full context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities` endpoint and supplying the `type` parameter, combine this with the o`ptions=keyValues` parameter and the `attrs` parameter to obtain key-values.
 
 
 ### List Data Entity by id
