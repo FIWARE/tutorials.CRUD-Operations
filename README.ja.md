@@ -268,7 +268,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/entities' \
   --header 'Content-Type: application/json' \
   --data ' {
@@ -286,7 +286,7 @@ curl --request POST \
 GET リクエストを行うことで、新しい製品がコンテキスト内に見つかるかどうかを確認することができます :
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
@@ -300,7 +300,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -319,7 +319,7 @@ curl --request POST \
 GET リクエストを行うことで、新しい **Product** 属性がコンテキスト内にあるかどうかを確認することができます :
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
 ```
 
@@ -335,7 +335,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -383,7 +383,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -434,7 +434,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
@@ -463,7 +463,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value'
 ```
 
@@ -486,7 +486,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price'
 ```
 
@@ -515,7 +515,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price'
 ```
 
@@ -542,7 +542,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product'
 ```
 
@@ -649,7 +649,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
 ```
 
@@ -744,7 +744,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
 ```
 
@@ -824,7 +824,7 @@ curl --request GET \
 #### Request:
 
 ```console
-curl --request PUT \
+curl -iX PUT \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/price/value' \
   --header 'Content-Type: text/plain' \
   --data 89
@@ -841,7 +841,7 @@ curl --request PUT \
 #### Request:
 
 ```console
-curl --request PATCH \
+curl -iX PATCH \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
   --data ' {
@@ -858,7 +858,7 @@ curl --request PATCH \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -890,7 +890,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -923,7 +923,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -966,7 +966,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request DELETE \
+curl -iX DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
@@ -983,7 +983,7 @@ curl --request DELETE \
 #### Request:
 
 ```console
-curl --request DELETE \
+curl -iX DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010/attrs/specialOffer'
 ```
 
@@ -999,7 +999,7 @@ curl --request DELETE \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -1029,7 +1029,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -1058,7 +1058,7 @@ curl --request POST \
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
 ```
 

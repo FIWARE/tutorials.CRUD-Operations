@@ -262,7 +262,7 @@ This example adds a new **Product** entity ("Lemonade" at 99 cents) to the conte
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/entities' \
   --header 'Content-Type: application/json' \
   --data ' {
@@ -280,7 +280,7 @@ The request will fail if any of the attributes already exist in the context.
 You can check to see if the new **Product** can be found in the context by making a GET request
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
@@ -294,7 +294,7 @@ This example adds a new `specialOffer` attribute to the existing **Product** ent
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -313,7 +313,7 @@ Subsequent requests using the same `id` will update the value of the attribute i
 You can check to see if the new **Product** attribute can be found in the context by making a GET request
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
 ```
 
@@ -328,7 +328,7 @@ This example uses the convenience batch processing endpoint to add two new **Pro
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -374,7 +374,7 @@ This example uses the convenience batch processing endpoint to adds or amend two
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update/' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -421,7 +421,7 @@ This example reads the full context from an existing Product entity with a known
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
@@ -449,7 +449,7 @@ This example reads the value of a single attribute (`name`) from an existing **P
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value'
 ```
 
@@ -471,7 +471,7 @@ This example reads the key-value pairs for two requested attributes (`name` and 
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price'
 ```
 
@@ -499,7 +499,7 @@ This example reads the value of two requested attributes (`name` and `price`) fr
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price'
 ```
 
@@ -526,7 +526,7 @@ This example lists the full context of all **Product** entities.
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product'
 ```
 
@@ -632,7 +632,7 @@ This example lists the `name` and `price` attributes of all **Product** entities
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
 ```
 
@@ -726,7 +726,7 @@ This example lists the `id` and `type` of all **Product** entities.
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
 ```
 
@@ -804,7 +804,7 @@ This example updates the value of the price attribute of the Entity with `id=urn
 #### Request:
 
 ```console
-curl --request PUT \
+curl -iX PUT \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/price/value' \
   --header 'Content-Type: text/plain' \
   --data 89
@@ -820,7 +820,7 @@ This example simultaneously updates the values of both the price and name attrib
 #### Request:
 
 ```console
-curl --request PATCH \
+curl -iX PATCH \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
   --data ' {
@@ -836,7 +836,7 @@ This example uses the convenience batch processing endpoint to create a series o
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -865,7 +865,7 @@ This example uses the convenience batch processing endpoint to create a series o
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -895,7 +895,7 @@ This example uses the convenience batch processing endpoint to create a series o
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -933,7 +933,7 @@ This example deletes the Entity with `id=urn:ngsi-ld:Product:001` from the conte
 #### Request:
 
 ```console
-curl --request DELETE \
+curl -iX DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
 ```
 
@@ -949,7 +949,7 @@ This example remove the `specialOffer` attribute from the entity with `id=urn:ng
 #### Request:
 
 ```console
-curl --request DELETE \
+curl -iX DELETE \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010/attrs/specialOffer'
 ```
 
@@ -964,7 +964,7 @@ This example uses the convenience batch processing endpoint to delete a series o
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -991,7 +991,7 @@ This example uses the convenience batch processing endpoint to delete a series o
 #### Request:
 
 ```console
-curl --request POST \
+curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -1017,7 +1017,7 @@ This example returns the key of all entities directly associated with the `urn:n
 #### Request:
 
 ```console
-curl --request GET \
+curl -X GET \
   --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
 ```
 
