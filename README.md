@@ -281,7 +281,7 @@ You can check to see if the new **Product** can be found in the context by makin
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
 ```
 
 
@@ -314,7 +314,7 @@ You can check to see if the new **Product** attribute can be found in the contex
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product'
 ```
 
 As you can see there is now  boolean `specialOffer` flag attached to the "Beer" **Product** entity
@@ -422,7 +422,7 @@ This example reads the full context from an existing Product entity with a known
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
 ```
 
 #### Response:
@@ -472,7 +472,7 @@ This example reads the key-value pairs for two requested attributes (`name` and 
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=keyValues&attrs=name,price'
 ```
 
 #### Response:
@@ -500,7 +500,7 @@ This example reads the value of two requested attributes (`name` and `price`) fr
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=values&attrs=name,price'
 ```
 
 #### Response:
@@ -527,7 +527,7 @@ This example lists the full context of all **Product** entities.
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product'
+  --url 'http://localhost:1026/v2/entities?type=Product'
 ```
 
 ### Response:
