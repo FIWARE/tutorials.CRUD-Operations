@@ -329,7 +329,7 @@ This example uses the convenience batch processing endpoint to add two new **Pro
 
 ```console
 curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update/' \
+  --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
   "actionType":"APPEND_STRICT",
@@ -375,7 +375,7 @@ This example uses the convenience batch processing endpoint to adds or amend two
 
 ```console
 curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update/' \
+  --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
   "actionType":"APPEND",

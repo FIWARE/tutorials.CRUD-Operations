@@ -336,7 +336,7 @@ curl -X GET \
 
 ```console
 curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update/' \
+  --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
   "actionType":"APPEND_STRICT",
@@ -384,7 +384,7 @@ curl -iX POST \
 
 ```console
 curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update/' \
+  --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
   "actionType":"APPEND",
