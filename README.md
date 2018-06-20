@@ -158,9 +158,12 @@ We will start up our services using a simple bash script. Windows users should d
 
 # Start Up
 
-All services can be initialised from the command line by running the bash script provided within the repository:
+All services can be initialised from the command line by running the bash script provided within the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
+git clone git@github.com:Fiware/tutorials.CRUD-Operations.git
+cd tutorials.CRUD-Operations
+
 ./services start
 ```
 
