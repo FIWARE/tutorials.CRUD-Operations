@@ -2,9 +2,7 @@
 
 [![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
 
-このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。
-
-このチュートリアルでは、以前の[在庫管理の例](https://github.com/Fiware/tutorials.Entity-Relationships/)で作成されたデータを基に、[CRUD オペレーション](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)の概念を紹介し、ユーザがコンテキスト内に保持されているデータをオペレーションできるようにします。
+このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。チュートリアルでは、以前の[在庫管理の例](https://github.com/Fiware/tutorials.Entity-Relationships/)で作成されたデータを基に、[CRUD オペレーション](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)の概念を紹介し、ユーザがコンテキスト内に保持されているデータをオペレーションできるようにします。
 
 このチュートリアルでは、全体で [cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Getting-Started/) も利用できます。
 
@@ -151,8 +149,7 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 * Docker を Mac にインストールするには、[こちら](https://docs.docker.com/docker-for-mac/)の手順に従ってください
 * Docker を Linux にインストールするには、[こちら](https://docs.docker.com/install/)の手順に従ってください
 
-**Docker Compose** は、マルチコンテナ Docker アプリケーションを定義して実行するためのツールです。[YAML file](htt
-ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-compose.yml) ファイルは、アプリケーションのために必要なサービスを設定する使用されています。つまり、すべてのコンテナ・サービスは1つのコマンドで呼び出すことができます。Docker Compose は、デフォルトで Docker for Windows とD ocker for Mac の一部としてインストールされますが、Linux ユーザは[ここ](https://docs.docker.com/compose/install/)に記載されている手順に従う必要があります。
+**Docker Compose** は、マルチコンテナ Docker アプリケーションを定義して実行するためのツールです。[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-compose.yml) ファイルは、アプリケーションのために必要なサービスを設定する使用されています。つまり、すべてのコンテナ・サービスは1つのコマンドで呼び出すことができます。Docker Compose は、デフォルトで Docker for Windows とD ocker for Mac の一部としてインストールされますが、Linux ユーザは[ここ](https://docs.docker.com/compose/install/)に記載されている手順に従う必要があります。
 
 
 <a name="cygwin"></a>
@@ -164,9 +161,12 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 <a name="start-up"></a>
 # 起動
 
-リポジトリ内で提供される bash スクリプトを実行すると、コマンドラインからすべてのサービスを初期化できます :
+リポジトリ内で提供される bash スクリプトを実行すると、コマンドラインからすべてのサービスを初期化できます。リポジトリを複製し、以下のコマンドを実行して必要なイメージを作成してください :
 
 ```console
+git clone git@github.com:Fiware/tutorials.CRUD-Operations.git
+cd tutorials.CRUD-Operations
+
 ./services start
 ```
 
@@ -265,7 +265,7 @@ ps://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-co
 
 この例では、新しい **Product** エンティティ (99セント の "Lemonade") をコンテキストに追加します。
 
-#### Request:
+#### :one: リクエスト :
 
 ```console
 curl -iX POST \
@@ -283,11 +283,13 @@ curl -iX POST \
 
 いずれかの属性がすでにコンテキストに存在する場合、リクエストは失敗します。
 
-GET リクエストを行うことで、新しい製品がコンテキスト内に見つかるかどうかを確認することができます :
+#### :two: リクエスト :
+
+GET リクエストを行うことで、新しい **Product** がコンテキスト内に見つかるかどうかを確認することができます :
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
 ```
 
 
@@ -295,9 +297,9 @@ curl -X GET \
 <a name="create-a-new-attribute"></a>
 ### 新しい属性の作成
 
-この例では、`id=urn:ngsi-ld:Product:001` の既存 Product エンティティに新しい `specialOffer` 属性を追加します。
+この例では、`id=urn:ngsi-ld:Product:001` の既存 **Product** エンティティに新しい `specialOffer` 属性を追加します。
 
-#### Request:
+#### :three: リクエスト :
 
 ```console
 curl -iX POST \
@@ -316,11 +318,13 @@ curl -iX POST \
 
 同じ `id` を使用する後続のリクエストは、コンテキスト内の属性の値を更新します。
 
+#### :four: リクエスト :
+
 GET リクエストを行うことで、新しい **Product** 属性がコンテキスト内にあるかどうかを確認することができます :
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product'
 ```
 
 ご覧のように、 "Beer" **Product** エンティティにブール値の `specialOffer` フラグが付けられています。
@@ -332,7 +336,7 @@ curl -X GET \
 
 この例では、コンビニエンス・バッチ処理エンドポイントを使用して、2つの新しい **Product** エンティティと1つの新しい属性 (`offerPrice`)をコンテキストに追加します。
 
-#### Request:
+#### :five: リクエスト :
 
 ```console
 curl -iX POST \
@@ -379,8 +383,7 @@ curl -iX POST \
 * エンティティがすでに存在する場合、リクエストはエンティティの属性を更新します
 * エンティティが存在しない場合は、新しいエンティティが作成されます
 
-
-#### Request:
+#### :six: リクエスト :
 
 ```console
 curl -iX POST \
@@ -431,14 +434,14 @@ curl -iX POST \
 
 この例では、既知の `id` を持つ既存 **Product** エンティティから完全なコンテキストを読み取ります。
 
-#### Request:
+#### :seven: リクエスト :
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
 ```
 
-#### Response:
+#### レスポンス :
 
 **Product** `urn:ngsi-ld:Product:010` は 99セントの"Lemonade" です。レスポンスは以下のようになります :
 
@@ -460,14 +463,14 @@ curl -X GET \
 
 この例では、既知の `id` を持つ既存 **Product** エンティティから単一の属性(`name`)の値を読み取ります。
 
-#### Request:
+#### :eight: リクエスト :
 
 ```console
 curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value'
 ```
 
-#### Response:
+#### レスポンス :
 
 **Product** `urn:ngsi-ld:Product:001` は 99セントの"Beer"です。レスポンスは以下のようになります :
 
@@ -483,14 +486,14 @@ curl -X GET \
 
 この例では、リクエストされた2つの属性(`name` および `price` )のキーと値のペアを、既知の `id` を持つ既存 **Product** エンティティのコンテキストから読み取ります。
 
-#### Request:
+#### :nine: リクエスト :
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=keyValues&attrs=name,price'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=keyValues&attrs=name,price'
 ```
 
-#### Response:
+#### レスポンス :
 
 **Product** `urn:ngsi-ld:Product:001` は 99セントの"Beer"です。レスポンスは以下のようになります :
 
@@ -512,14 +515,14 @@ curl -X GET \
 
 この例では、既知の `id` を持つ既存 **Product** エンティティのコンテキストから、2つのリクエストされた属性(`name` および `price`)の値を読み取ります。
 
-#### Request:
+#### :one::zero: リクエスト :
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/?options=values&attrs=name,price'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=values&attrs=name,price'
 ```
 
-#### Response:
+#### レスポンス :
 
 **Product** `urn:ngsi-ld:Product:001` は 99セントの"Beer"です。レスポンスは以下のようになります :
 
@@ -539,14 +542,14 @@ curl -X GET \
 
 この例では、すべての **Product** エンティティの完全なコンテキストをリストしています。
 
-#### Request:
+#### :one::one: リクエスト :
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product'
+  --url 'http://localhost:1026/v2/entities?type=Product'
 ```
 
-### Response:
+### レスポンス :
 
 起動すると、コンテキストは9つの製品を含み、3つの製品が作成オペレーションによって追加され、フル・コンテキストでは12の製品が返されます。
 
@@ -646,14 +649,14 @@ curl -X GET \
 
 この例では、すべての **Product** エンティティの `name` と `price` 属性を示します。
 
-#### Request:
+#### :one::two: リクエスト :
 
 ```console
 curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
 ```
 
-#### Response:
+#### レスポンス :
 起動すると、コンテキストは9つの製品を含み、3つの製品が作成オペレーションによって追加され、フル・コンテキストでは12の製品が返されます。
 
 ```json
@@ -741,14 +744,14 @@ curl -X GET \
 
 この例では、すべての **Prodcut** エンティティの `id` と `type` が一覧表示されます。
 
-#### Request:
+#### :one::three: リクエスト :
 
 ```console
 curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
 ```
 
-#### Response:
+#### レスポンス :
 起動すると、コンテキストは9つの製品を含み、3つの製品が作成オペレーションによって追加され、フル・コンテキストでは12の製品が返されます。
 
 ```json
@@ -821,7 +824,7 @@ curl -X GET \
 
 この例では、`id=urn:ngsi-ld:Product:001` を持つ Entity の `price` 属性の値を次のように更新します。 
 
-#### Request:
+#### :one::four: リクエスト :
 
 ```console
 curl -iX PUT \
@@ -838,7 +841,7 @@ curl -iX PUT \
 
 この例は、`id=urn:ngsi-ld:Product:001` を持つ、`Entity` の `price` 属性と `name` 属性の両方の値を同時に更新します。 
 
-#### Request:
+#### :one::five: リクエスト :
 
 ```console
 curl -iX PATCH \
@@ -855,7 +858,7 @@ curl -iX PATCH \
 
 この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の使用可能な製品を作成しています。
 
-#### Request:
+#### :one::six: リクエスト :
 
 ```console
 curl -iX POST \
@@ -887,7 +890,7 @@ curl -iX POST \
 
 この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の利用可能な製品を作成しています。
 
-#### Request:
+#### :one::seven: リクエスト :
 
 ```console
 curl -iX POST \
@@ -920,7 +923,7 @@ curl -iX POST \
 
 この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の使用可能な製品を作成しています。
 
-#### Request:
+#### :one::eight: リクエスト :
 
 ```console
 curl -iX POST \
@@ -963,7 +966,7 @@ curl -iX POST \
 
 この例では、`id=urn:ngsi-ld:Product:001` のエンティティをコンテキストから削除します。
 
-#### Request:
+#### :one::nine: リクエスト :
 
 ```console
 curl -iX DELETE \
@@ -980,7 +983,7 @@ curl -iX DELETE \
 
 この例では、`id=urn:ngsi-ld:Product:010` のエンティティから `specialOffer` 属性を削除します。
 
-#### Request:
+#### :two::zero: リクエスト :
 
 ```console
 curl -iX DELETE \
@@ -996,7 +999,7 @@ curl -iX DELETE \
 
 この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の利用可能な `Product` エンティティを削除します。
 
-#### Request:
+#### :two::one: リクエスト :
 
 ```console
 curl -iX POST \
@@ -1026,7 +1029,7 @@ curl -iX POST \
 
 この例では、コンビニエンス・バッチ処理エンドポイントを使用して、使用可能な **Product** エンティティから一連の属性を削除します。
 
-#### Request:
+#### :two::two: リクエスト :
 
 ```console
 curl -iX POST \
@@ -1055,14 +1058,14 @@ curl -iX POST \
 
 この例では、`urn:ngsi-ld:Product:001` に直接関連するすべてのエンティティのキーを返します。
 
-#### Request:
+#### :two::three: リクエスト :
 
 ```console
 curl -X GET \
   --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
 ```
 
-#### Response:
+#### レスポンス :
 
 ```json
 [
@@ -1091,14 +1094,18 @@ curl -X GET \
 <a name="next-steps"></a>
 # 次のステップ
 
-アドバンス機能を追加するアプリをもっと複雑にする方法を知りたいですか？ このシリーズの他のチュートリアルを読むことで、学ぶことができます。
+高度な機能を追加することで、アプリケーションに複雑さを加える方法を知りたいですか？このシリーズの他のチュートリアルを読むことで見つけることができます :
 
 &nbsp; 101. [Getting Started](https://github.com/Fiware/tutorials.Getting-Started)<br/>
-&nbsp; 102. [Entity Relationships](https://github.com/Fiware/tutorials.Entity-Relationships/)<br/>
-&nbsp; 103. [CRUD Operations](https://github.com/Fiware/tutorials.CRUD-Operations/)<br/>
-&nbsp; 104. [Context Providers](https://github.com/Fiware/tutorials.Context-Providers/)<br/>
-&nbsp; 105. [Altering the Context Programmatically](https://github.com/Fiware/tutorials.Accessing-Context/)<br/> 
-&nbsp; 106. [Subscribing to Changes in Context](https://github.com/Fiware/tutorials.Subscriptions/)<br/>
+&nbsp; 102. [Entity Relationships](https://github.com/Fiware/tutorials.Entity-Relationships)<br/>
+&nbsp; 103. [CRUD Operations](https://github.com/Fiware/tutorials.CRUD-Operations)<br/>
+&nbsp; 104. [Context Providers](https://github.com/Fiware/tutorials.Context-Providers)<br/>
+&nbsp; 105. [Altering the Context Programmatically](https://github.com/Fiware/tutorials.Accessing-Context)<br/> 
+&nbsp; 106. [Subscribing to Changes in Context](https://github.com/Fiware/tutorials.Subscriptions)<br/>
 
-&nbsp; 201. [Introduction to IoT Sensors](https://github.com/Fiware/tutorials.IoT-Sensors/)<br/> 
-&nbsp; 202. [Provisioning an IoT Agent](https://github.com/Fiware/tutorials.IoT-Agent/)<br/>
+&nbsp; 201. [Introduction to IoT Sensors](https://github.com/Fiware/tutorials.IoT-Sensors)<br/>
+&nbsp; 202. [Provisioning an IoT Agent](https://github.com/Fiware/tutorials.IoT-Agent)<br/>
+&nbsp; 250. [Introduction to Fast-RTPS and Micro-RTPS ](https://github.com/Fiware/tutorials.Fast-RTPS-Micro-RTPS)<br/>
+
+&nbsp; 301. [Persisting Context Data](https://github.com/Fiware/tutorials.Historic-Context)<br/>
+&nbsp; 302. [Querying Time Series Data](https://github.com/Fiware/tutorials.Short-Term-History)<br/>
