@@ -154,9 +154,17 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 
 **Docker Compose** は、マルチコンテナ Docker アプリケーションを定義して実行するためのツールです。[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Getting-Started/master/docker-compose.yml) ファイルは、アプリケーションのために必要なサービスを構成するために使用します。つまり、すべてのコンテナ・サービスは1つのコマンドで呼び出すことができます。Docker Compose は、デフォルトで Docker for Windows とD ocker for Mac の一部としてインストールされますが、Linux ユーザは[ここ](https://docs.docker.com/compose/install/)に記載されている手順に従う必要があります。
 
+次のコマンドを使用して、現在の **Docker** バージョンと **Docker Compose** バージョンを確認できます :
+
+```console
+docker-compose -v
+docker version
+```
+
+Docker バージョン 18.03 以降と Docker Compose 1.21 以上を使用していることを確認し、必要に応じてアップグレードしてください。
 
 <a name="cygwin"></a>
-## Cygwin 
+## Cygwin
 
 シンプルな bash スクリプトを使用してサービスを開始します。Windows ユーザは [cygwin](http://www.cygwin.com/) をダウンロードして、Windows 上の Linux ディストリビューションと同様のコマンドライン機能を提供する必要があります。
 
@@ -197,10 +205,10 @@ cd tutorials.CRUD-Operations
 | HTTP 動詞   | `/v2/entities`  | `/v2/entities/<entity-id>`  |
 |-----------  |:--------------: |:-----------------------: |
 | **POST**    | 新しいエンティティを作成し、コンテキストに追加します。 | 指定されたエンティティの属性を作成または更新します。 |
-| **GET**     | コンテキストからエンティティ・データを読み込みます。これにより、複数のエンティティからのデータが返されます。データはフィルタリングできます。 | 指定されたエンティティからエンティティ・データを読み込みます。これは、単一のエンティティからのデータのみを返します。データはフィルタリングできます。 | 
+| **GET**     | コンテキストからエンティティ・データを読み込みます。これにより、複数のエンティティからのデータが返されます。データはフィルタリングできます。 | 指定されたエンティティからエンティティ・データを読み込みます。これは、単一のエンティティからのデータのみを返します。データはフィルタリングできます。 |
 | **PUT**     | :x:   | :x:   |
 | **PATCH**   | :x:   | :x:   |
-| **DELETE**  | :x:  | コンテキストからエンティティを削除します。 | 
+| **DELETE**  | :x:  | コンテキストからエンティティを削除します。 |
 
 エンティティ・エンドポイントの完全なリストは、[NGSI v2 Swagger Specification](https://fiware.github.io/specifications/OpenAPI/ngsiv2#/Entities) で、見つけることができます。
 
@@ -825,7 +833,7 @@ curl -X GET \
 <a name="overwrite-the-value-of-an-attribute-value"></a>
 ### 属性の値を上書き
 
-この例では、`id=urn:ngsi-ld:Product:001` を持つ Entity の `price` 属性の値を次のように更新します。 
+この例では、`id=urn:ngsi-ld:Product:001` を持つ Entity の `price` 属性の値を次のように更新します。
 
 #### :one::four: リクエスト :
 
@@ -842,7 +850,7 @@ curl -iX PUT \
 <a name="overwrite-multiple-attributes-of-a-data-entity"></a>
 ### データ・エンティティの複数の属性を上書き
 
-この例は、`id=urn:ngsi-ld:Product:001` を持つ、`Entity` の `price` 属性と `name` 属性の両方の値を同時に更新します。 
+この例は、`id=urn:ngsi-ld:Product:001` を持つ、`Entity` の `price` 属性と `name` 属性の両方の値を同時に更新します。
 
 #### :one::five: リクエスト :
 
