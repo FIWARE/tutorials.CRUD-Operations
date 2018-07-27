@@ -41,8 +41,8 @@ Shelf : refStore
 Shelf : location 
 Shelf : maxCapacity
 
-Product "1 " o-- " *" InventoryItem  : listed in >
-Store " 1  " o-- " *  " InventoryItem :  sells >
 Store "1" *-- "*" Shelf : contains >
 InventoryItem "*" -o " 1" Shelf : < holds
+Product "0..*" - "0..*" Store
+(Product, Store) .. InventoryItem : associates
 @enduml
