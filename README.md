@@ -10,8 +10,7 @@ The tutorial builds on the data created in the previous [stock management exampl
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as [Postman documentation](http://fiware.github.io/tutorials.CRUD-Operations/).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/825950653bc2350307c3)
-
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7764c9cbc3cfe2d5b403)
 
 * このチュートリアルは[日本語](https://github.com/Fiware/tutorials.CRUD-Operations/blob/master/README.ja.md)でもご覧いただけます。
 
@@ -242,7 +241,7 @@ Additionally the Orion Context Broker a convenience batch operation endpoint `/v
 
 Batch operations are always made using a POST request, where the payload is an object with two properties:
 
-*  `actionType` specifies the kind of action to invoke (e.g. `DELETE`)
+*  `actionType` specifies the kind of action to invoke (e.g. `delete`)
 *  `entities` is an array object holding the list of entities to update, along with the relevant entity data used to make the operation.
 
 
@@ -353,7 +352,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"APPEND_STRICT",
+  "actionType":"append_strict",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:011", "type":"Product",
@@ -379,10 +378,10 @@ The request will fail if any of the attributes already exist in the context.
 
 Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes
 
-* `actionType=APPEND_STRICT` means that the request only succeed all entities / attributes are new.
+* `actionType=append_strict` means that the request only succeed all entities / attributes are new.
 * The `entities` attribute holds an array of entities we wish to create.
 
-Subsequent request using the same data with the `actionType=APPEND_STRICT` batch operation will result in an error response.
+Subsequent request using the same data with the `actionType=append_strict` batch operation will result in an error response.
 
 
 ### Batch Create/Overwrite New Data Entities
@@ -399,7 +398,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"APPEND",
+  "actionType":"append",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:011", "type":"Product",
@@ -419,10 +418,10 @@ curl -iX POST \
 
 Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes:
 
-* `actionType=APPEND` means we will overwrite existing entities if they exist
+* `actionType=append` means we will overwrite existing entities if they exist
 * The entities attribute holds an array of entities we wish to create/overwrite.
 
-A Subsequent request using the same data with the `actionType=APPEND` batch operation can applied without changing the result beyond the initial application.
+A Subsequent request using the same data with the `actionType=append` batch operation can applied without changing the result beyond the initial application.
 
 
 ## Read Operations
@@ -861,7 +860,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"UPDATE",
+  "actionType":"update",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
@@ -876,7 +875,7 @@ curl -iX POST \
 }'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=append` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
 
 
 ### Batch Create/Overwrite Attributes of Multiple Data Entities
@@ -890,7 +889,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"APPEND",
+  "actionType":"append",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
@@ -905,7 +904,7 @@ curl -iX POST \
 }'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=APPEND` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=append` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
 
 
 
@@ -920,7 +919,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"REPLACE",
+  "actionType":"replace",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:010", "type":"Product",
@@ -930,7 +929,7 @@ curl -iX POST \
 }'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=REPLACE` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=replace` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.
 
 
 ## Delete Operations
@@ -989,7 +988,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"DELETE",
+  "actionType":"delete",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product"
@@ -1001,7 +1000,7 @@ curl -iX POST \
 }'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=DELETE` means we will delete something from the context and the `entities` attribute holds the `id` of the entities we wish to update.
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=delete` means we will delete something from the context and the `entities` attribute holds the `id` of the entities we wish to update.
 
 If any entity does not exist in the context, the result in an error response.
 
@@ -1016,7 +1015,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"DELETE",
+  "actionType":"delete",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:010", "type":"Product",
@@ -1027,7 +1026,7 @@ curl -iX POST \
 }'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=DELETE` means we will delete something from the context and the `entities` attribute holds an array of attributes we wish to update.
+Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=delete` means we will delete something from the context and the `entities` attribute holds an array of attributes we wish to update.
 
 If any attribute does not exist in the context, the result will be an error response.
 

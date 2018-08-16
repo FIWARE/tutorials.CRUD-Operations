@@ -9,7 +9,7 @@
 
 このチュートリアルでは、全体で [cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Getting-Started/) も利用できます。
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/825950653bc2350307c3)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7764c9cbc3cfe2d5b403)
 
 # 内容
 
@@ -241,7 +241,7 @@ cd tutorials.CRUD-Operations
 
 バッチ・オペレーションは常に POST リクエストを使用して行われます。ここで、ペイロードは2つのプロパティを持つオブジェクトです :
 
-* `actionType` : アクションの種類を呼び出すために指定します。例、`DELETE`
+* `actionType` : アクションの種類を呼び出すために指定します。例、`delete`
 * `entities` :  更新するエンティティのリストを保持している配列オブジェクトです。オペレーションに使用される関連エンティティ・データと一緒に使用されます
 
 
@@ -354,7 +354,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"APPEND_STRICT",
+  "actionType":"append_strict",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:011", "type":"Product",
@@ -380,10 +380,10 @@ curl -iX POST \
 
 バッチ処理は、2つの属性のペイロードで `/v2/op/update` エンドポイントを使用します
 
-* `actionType=APPEND_STRICT` は、すべてのエンティティ/属性が新しいリクエストにのみ成功することを意味します
+* `actionType=append_strict` は、すべてのエンティティ/属性が新しいリクエストにのみ成功することを意味します
 * `entities` 属性は、作成したいエンティティの配列を保持しています。
 
-`actionType=APPEND_STRICT` バッチ・オペレーションで同じデータを使用した後続のリクエストでは、エラー・レスポンスが発生します。
+`actionType=append_strict` バッチ・オペレーションで同じデータを使用した後続のリクエストでは、エラー・レスポンスが発生します。
 
 
 <a name="batch-createoverwrite-new-data-entities"></a>
@@ -401,7 +401,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"APPEND",
+  "actionType":"append",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:011", "type":"Product",
@@ -421,10 +421,10 @@ curl -iX POST \
 
 バッチ処理では、次の2つの属性を持つペイロードで、`/v2/op/update` エンドポイントを使用します :
 
-* `actionType=APPEND` は、既存のエンティティが存在する場合は上書きすることを意味します
+* `actionType=append` は、既存のエンティティが存在する場合は上書きすることを意味します
 * エンティティ属性は、作成/上書きするエンティティの配列を保持します
 
-`actionType=APPEND` バッチ処理で同じデータを使用する後続のリクエストは、最初のアプリケーションを超えて結果を変更することなく適用することができます。
+`actionType=append` バッチ処理で同じデータを使用する後続のリクエストは、最初のアプリケーションを超えて結果を変更することなく適用することができます。
 
 
 <a name="read-operations"></a>
@@ -876,7 +876,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"UPDATE",
+  "actionType":"update",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
@@ -893,7 +893,7 @@ curl -iX POST \
 
 バッチ処理では、2つの属性のペイロードを持つ `/v2/op/update` エンドポイントを使用します。
 
-- `actionType = APPEND` は、既存のエンティティが存在する場合はそれを上書きすることを意味しますが、`entities` 属性は更新したいエンティティの配列を保持します。
+- `actionType=append` は、既存のエンティティが存在する場合はそれを上書きすることを意味しますが、`entities` 属性は更新したいエンティティの配列を保持します。
 
 
 <a name="batch-createoverwrite-attributes-of-multiple-data-entities"></a>
@@ -908,7 +908,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"APPEND",
+  "actionType":"append",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product",
@@ -925,7 +925,7 @@ curl -iX POST \
 
 バッチ処理では、2つの属性のペイロードを持つ `/v2/op/update` エンドポイントを使用します。
 
-- `actionType = APPEND` は、既存のエンティティが存在する場合はそれを上書きすることを意味しますが、`entities` 属性は更新したいエンティティの配列を保持します。
+- `actionType=append` は、既存のエンティティが存在する場合はそれを上書きすることを意味しますが、`entities` 属性は更新したいエンティティの配列を保持します。
 
 
 
@@ -941,7 +941,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"REPLACE",
+  "actionType":"replace",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:010", "type":"Product",
@@ -953,7 +953,7 @@ curl -iX POST \
 
 バッチ処理では、2つの属性のペイロードを持つ `/v2/op/update` エンドポイントを使用します。
 
-- `actionType=REPLACE` は、既存のエンティティが存在する場合は上書きすることを意味しますが、`entities` 属性は更新するエンティティの配列を保持します。
+- `actionType=replace` は、既存のエンティティが存在する場合は上書きすることを意味しますが、`entities` 属性は更新するエンティティの配列を保持します。
 
 
 <a name="delete-operations"></a>
@@ -1017,7 +1017,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"DELETE",
+  "actionType":"delete",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:001", "type":"Product"
@@ -1031,7 +1031,7 @@ curl -iX POST \
 
 バッチ処理では、2つの属性のペイロードを持つ `/v2/op/update` エンドポイントを使用します。
 
-- `actionType=DELETE` は、コンテキストから何かを削除することを意味し、`entities`属性は、更新するエンティティの `id` を保持します。
+- `actionType=delete` は、コンテキストから何かを削除することを意味し、`entities`属性は、更新するエンティティの `id` を保持します。
 
 コンテキスト内にエンティティが存在しない場合は、エラーレスポンスが返されます。
 
@@ -1047,7 +1047,7 @@ curl -iX POST \
   --url 'http://localhost:1026/v2/op/update' \
   --header 'Content-Type: application/json' \
   --data '{
-  "actionType":"DELETE",
+  "actionType":"delete",
   "entities":[
     {
       "id":"urn:ngsi-ld:Product:010", "type":"Product",
@@ -1060,7 +1060,7 @@ curl -iX POST \
 
 バッチ処理では、2つの属性のペイロードを持つ `/v2/op/update` エンドポイントを使用します。
 
-- `actionType=DELETE` は、コンテキストから何かを削除することを意味し、`entities`属性は、更新する属性の 配列 を保持します。
+- `actionType=delete` は、コンテキストから何かを削除することを意味し、`entities`属性は、更新する属性の 配列 を保持します。
 
 コンテキストに属性が存在しない場合、結果はエラーレスポンスになります。
 
