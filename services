@@ -7,6 +7,13 @@
 
 set -e
 
+loadData () {
+	printf "Loading context data "
+	./import-data
+	echo -e " \033[1;32mdone\033[0m"
+	echo ""
+}
+
 if (( $# != 1 )); then
 	echo "Illegal number of parameters"
 	echo "usage: services [create|start|stop]"
@@ -23,8 +30,7 @@ case "${command}" in
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
 		echo ""
 		docker-compose --log-level ERROR -p fiware up -d --remove-orphans
-		echo "loading data"
-		./import-data
+		loadData
 		;;
 	"stop")
 		echo "stopping containers"
