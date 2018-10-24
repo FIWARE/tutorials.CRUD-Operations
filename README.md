@@ -3,7 +3,7 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 This tutorial teaches FIWARE users about CRUD Operations.
 The tutorial builds on the data created in the previous [stock management example](https://github.com/Fiware/tutorials.Entity-Relationships/) and introduces the concept of [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete), allowing users to manipulate the data held within the context.
@@ -35,11 +35,11 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
     + [Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities)
   * [Read Operations](#read-operations)
     + [Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity)
-    + [Read a Data Entity (key value pairs)](#read-a-data-entity-key-value-pairs)
+    + [Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs)
     + [Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity)
     + [List all Data Entities (verbose)](#list-all-data-entities-verbose)
-    + [List all Data Entities (key value pairs)](#list-all-data-entities-key-value-pairs)
-    + [List Data Entity by id](#list-data-entity-by-id)
+    + [List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs)
+    + [List Data Entity by ID](#list-data-entity-by-id)
   * [Update Operations](#update-operations)
     + [Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value)
     + [Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity)
@@ -79,7 +79,7 @@ Within our simple stock management system, currently have four types of entity. 
   + A price e.g. 13.99 Euros
   + A size e.g. Small
 * An **Inventory Item** is another conceptural entity, used to assocate products, stores, shelves and physical objects. It would have properties such as:
-  + An assocation to the product being sold
+  + An association to the product being sold
   + An association to the store in which the product is being sold
   + An association to the shelf where the product is being displayed
   + A stock count of the quantity of the product available in the warehouse
@@ -138,7 +138,7 @@ The necessary configuration information can be seen in the services section of t
 Both containers are residing on the same network - the Orion Context Broker is listening on Port `1026`
 and MongoDB is listening on the default port `271071`. Both containers are also exposing the same ports
 externally - this is purely for the tutorial access - so that cUrl or Postman can access them without
-being part of the same network. The command line initialization should be self explanatory.
+being part of the same network. The command-line initialization should be self explanatory.
 
 # Prerequisites
 
@@ -164,12 +164,12 @@ Please ensure that you are using Docker version 18.03 or higher and Docker Compo
 
 ## Cygwin
 
-We will start up our services using a simple bash script. Windows users should download [cygwin](http://www.cygwin.com/) to provide a command line functionality similar to a Linux distribution on Windows.
+We will start up our services using a simple bash script. Windows users should download [cygwin](http://www.cygwin.com/) to provide a command-line functionality similar to a Linux distribution on Windows.
 
 
 # Start Up
 
-All services can be initialised from the command line by running the bash script provided within the repository. Please clone the repository and create the necessary images by running the commands as shown:
+All services can be initialised from the command-line by running the bash script provided within the repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```console
 git clone git@github.com:Fiware/tutorials.CRUD-Operations.git
@@ -215,7 +215,7 @@ A complete list of entity endpoints can be found by looking at the [NGSI v2 Swag
 
 ## Attribute CRUD Operations
 
-To perform CRUD operations on attributes, the `<entity-id>` must be known. Each attribute is effectively a key value pair.
+To perform CRUD operations on attributes, the `<entity-id>` must be known. Each attribute is effectively a key-value pair.
 
   There are three endpoints:
 
@@ -251,7 +251,7 @@ Batch operations are always made using a POST request, where the payload is an o
 The following examples assume that the Orion Context Broker is listening on port 1026 of `localhost`, and the initial seed data has been imported from the previous tutorial.
 
 All examples refer to the **Product** entity as defined in the stock management system. CRUD operations will therefore relate to adding, reading,  amending and deleting a product or series of products. This is a typical use case for a regional manager of store for example - setting prices and deciding what products can be sold.
-The actual responses you receive in each case will depend on the state of the context data in your system at the time. If you find that you have already deleted an entity by mistake, you can restore the initial context by reloading the data from the command line
+The actual responses you receive in each case will depend on the state of the context data in your system at the time. If you find that you have already deleted an entity by mistake, you can restore the initial context by reloading the data from the command-line
 
 ```console
 ./import-data
@@ -484,7 +484,7 @@ Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is as show
 Context data can be retrieved by making a GET request to the `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
 
 
-### Read a Data Entity (key value pairs)
+### Read a Data Entity (key-value pairs)
 
 This example reads the key-value pairs for two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known `id`.
 
@@ -514,7 +514,7 @@ Combine the `options=keyValues` parameter and the `attrs` parameter to obtain ke
 
 ### Read Multiple attributes values from a Data Entity
 
-This example reads the value of two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known id.
+This example reads the value of two requested attributes (`name` and `price`) from the context of existing **Product** entity with a known ID.
 
 #### :one::zero: Request:
 
@@ -645,7 +645,7 @@ On Start up the context held nine products, three more have been added by the cr
 ]
 ```
 
-### List all Data Entities (key value pairs)
+### List all Data Entities (key-value pairs)
 
 This example lists the `name` and `price` attributes of all **Product** entities.
 
@@ -739,7 +739,7 @@ On Start up the context held nine products, three more have been added by the cr
 Full context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities` endpoint and supplying the `type` parameter, combine this with the o`ptions=keyValues` parameter and the `attrs` parameter to obtain key-values.
 
 
-### List Data Entity by id
+### List Data Entity by ID
 
 This example lists the `id` and `type` of all **Product** entities.
 

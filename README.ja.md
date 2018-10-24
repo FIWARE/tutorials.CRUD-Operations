@@ -3,7 +3,7 @@
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://www.fiware.org/developers/catalogue/)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](http://fiware.github.io/context.Orion/api/v2/stable/)
+[![NGSI v2](https://img.shields.io/badge/NGSI-v2-blue.svg)](https://fiware-ges.github.io/core.Orion/api/v2/stable/)
 
 このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。チュートリアルでは、以前の[在庫管理の例](https://github.com/Fiware/tutorials.Entity-Relationships/)で作成されたデータを基に、[CRUD オペレーション](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)の概念を紹介し、ユーザがコンテキスト内に保持されているデータをオペレーションできるようにします。
 
