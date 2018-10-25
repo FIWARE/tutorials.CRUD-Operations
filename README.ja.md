@@ -9,7 +9,7 @@
 
 このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。チュートリアルでは、以前の[在庫管理の例](https://github.com/Fiware/tutorials.Entity-Relationships/)で作成されたデータを基に、[CRUD オペレーション](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)の概念を紹介し、ユーザがコンテキスト内に保持されているデータをオペレーションできるようにします。
 
-このチュートリアルでは、全体で [cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](http://fiware.github.io/tutorials.Getting-Started/) も利用できます。
+このチュートリアルでは、全体で [cUrl](https://ec.haxx.se/) コマンドを使用していますが、[Postman documentation](https://fiware.github.io/tutorials.Getting-Started/) も利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7764c9cbc3cfe2d5b403)
 
