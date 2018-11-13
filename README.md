@@ -73,7 +73,7 @@ conceptual object which exists in the real world.
 ## Entities within a stock management system
 
 Within our simple stock management system, we currently have four entity types.
-The relationships among our entities are defined as shown below:
+The relationships between our entities are defined as shown below:
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
 
@@ -103,7 +103,7 @@ The relationships among our entities are defined as shown below:
     -   Shelf count, i.e. number of items available on the shelf
 
 As you can see, each of the entities defined above contain some properties which
-are liable to change. For example, product price may change, stock may be sold
+are liable to change. For example, product price could change, stock could be sold
 and the number of items on the shelves would drop.
 
 # Architecture
@@ -255,9 +255,9 @@ is unspecified, the `/v2/entities` endpoint is used.
 Once an `<entity-id>` is known within the context, individual data entities can
 be manipulated using the `/v2/entities/<entity-id>` endpoint.
 
-It is recommended that entity identifiers should be URN's following the
+It is recommended that entity identifiers should be URNs following the
 [NGSI-LD guidelines](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf),
-therefore each `id` as a URN follows a standard format:
+therefore each `id` is a URN which follows a standard format:
 `urn:ngsi-ld:<entity-type>:<entity-id>`. This helps making every `id` in the
 context data unique.
 
@@ -318,7 +318,7 @@ previous tutorial.
 All examples refer to the **Product** entity as defined in the stock management
 system. CRUD operations will therefore relate to adding, reading, amending and
 deleting a product or series of products. This is a typical use case for a
-store regional manager, for example specifying prices and deciding what
+store regional manager, for example setting prices and deciding what
 products can be sold. The actual responses you receive in each case will depend
 on the state of the context data in your system at the time. If you find that
 you have already deleted an entity by mistake, you can restore the initial
@@ -639,7 +639,7 @@ curl -X GET \
 
 ### Response:
 
-On start up the context held nine products, three more have been added by
+On start-up the context held nine products, three more have been added by
 create operations so the full context will now contain twelve products.
 
 ```json
@@ -747,7 +747,7 @@ curl -X GET \
 
 #### Response:
 
-On start up the context held nine products, three more have been added by
+On start-up the context held nine products, three more have been added by
 create operations so the full context will now contain twelve products.
 
 ```json
@@ -845,7 +845,7 @@ curl -X GET \
 
 #### Response:
 
-On start up the context held nine products, three more have been added by
+On start-up the context held nine products, three more have been added by
 create operations so the full context will now contain twelve products.
 
 ```json
@@ -911,12 +911,12 @@ of the given `type`.
 Overwrite operations are mapped to HTTP PUT. HTTP PATCH can be used to update
 several attributes at once.
 
--   The `/v2/entities/<entity>/attrs/<attribute>/value` endpoint can be used to
+-   The `/v2/entities/<entity>/attrs/<attribute>/value` endpoint is used to
     update an attribute
--   The `/v2/entities/<entity>/attrs` endpoint can be used to update multiple
+-   The `/v2/entities/<entity>/attrs` endpoint is used to update multiple
     attributes
 
-### Overwrite an Attribute's value
+### Overwrite the value of an Attribute value
 
 This example updates the value of the price attribute of the Entity with
 `id=urn:ngsi-ld:Product:001`
