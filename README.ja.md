@@ -49,7 +49,7 @@
         -   [データ・エンティティから複数の属性値の読み取り](#read-multiple-attributes-values-from-a-data-entity)
         -   [すべてのデータ・エンティティ(詳細)を一覧表示](#list-all-data-entities-verbose)
         -   [すべてのデータ・エンティティ(キー値のペア)を一覧表示](#list-all-data-entities-key-value-pairs)
-        -   [id でデータ・エンティティを一覧表示](#list-data-entity-by-id)
+        -   [ID でデータ・エンティティを一覧表示](#list-data-entity-by-id)
     -   [更新 (Update) オペレーション](#update-operations)
         -   [属性の値を上書き](#overwrite-the-value-of-an-attribute-value)
         -   [データ・エンティティの複数の属性を上書き](#overwrite-multiple-attributes-of-a-data-entity)
@@ -58,10 +58,10 @@
         -   [エンティティ・データの一括置換](#batch-replace-entity-data)
     -   [削除 (DELETE) オペレーション](#delete-operations)
         -   [データの関係](#data-relationships)
-        -   [データ・エンティティの削除](#delete-a-data-entity)
-        -   [データ・エンティティからの属性の削除](#delete-an-attribute-from-a-data-entity)
-        -   [複数のデータ・エンティティの一括削除](#batch-delete-multiple-data-entities)
-        -   [データ・エンティティからの複数の属性のバッチ削除](#batch-delete-multiple-attributes-from-a-data-entity)
+        -   [エンティティの削除](#delete-an-entity)
+        -   [エンティティからの属性の削除](#delete-an-attribute-from-an-entity)
+        -   [複数のエンティティの一括削除](#batch-delete-multiple-entities)
+        -   [エンティティからの複数の属性のバッチ削除](#batch-delete-multiple-attributes-from-an-entity)
         -   [既存のデータ関係を見つける](#find-existing-data-relationships)
 -   [次のステップ](#next-steps)
 
@@ -76,7 +76,7 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 
 ## 在庫管理システム内のエンティティ
 
-シンプルな在庫管理システムでは、現在 4 つのタイプのエンティティがあります。エン
+シンプルな在庫管理システムでは、現在 4 つのエンティティ型があります。エン
 ティティ間の関係は、次のように定義されます :
 
 ![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
@@ -88,12 +88,12 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
         Berlin"
     -   location : ストアの物理的なローケーション。例えば、_52.5075 N, 13.3903
         E_
--   **Shelf** : 棚は販売したいオブジェクトを保持するための、現実世界のデバイスで
-    す。各棚には次のようなプロパティがあります :
+-   **Shelf** : 棚は販売したいオブジェクトを保持するための、現実世界の
+    オブジェクトです。各棚には次のようなプロパティがあります :
     -   name : 棚の名前。例えば、"Wall Unit"
     -   location : 棚の物理的なローケーション。例えば、_52.5075 N, 13.3903 E_
     -   maximum_capacity : 棚の最大容量
-    -   棚(shelf)が存在するストア(store)への関連付け
+    -   棚(shelf)が置かれているストア(store)への関連付け
 -   **Product** : 製品は販売するものとして定義されています。それは概念的なオブジ
     ェクトです。製品には次のような特性があります :
     -   name : 製品の名前。例えば、"Vodka"
@@ -108,9 +108,9 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
     -   stock_count : 倉庫で利用可能な製品の在庫数
     -   shelf_count : 棚で利用可能な製品の在庫数
 
-ご覧のとおり、上記で定義されたエンティティのそれぞれは、変更される可能性のあるい
-くつかのプロパティを含んでいます。製品の価格は変わる可能性があり、在庫が売却され
-、在庫の在庫数が減る可能性があります。
+ご覧のとおり、上記で定義されたエンティティには、変更される可能性のある
+プロパティがいつか含まれています。たとえば、製品価格が変化し、在庫が売却され、
+棚の商品数が減少する可能性があります。
 
 <a name="architecture"></a>
 
@@ -122,18 +122,21 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 FIWARE"_ と認定するには、Orion Context Broker を使用するだけで十分です。
 
 現在、Orion Context Broker はオープンソースの
-[MongoDB](https://www.mongodb.com/) 技術を利用して、コンテキスト・データの永続性
-を維持しています。したがって、アーキテクチャは 2 つの要素で構成されます。
+
+現在、Orion Context Broker はオープンソースの
+[MongoDB](https://www.mongodb.com/) テクノロジに依存して、
+管理しているコンテキストデータを格納しています。
+したがって、アーキテクチャは 2つの要素で構成されます :
 
 -   [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してリ
     クエストを受信する
     [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)
 -   バックエンドの [MongoDB](https://www.mongodb.com/) データベース
-    -   Orion Context Broker が、データ・エンティティなどのコンテキスト・データ
-        情報、サブスクリプション、登録などを保持するために使用します
+    -   Orion Context Broker が、データ・エンティティなどのコンテキスト
+        情報、サブスクリプション、登録などをストアするために使用します
 
-2 つの要素間のすべての対話は HTTP リクエストによって開始されるため、エンティティ
-はコンテナ化され、公開されたポートから実行されます。
+2つのコンポーネントは HTTP リクエストによって相互作用するため、
+コンテナ化して公開されたポートから実行できます。
 
 ![](https://fiware.github.io/tutorials.CRUD-Operations/img/architecture.png)
 
@@ -170,11 +173,11 @@ mongo-db:
     command: --bind_ip_all --smallfiles
 ```
 
-両方のコンテナが同じネットワークに常駐しています。Orion Context Broker はポート
-`1026` でリッスンしており、MongoDB はデフォルト・ポート `271071` でリッスンして
-います。 どちらのコンテナも同じポートを外部に公開しています。これはチュートリア
-ルのアクセス専用です。これにより、cUrl または Postman は同じネットワークに参加す
-ることなくアクセスできます。 コマンドラインの初期化は、一目瞭然でなければなりま
+どちらのコンテナも同じネットワークに常駐しています。Orion Context Broker は
+ポート `1026` でリッスンしており、MongoDB はデフォルトポート `271071` で
+リッスンしています。このチュートリアルでは、ネットワークの外部から2つのポートを
+利用できるようにして、cUrl または Postman がネットワーク内から実行することなく
+アクセスできるようにしました。コマンドラインの初期化は、一目瞭然でなければなりま
 せん。
 
 <a name="prerequisites"></a>
@@ -186,8 +189,8 @@ mongo-db:
 ## Docker
 
 物事を単純にするために、両方のコンポーネントが [Docker](https://www.docker.com)
-を使用して実行されます。**Docker** は、さまざまコンポーネントをそれぞれの環境に
-分離することを可能にするコンテナ・テクノロジです。
+を使用して実行されます。**Docker** は、環境ごとに各コンポーネントをパッケージ
+化し、独立して実行することができるコンテナ・テクノロジです。
 
 -   Docker を Windows にインストールするには
     、[こちら](https://docs.docker.com/docker-for-windows/)の手順に従ってくださ
@@ -270,10 +273,12 @@ cd tutorials.CRUD-Operations
 `<entity-id>` がコンテキスト内で認識されると、個々のデータ・エンティティは
 、`/v2/entities/<entity-id>` エンドポイントを使用してオペレーションできます。
 
-エンティティ識別子は、NGSI-LD ガイドラインに従った URN であることが推奨されます
-。したがって、各 `id` は、標準形式に従った URN です :
+エンティティ識別子は、
+[NGSI-LD guidelines](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)
+ガイドラインに従った URNs であることが推奨されます。
+したがって、各 `id` は、標準形式に従った URN です :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、コンテキスト・データ内のすべて
-の `id` が一意であることを意味します。
+の `id` を一意にするのに役立ちます。
 
 | HTTP 動詞  |                                                                `/v2/entities`                                                                |                                                              `/v2/entities/<entity-id>`                                                              |
 | ---------- | :------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -323,12 +328,14 @@ cd tutorials.CRUD-Operations
 ーションするためのコンビニエンス・バッチ・オペレーションのエンドポイント
 `/v2/op/update` を持っています。
 
-バッチ・オペレーションは常に POST リクエストを使用して行われます。ここで、ペイロ
-ードは 2 つのプロパティを持つオブジェクトです :
+
+バッチ・オペレーションは、ペイロードが2つのプロパティを持つオブジェクトである
+POST リクエストによって常にトリガされます :
 
 -   `actionType` : アクションの種類を呼び出すために指定します。例、`delete`
--   `entities` : 更新するエンティティのリストを保持している配列オブジェクトです
-    。オペレーションに使用される関連エンティティ・データと一緒に使用されます
+-   `entities` : 更新するエンティティのリストを保持しているオブジェクトの
+    配列です。オペレーションを実行するため関連エンティティ・データと一緒に
+    使用されます
 
 <a name="example-crud-operations-using-fiware"></a>
 
@@ -360,13 +367,13 @@ cd tutorials.CRUD-Operations
 -   `/v2/entities/<entity>` エンドポイントは、新しい属性を追加するために使用され
     ます
 
-新しく作成されたエンティティは、`id` と `type` 属性を持たなければならず、それぞ
-れの追加属性はオプションであり、記述されているシステムに依存します。それぞれの追
-加属性も、定義された`type` と `value` 属性をもつべきです。
+新しく作成されたエンティティは、`id` と `type` 属性を持たなければならず、
+他の属性はオプションであり、モデル化されるシステムに依存します。
+しかし、追加の属性が存在する場合、それぞれは `type` と `value` の両方を
+指定する必要があります。
 
 オペレーションが成功した場合、レスポンスは、**204 - No Context** になるか、オペ
-レーションが失敗した場合、**422 - Unprocessable Entity error response** になりま
-す
+レーションが失敗した場合、**422 - Unprocessable Entity** になります
 
 <a name="create-a-new-data-entity"></a>
 
@@ -488,8 +495,8 @@ curl -iX POST \
 バッチ処理は、2 つの属性のペイロードで `/v2/op/update` エンドポイントを使用しま
 す
 
--   `actionType=append_strict` は、すべてのエンティティ/属性が新しいリクエストに
-    のみ成功することを意味します
+-   `actionType=append_strict` は、すべてのエンティティ/属性が新しい場合にのみ
+　　リクエストが成功することを意味します
 -   `entities` 属性は、作成したいエンティティの配列を保持しています。
 
 `actionType=append_strict` バッチ・オペレーションで同じデータを使用した後続のリ
@@ -538,14 +545,14 @@ curl -iX POST \
     味します
 -   エンティティ属性は、作成/上書きするエンティティの配列を保持します
 
-`actionType=append` バッチ処理で同じデータを使用する後続のリクエストは、最初のア
-プリケーションを超えて結果を変更することなく適用することができます。
+同じデータ (すなわち、同じエンティティおよび `actionType=append` ) を含む後続の
+リクエストは、コンテキスト状態を変更しません。
 
 <a name="read-operations"></a>
 
 ## 読み取り (Read) オペレーション
 
--   `/v2/entities` エンドポイントは、オペレーションをリストするために使用されま
+-   `/v2/entities` エンドポイントは、エンティティをリストするために使用されま
     す
 -   `/v2/entities/<entity>` エンドポイントは、単一のエンティティの詳細情報を取得
     するために使用されています
@@ -555,7 +562,7 @@ curl -iX POST \
 ### フィルタリング
 
 -   options パラメータ (attrs パラメータと組み合わせて)は、返されるフィールドを
-    フィルタリングするために使用されます
+    フィルタリングすることができます
 -   q パラメータは、返されるエンティティをフィルタリングするために使用できます
 
 <a name="read-a-data-entity"></a>
@@ -620,9 +627,8 @@ curl -X GET \
 
 ### データ・エンティティ(キー値のペア)の読み取り
 
-この例では、リクエストされた 2 つの属性(`name` および `price` )のキーと値のペア
-を、既知の `id` を持つ既存 **Product** エンティティのコンテキストから読み取りま
-す。
+この例では、既存の **Product** エンティティのコンテキストから2つの属性
+(`name`と` price`) のキーと値のペアを既知の `id` で読み込みます。
 
 #### :nine: リクエスト :
 
@@ -645,15 +651,15 @@ curl -X GET \
 }
 ```
 
-`options=keyValues` パラメータと `attrs` パラメータを組み合わることで、キーと値
+`options=keyValues` パラメータと `attrs` パラメータを組み合わせて、キーと値
 のペアを取得します。
 
 <a name="read-multiple-attributes-values-from-a-data-entity"></a>
 
 ### データ・エンティティから複数の属性値の読み取り
 
-この例では、既知の `id` を持つ既存 **Product** エンティティのコンテキストから、2
-つのリクエストされた属性(`name` および `price`)の値を読み取ります。
+この例では、既存の **Product** エンティティのコンテキストから、既知の ID を
+持つ2つの属性 (`name`と `price`) の値を読み込みます。
 
 #### :one::zero: リクエスト :
 
@@ -690,8 +696,8 @@ curl -X GET \
 
 ### レスポンス :
 
-起動すると、コンテキストは 9 つの製品を含み、3 つの製品が作成オペレーションによ
-って追加され、フル・コンテキストでは 12 の製品が返されます。
+起動時にコンテキストが9つの製品を保持し、3つが作成オペレーションによって
+追加され、フル・コンテキストに12の製品が含まれるようになりました。
 
 ```json
 [
@@ -800,8 +806,8 @@ curl -X GET \
 
 #### レスポンス :
 
-起動すると、コンテキストは 9 つの製品を含み、3 つの製品が作成オペレーションによ
-って追加され、フル・コンテキストでは 12 の製品が返されます。
+起動時にコンテキストが9つの製品を保持し、3つが作成オペレーションによって
+追加され、フル・コンテキストに12の製品が含まれるようになりました。
 
 ```json
 [
@@ -887,7 +893,7 @@ curl -X GET \
 
 <a name="list-data-entity-by-id"></a>
 
-### id でデータ・エンティティを一覧表示
+### ID でデータ・エンティティを一覧表示
 
 この例では、すべての **Prodcut** エンティティの `id` と `type` が一覧表示されま
 す。
@@ -901,8 +907,8 @@ curl -X GET \
 
 #### レスポンス :
 
-起動すると、コンテキストは 9 つの製品を含み、3 つの製品が作成オペレーションによ
-って追加され、フル・コンテキストでは 12 の製品が返されます。
+起動時にコンテキストが9つの製品を保持し、3つが作成オペレーションによって
+追加され、フル・コンテキストに12の製品が含まれるようになりました。
 
 ```json
 [
@@ -1007,7 +1013,8 @@ curl -iX PATCH \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
   --header 'Content-Type: application/json' \
   --data ' {
-      "price":{"type":"Integer", "value": 89}
+      "price":{"type":"Integer", "value": 89},
+      "name": {"type":"Text", "value": "Ale"}
 }'
 ```
 
@@ -1015,8 +1022,8 @@ curl -iX PATCH \
 
 ### 複数のデータ・エンティティの属性のバッチ上書き
 
-この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の使用可能な製
-品を作成しています。
+この例では、コンビニエンス・バッチ処理エンドポイントを使用して、
+既存の製品を更新します。
 
 #### :one::six: リクエスト :
 
@@ -1051,8 +1058,8 @@ curl -iX POST \
 
 ### 複数のデータ・エンティティの属性のバッチ作成/上書き
 
-この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の利用可能な製
-品を作成しています。
+この例では、コンビニエンス・バッチ処理エンドポイントを使用して、
+既存の製品を更新します。
 
 #### :one::seven: リクエスト :
 
@@ -1087,8 +1094,8 @@ curl -iX POST \
 
 ### エンティティ・データの一括置換
 
-この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の使用可能な製
-品を作成しています。
+この例では、既存の製品のエンティティのデータを置き換えるために、
+コンビニエンス・バッチ処理エンドポイントを使用しています。
 
 #### :one::eight: リクエスト :
 
@@ -1108,10 +1115,9 @@ curl -iX POST \
 ```
 
 バッチ処理では、2 つの属性のペイロードを持つ `/v2/op/update` エンドポイントを使
-用します。
-
--   `actionType=replace` は、既存のエンティティが存在する場合は上書きすることを
-    意味しますが、`entities` 属性は更新するエンティティの配列を保持します。
+用します。 - `actionType=replace` は、既存のエンティティが存在する場合はそれを
+上書きすることを意味しますが、`entities` 属性はデータを置き換えるエンティティの
+配列を保持します。
 
 <a name="delete-operations"></a>
 
@@ -1119,10 +1125,10 @@ curl -iX POST \
 
 削除 (Delete) オペレーション は、HTTP DELETE にマップします。
 
--   `/v2/entities/<entity>` エンドポイントは、エンティティを削除するために使用さ
-    れます
+-   `/v2/entities/<entity>` エンドポイントは、エンティティを削除するために使用
+    できます
 -   `/v2/entities/<entity>/attrs/<attribute>` エンドポイントは、属性を削除するた
-    めに使用されます
+    めに使用できます
 
 レスポンスは、オペレーションが成功すれば、**204 - No Content** となり、失敗すれ
 ば、**404 - Not Found** となります。
@@ -1138,9 +1144,9 @@ curl -iX POST \
 カスケード削除の構成はこのチュートリアルの範囲を超えていますが、バッチ削除リクエ
 ストを使用することもできます。
 
-<a name="delete-a-data-entity"></a>
+<a name="delete-an-entity"></a>
 
-### データ・エンティティの削除
+### エンティティの削除
 
 この例では、`id=urn:ngsi-ld:Product:001` のエンティティをコンテキストから削除し
 ます。
@@ -1153,36 +1159,36 @@ curl -iX DELETE \
 ```
 
 エンティティは、`/v2/entities/<entity>` エンドポイントに DELETE リクエストを行う
-ことによって削除されます。
+ことによって削除することができます。
 
 同じ `id` を使用する後続のリクエストは、エンティティがもはやコンテキストに存在し
 ないため、エラーレスポンスになります。
 
-<a name="delete-an-attribute-from-a-data-entity"></a>
+<a name="delete-an-attribute-from-an-entity"></a>
 
-### データ・エンティティからの属性の削除
+### エンティティからの属性の削除
 
-この例では、`id=urn:ngsi-ld:Product:010` のエンティティから `specialOffer` 属性
+この例では、`id=urn:ngsi-ld:Product:001` のエンティティから `specialOffer` 属性
 を削除します。
 
 #### :two::zero: リクエスト :
 
 ```console
 curl -iX DELETE \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010/attrs/specialOffer'
+  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/specialOffer'
 ```
 
 属性は、`/v2/entities/<entity>/attrs/<attribute>` エンドポイントに DELETE リクエ
 ストを行うことによって削除できます。
 
-属性がコンテキストに存在しない場合は、エラーレスポンスが返されます。
+属性がコンテキストに存在しない場合は、エラー・レスポンスになります。
 
-<a name="batch-delete-multiple-data-entities"></a>
+<a name="batch-delete-multiple-entities"></a>
 
-### 複数のデータ・エンティティの一括削除
+### 複数のエンティティの一括削除
 
-この例では、コンビニエンス・バッチ処理エンドポイントを使用して一連の利用可能な
-`Product` エンティティを削除します。
+この例では、コンビニエンス・バッチ処理エンドポイントを使用して、
+**Product** エンティティを削除します。
 
 #### :two::one: リクエスト :
 
@@ -1207,16 +1213,17 @@ curl -iX POST \
 用します。
 
 -   `actionType=delete` は、コンテキストから何かを削除することを意味し
-    、`entities`属性は、更新するエンティティの `id` を保持します。
+    、`entities`属性は、削除するエンティティの `id` を保持します。
 
-コンテキスト内にエンティティが存在しない場合は、エラーレスポンスが返されます。
+コンテキスト内にエンティティが存在しない場合は、
+結果はエラー・レスポンスが返されます。
 
-<a name="batch-delete-multiple-attributes-from-a-data-entity"></a>
+<a name="batch-delete-multiple-attributes-from-an-entity"></a>
 
-### データ・エンティティからの複数の属性のバッチ削除
+### エンティティからの複数の属性のバッチ削除
 
-この例では、コンビニエンス・バッチ処理エンドポイントを使用して、使用可能な
-**Product** エンティティから一連の属性を削除します。
+この例では、コンビニエンス・バッチ処理エンドポイントを使用して、
+**Product** エンティティからいくつかの属性を削除します。
 
 #### :two::two: リクエスト :
 
@@ -1228,7 +1235,7 @@ curl -iX POST \
   "actionType":"delete",
   "entities":[
     {
-      "id":"urn:ngsi-ld:Product:010", "type":"Product",
+      "id":"urn:ngsi-ld:Product:003", "type":"Product",
       "price":{},
       "name": {}
     }
@@ -1240,7 +1247,7 @@ curl -iX POST \
 用します。
 
 -   `actionType=delete` は、コンテキストから何かを削除することを意味し
-    、`entities`属性は、更新する属性の 配列 を保持します。
+    、`entities`属性は、削除する属性の 配列 を保持します。
 
 コンテキストに属性が存在しない場合、結果はエラーレスポンスになります。
 
@@ -1265,18 +1272,6 @@ curl -X GET \
     {
         "id": "urn:ngsi-ld:InventoryItem:001",
         "type": "InventoryItem"
-    },
-    {
-        "id": "urn:ngsi-ld:InventoryItem:004",
-        "type": "InventoryItem"
-    },
-    {
-        "id": "urn:ngsi-ld:InventoryItem:006",
-        "type": "InventoryItem"
-    },
-    {
-        "id": "urn:ngsi-ld:InventoryItem:401",
-        "type": "InventoryItem"
     }
 ]
 ```
@@ -1285,6 +1280,10 @@ curl -X GET \
     いません。安全に削除できます
 -   レスポンスが一連の `InventoryItem` エンティティをリストする場合、関連する
     `Product` エンティティがコンテキストから削除される前に削除する必要があります
+
+以前に、**Product** `urn:ngsi-ld:Product:001` を削除したので、上で見たものは、
+実際にぶら下がている参照 (a dangling reference) です。たとえば、返された
+**InventoryItem** は、もはや存在しない **Product** を参照します。
 
 <a name="next-steps"></a>
 
