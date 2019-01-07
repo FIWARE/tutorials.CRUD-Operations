@@ -22,7 +22,10 @@
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7764c9cbc3cfe2d5b403)
 
-# 内容
+## 内容
+
+<details>
+<summary>詳細 <b>(クリックして拡大)</b></summary>
 
 -   [データ・エンティティ](#data-entities)
     -   [在庫管理システム内のエンティティ](#entities-within-a-stock-management-system)
@@ -64,6 +67,8 @@
         -   [エンティティからの複数の属性のバッチ削除](#batch-delete-multiple-attributes-from-an-entity)
         -   [既存のデータ関係を見つける](#find-existing-data-relationships)
 -   [次のステップ](#next-steps)
+
+</details>
 
 <a name="data-entities"></a>
 

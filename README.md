@@ -24,7 +24,10 @@ available as
     は[日本語](https://github.com/Fiware/tutorials.CRUD-Operations/blob/master/README.ja.md)で
     もご覧いただけます。
 
-# Contents
+## Contents
+
+<details>
+<summary><strong>Details</strong></summary>
 
 -   [Data Entities](#data-entities)
     -   [Entities within a stock management system](#entities-within-a-stock-management-system)
@@ -64,6 +67,8 @@ available as
         -   [Batch Delete Multiple Attributes from a Data Entity](#batch-delete-multiple-attributes-from-a-data-entity)
         -   [Find existing data relationships](#find-existing-data-relationships)
 -   [Next Steps](#next-steps)
+
+</details>
 
 # Data Entities
 
