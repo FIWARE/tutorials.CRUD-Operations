@@ -281,7 +281,7 @@ cd tutorials.CRUD-Operations
 、`/v2/entities/<entity-id>` エンドポイントを使用してオペレーションできます。
 
 エンティティ識別子は、
-[NGSI-LD guidelines](https://docbox.etsi.org/ISG/CIM/Open/ISG_CIM_NGSI-LD_API_Draft_for_public_review.pdf)
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)
 ガイドラインに従った URNs であることが推奨されます。
 したがって、各 `id` は、標準形式に従った URN です :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、コンテキスト・データ内のすべて
