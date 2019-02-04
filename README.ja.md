@@ -7,6 +7,8 @@
 <br/>
 [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
+<!-- prettier-ignore -->
+
 このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。
 チュートリアルでは、以前
 の[在庫管理の例](https://github.com/Fiware/tutorials.Entity-Relationships/)で作
