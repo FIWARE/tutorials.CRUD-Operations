@@ -11,7 +11,7 @@
 
 このチュートリアルでは、FIWARE ユーザに CRUD オペレーションについて説明します。
 チュートリアルでは、以前
-の[在庫管理の例](https://github.com/Fiware/tutorials.Entity-Relationships/)で作
+の[在庫管理の例](https://github.com/FIWARE/tutorials.Entity-Relationships/)で作
 成されたデータを基に
 、[CRUD オペレーション](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete)の
 概念を紹介し、ユーザがコンテキスト内に保持されているデータをオペレーションできる
@@ -252,7 +252,7 @@ cd tutorials.CRUD-Operations
 ```
 
 このコマンドは、起動時に以前
-の[ストア・ファインダのチュートリアル](https://github.com/Fiware/tutorials.Entity-Relationships)の
+の[ストア・ファインダのチュートリアル](https://github.com/FIWARE/tutorials.Entity-Relationships)の
 シードデータもインポートします。
 
 <a name="what-is-crud"></a>

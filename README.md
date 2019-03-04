@@ -7,7 +7,7 @@
 <br/> [![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
 
 This tutorial teaches FIWARE users about CRUD Operations. The tutorial builds on the data created in the previous
-[stock management example](https://github.com/Fiware/tutorials.Entity-Relationships/) and introduces the concept of
+[stock management example](https://github.com/FIWARE/tutorials.Entity-Relationships/) and introduces the concept of
 [CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete), allowing users to manipulate the data
 held within the context.
 
@@ -16,7 +16,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7764c9cbc3cfe2d5b403)
 
--   このチュートリアルは[日本語](https://github.com/Fiware/tutorials.CRUD-Operations/blob/master/README.ja.md)でもご覧い
+-   このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/master/README.ja.md)でもご覧い
     ただけます。
 
 ## Contents
@@ -203,7 +203,7 @@ cd tutorials.CRUD-Operations
 ```
 
 This command will also import seed data from the previous
-[Store Finder tutorial](https://github.com/Fiware/tutorials.Entity-Relationships) on startup.
+[Store Finder tutorial](https://github.com/FIWARE/tutorials.Entity-Relationships) on startup.
 
 > :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
 >
