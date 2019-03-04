@@ -196,7 +196,7 @@ All services can be initialised from the command-line by running the bash script
 clone the repository and create the necessary images by running the commands as shown below:
 
 ```console
-git clone git@github.com:Fiware/tutorials.CRUD-Operations.git
+git clone git@github.com:FIWARE/tutorials.CRUD-Operations.git
 cd tutorials.CRUD-Operations
 
 ./services start
