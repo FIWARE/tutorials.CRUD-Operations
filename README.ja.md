@@ -245,7 +245,7 @@ Docker バージョン 18.03 以降と Docker Compose 1.21 以上を使用して
 ージを作成してください :
 
 ```console
-git clone git@github.com:FIWARE/tutorials.CRUD-Operations.git
+git clone https://github.com/FIWARE/tutorials.CRUD-Operations.git
 cd tutorials.CRUD-Operations
 
 ./services start
