@@ -135,7 +135,7 @@ FIWARE"_ と認定するには、Orion Context Broker を使用するだけで�
 管理しているコンテキストデータを格納しています。
 したがって、アーキテクチャは 2つの要素で構成されます :
 
--   [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してリ
+-   [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してリ
     クエストを受信する
     [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)
 -   バックエンドの [MongoDB](https://www.mongodb.com/) データベース
@@ -265,7 +265,7 @@ cd tutorials.CRUD-Operations
 れますが、RESTful API との関係はやや複雑です。
 
 [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) は
-、[NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してコン
+、[NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) を使用してコン
 テキスト・データをオペレーションします。RESTful API として、コンテキスト内に保持
 されているデータをオペレーションするリクエストは、HTTP 動詞を CRUD オペレーショ
 ンにマッピングする際に見られる標準的な規則に従います。

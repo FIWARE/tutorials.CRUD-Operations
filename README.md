@@ -112,7 +112,7 @@ Currently, the Orion Context Broker relies on open source [MongoDB](https://www.
 context data it manages. Therefore, the architecture will consist of two components:
 
 -   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
+    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
 -   The underlying [MongoDB](https://www.mongodb.com/) database:
     -   Used by the Orion Context Broker to store context information such as data entities, subscriptions and
         registrations
@@ -218,7 +218,7 @@ usually referred to using the acronym **CRUD**. Within a database each of these 
 commands, however their relationship with a RESTful API is slightly more complex.
 
 The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) uses
-[NGSI](https://fiware.github.io/specifications/OpenAPI/ngsiv2) to manipulate the context data. As a RESTful API,
+[NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) to manipulate the context data. As a RESTful API,
 requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to
 CRUD operations.
 
