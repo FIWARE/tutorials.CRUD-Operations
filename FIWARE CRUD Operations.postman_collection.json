@@ -35,7 +35,7 @@
 								""
 							]
 						},
-						"description": "This example adds a new **Product** entity to the context.\n\nNew entities can be added by making a POST request to the `/v2/entities/` endpoint.\n\nThe request will **fail** if any of the attributes already exist in the context.\n\nAny entity must have a `id` and `type` attributes, each additional attributes are optional \nand will depend on the system being described. Each additional attribute should also have a \ndefined `type` and a `value` attribute. The product has been assigned a unique `id` following\nthe NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`.\n\n---\nSubsequent requests using the same `id` will result in an error response."
+						"description": "This example adds a new **Product** entity to the context.\n\nNew entities can be added by making a POST request to the `/v2/entities/` endpoint.\n\nThe request will **fail** if any of the attributes already exist in the context.\n\nAny entity must have a `id` and `type` attributes, each additional attributes are optional \nand will depend on the system being described. Each additional attribute should also have a \ndefined `type` and a `value` attribute. The product has been assigned a unique `id` following\nthe NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`.\n\n---\nSubsequent requests using the same `id` will result in an error response."
 					},
 					"response": []
 				},
@@ -97,7 +97,7 @@
 								""
 							]
 						},
-						"description": "This example uses the convenience batch processing endpoint to add two new **Product** entities and one new attribute (`offerPrice`)\nto the context. \n\nThe request will **fail** if any of the attributes already exist in the context.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes\n* `actionType=append_strict` means that the request only succeed if all entities / attributes are new.\n* The `entities` attribute holds an array of entities we wish to create.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`.\n\n---\nSubsequent requests using the same data with the `actionType=append_strict` batch operation will result in an error response."
+						"description": "This example uses the convenience batch processing endpoint to add two new **Product** entities and one new attribute (`offerPrice`)\nto the context. \n\nThe request will **fail** if any of the attributes already exist in the context.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes\n* `actionType=append_strict` means that the request only succeed if all entities / attributes are new.\n* The `entities` attribute holds an array of entities we wish to create.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`.\n\n---\nSubsequent requests using the same data with the `actionType=append_strict` batch operation will result in an error response."
 					},
 					"response": []
 				},
@@ -128,7 +128,7 @@
 								""
 							]
 						},
-						"description": "This example uses the convenience batch processing endpoint to add or amend two **Product** entities and one attribute (`offerPrice`) to the context.\n\n-   `actionType=append` means we will overwrite existing entities if they exist\n-   The entities attribute holds an array of entities we wish to\n    create/overwrite.\n\nA subsequent request containing the same data (i.e. same entities and `actionType=append`)\nwon't change the context state.\n\n\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes:\n* `actionType=append` means we will overwrite existing entities if they exist\n* The `entities` attribute holds an array of entities we wish to create/overwrite.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`."
+						"description": "This example uses the convenience batch processing endpoint to add or amend two **Product** entities and one attribute (`offerPrice`) to the context.\n\n-   `actionType=append` means we will overwrite existing entities if they exist\n-   The entities attribute holds an array of entities we wish to\n    create/overwrite.\n\nA subsequent request containing the same data (i.e. same entities and `actionType=append`)\nwon't change the context state.\n\n\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes:\n* `actionType=append` means we will overwrite existing entities if they exist\n* The `entities` attribute holds an array of entities we wish to create/overwrite.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`."
 					},
 					"response": []
 				}
@@ -522,7 +522,7 @@
 								"update"
 							]
 						},
-						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=update` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`."
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=update` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`."
 					},
 					"response": []
 				},
@@ -552,7 +552,7 @@
 								"update"
 							]
 						},
-						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=append` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`."
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=append` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`."
 					},
 					"response": []
 				},
@@ -582,7 +582,7 @@
 								"update"
 							]
 						},
-						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=replace` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.01.01_60/gs_CIM009v010101p.pdf)  and has been assigned `type=Product`."
+						"description": "This example uses the convenience batch processing endpoint to create a series of available products.\n\nBatch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=replace` means we will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to update.\n\nEach product has a unique `id` following the NGSI-LD  [specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)  and has been assigned `type=Product`."
 					},
 					"response": []
 				}
