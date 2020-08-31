@@ -1,7 +1,7 @@
-[![FIWARE Banner](https://fiware.github.io/tutorials.NGSI-LD-Operations/img/fiware.png)](https://www.fiware.org/developers)
+[![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png)](https://www.fiware.org/developers)
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![License: MIT](https://img.shields.io/github/license/fiware/tutorials.NGSI-LD-Operations.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://nexus.lab.fiware.org/repository/raw/public/badges/stackoverflow/fiware.svg)](https://stackoverflow.com/questions/tagged/fiware)
 [![NGSI LD](https://img.shields.io/badge/NGSI-LD-d6604d.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)
 [![JSON LD](https://img.shields.io/badge/JSON--LD-1.1-f06f38.svg)](https://w3c.github.io/json-ld-syntax/) <br/>
@@ -14,9 +14,11 @@ series of entities representing temperature sensors are created, modified and de
 model defined in an [earlier tutorial](https://github.com/FIWARE/tutorials.Understanding-At-Context).
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
-[Postman documentation](https://fiware.github.io/tutorials.NGSI-LD-Operations/).
+[Postman documentation](https://fiware.github.io/tutorials.CRUD-Operations/ngsi-ld).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cc52b59aaf5a55d04b42)
+
+-   このチュートリアルは[日本語](README.ja.md)でもご覧いただけます。
 
 ## Contents
 
@@ -37,6 +39,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
         -   [Batch Create New Data Entities or Attributes](#batch-create-new-data-entities-or-attributes)
         -   [Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities)
     -   [Read Operations](#read-operations)
+        -   [Filtering](#filtering)
         -   [Read a Data Entity (verbose)](#read-a-data-entity-verbose)
         -   [Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity)
         -   [Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs)
@@ -119,7 +122,7 @@ technology which allows to different components isolated into their respective e
 -   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
 
 **Docker Compose** is a tool for defining and running multi-container Docker applications. A
-[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.NGSI-LD-Operations/master/docker-compose/orion-ld.yml) is
+[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.CRUD-Operations/master/docker-compose/orion-ld.yml) is
 used configure the required services for the application. This means all container services can be brought up in a
 single command. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux
 users will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
@@ -158,7 +161,7 @@ Therefore, the architecture will consist of three elements:
 Since all interactions between the three elements are initiated by HTTP requests, the elements can be containerized and
 run from exposed ports.
 
-![](https://fiware.github.io/tutorials.NGSI-LD-Operations/img/architecture.png)
+![](https://fiware.github.io/tutorials.CRUD-Operations/img/architecture-ld.png)
 
 The necessary configuration information can be seen in the services section of the associated `orion-ld.yml` file:
 
@@ -211,12 +214,12 @@ It has been described in a [previous tutorial](https://github.com/FIWARE/tutoria
 # Start Up
 
 All services can be initialised from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.NGSI-LD-Operations/blob/master/services) Bash script provided within the
+[services](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/master/services) Bash script provided within the
 repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```bash
-git clone https://github.com/FIWARE/tutorials.NGSI-LD-Operations.git
-cd tutorials.NGSI-LD-Operations
+git clone https://github.com/FIWARE/tutorials.CRUD-Operations.git
+cd tutorials.CRUD-Operations
 
 ./services orion|scorpio
 ```
@@ -455,7 +458,7 @@ change the context state. The `modifiedAt` metadata will be amended however.
 
 For read operations the `@context` must be supplied in a `Link` header.
 
-#### Filtering
+### Filtering
 
 -   The `options` parameter (combined with the `attrs` parameter) can be used to filter the returned fields
 -   The `q` parameter can be used to filter the returned entities
@@ -553,7 +556,7 @@ the `attrs` using a comma separated list.
 
 ### Read a Data Entity (key-value pairs)
 
-This example reads the key-value pairs  from the context of an existing **TemperatureSensor** entities with a known `id`.
+This example reads the key-value pairs from the context of an existing **TemperatureSensor** entities with a known `id`.
 
 #### :nine: Request:
 
@@ -588,7 +591,7 @@ Combine the `options=keyValues` parameter with the `attrs` parameter to retrieve
 ### Read Multiple attributes values from a Data Entity
 
 This example reads the value of two attributes (`category` and `temperature`) from the context of an existing
-**TemperatureSensor** entity with a known ID.
+**TemperatureSensor** entity with a known `id`.
 
 #### :one::zero: Request:
 
@@ -753,7 +756,7 @@ retrieve key-values.
 ### Filter Data Entities by ID
 
 This example lists selected data from two **TemperatureSensor** entities chosen by `id`. Note that every `id` must be
-unique, so `type` is not required for this request. To filter by `id` add the entries in a comma delimted list.
+unique, so `type` is not required for this request. To filter by `id` add the entries in a comma delimited list.
 
 #### :one::three: Request:
 
@@ -876,7 +879,7 @@ curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 ```
 
 Batch processing uses the `/ngsi-ld/v1/entityOperations/upsert` endpoint. The payload body holds an array of the
-entities and attributes we wish to update.The `options=update` parameter indicates we will not remove existing
+entities and attributes we wish to update. The `options=update` parameter indicates we will not remove existing
 attributes if they already exist and have not been included in the payload.
 
 An alternative would be to use the `/ngsi-ld/v1/entityOperations/update` endpoint. Unlike `upsert`, the `update`
