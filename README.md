@@ -198,6 +198,7 @@ clone the repository and create the necessary images by running the commands as 
 ```console
 git clone https://github.com/FIWARE/tutorials.CRUD-Operations.git
 cd tutorials.CRUD-Operations
+git checkout NGSI-v2
 
 ./services start
 ```
