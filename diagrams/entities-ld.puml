@@ -1,0 +1,54 @@
+@startuml
+
+skinparam object {
+  BackgroundColor #f5f5f5
+  ArrowColor #4c4c4c
+  BorderColor #233c68
+}
+
+
+object Building
+
+Building : id 
+Building : ~name 
+Building : ~address 
+Building : ~location
+Building : ~category
+Building : ~temperature
+Building : ~fillingLevel
+Building : -owner
+
+object TemperatureSensor
+
+TemperatureSensor : id 
+TemperatureSensor : ~temperature 
+
+object FillingLevelSensor
+
+FillingLevelSensor : id 
+FillingLevelSensor : ~fillingLevel 
+
+
+object Device << Abstract >>
+Device : ~batteryLevel 
+Device : ~category 
+Device : -controlledAsset 
+
+
+object Person
+
+Person : id 
+Person : ~name
+
+
+Device <|-down- FillingLevelSensor
+Device <|-down- TemperatureSensor
+
+FillingLevelSensor "1  " -down-> " 1 " Building : " provides\n fillingLevel  "
+TemperatureSensor "1 " -down-> " 1 " Building : " provides\n  temperature  "
+
+Building "1 " -right-> " 1  " Person : "   owned by "
+
+
+
+@enduml
