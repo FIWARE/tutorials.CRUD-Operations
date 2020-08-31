@@ -1,142 +1,181 @@
-[![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png)](https://www.fiware.org/developers)
+[![FIWARE Banner](https://fiware.github.io/tutorials.NGSI-LD-Operations/img/fiware.png)](https://www.fiware.org/developers)
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
-[![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/github/license/fiware/tutorials.NGSI-LD-Operations.svg)](https://opensource.org/licenses/MIT)
 [![Support badge](https://nexus.lab.fiware.org/repository/raw/public/badges/stackoverflow/fiware.svg)](https://stackoverflow.com/questions/tagged/fiware)
-[![NGSI v2](https://img.shields.io/badge/NGSI-v2-5dc0cf.svg)](https://fiware-ges.github.io/orion/api/v2/stable/) <br/>
-[![Documentation](https://img.shields.io/readthedocs/fiware-tutorials.svg)](https://fiware-tutorials.rtfd.io)
+[![NGSI LD](https://img.shields.io/badge/NGSI-LD-d6604d.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)
+[![JSON LD](https://img.shields.io/badge/JSON--LD-1.1-f06f38.svg)](https://w3c.github.io/json-ld-syntax/) <br/>
+[![Documentation](https://img.shields.io/readthedocs/ngsi-ld-tutorials.svg)](https://ngsi-ld-tutorials.rtfd.io)
 
-This tutorial teaches FIWARE users about CRUD Operations. The tutorial builds on the data created in the previous
-[stock management example](https://github.com/FIWARE/tutorials.Entity-Relationships/) and introduces the concept of
-[CRUD operations](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete), allowing users to manipulate the data
-held within the context.
+This tutorial teaches **NGSI-LD** users about CRUD Operations. The tutorial outlines example usage of the various ways
+of amending context as detailed within the
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf). A
+series of entities representing temperature sensors are created, modified and deleted based on the temperature sensor
+model defined in an [earlier tutorial](https://github.com/FIWARE/tutorials.Understanding-At-Context).
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
-[Postman documentation](https://fiware.github.io/tutorials.CRUD-Operations/).
+[Postman documentation](https://fiware.github.io/tutorials.NGSI-LD-Operations/).
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/7764c9cbc3cfe2d5b403)
-
--   このチュートリアルは[日本語](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/master/README.ja.md)でもご覧い
-    ただけます。
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cc52b59aaf5a55d04b42)
 
 ## Contents
 
 <details>
 <summary><strong>Details</strong></summary>
 
--   [Data Entities](#data-entities)
-    -   [Entities within a stock management system](#entities-within-a-stock-management-system)
--   [Architecture](#architecture)
+-   [NGSI-LD CRUD Operations](#ngsi-ld-crud-operations)
+    -   [Context Entity CRUD Operations](#context-entity-crud-operations)
+    -   [Context Entity Batch Operations](#context-entity-batch-operations)
 -   [Prerequisites](#prerequisites)
     -   [Docker](#docker)
     -   [Cygwin](#cygwin)
+-   [Architecture](#architecture)
 -   [Start Up](#start-up)
--   [What is CRUD?](#what-is-crud)
-    -   [Entity CRUD Operations](#entity-crud-operations)
-    -   [Attribute CRUD Operations](#attribute-crud-operations)
-    -   [Batch CRUD Operations](#batch-crud-operations)
--   [Example CRUD Operations using FIWARE](#example-crud-operations-using-fiware)
     -   [Create Operations](#create-operations)
         -   [Create a New Data Entity](#create-a-new-data-entity)
-        -   [Create a New Attribute](#create-a-new-attribute)
+        -   [Create New Attributes](#create-new-attributes)
         -   [Batch Create New Data Entities or Attributes](#batch-create-new-data-entities-or-attributes)
         -   [Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities)
     -   [Read Operations](#read-operations)
+        -   [Read a Data Entity (verbose)](#read-a-data-entity-verbose)
         -   [Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity)
         -   [Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs)
         -   [Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity)
         -   [List all Data Entities (verbose)](#list-all-data-entities-verbose)
         -   [List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs)
-        -   [List Data Entity by ID](#list-data-entity-by-id)
+        -   [Filter Data Entities by ID](#filter-data-entities-by-id)
     -   [Update Operations](#update-operations)
         -   [Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value)
         -   [Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity)
-        -   [Batch Overwrite Attributes of Multiple Data Entities](#batch-overwrite-attributes-of-multiple-data-entities)
-        -   [Batch Create/Overwrite Attributes of Multiple Data Entities](#batch-createoverwrite-attributes-of-multiple-data-entities)
+        -   [Batch Update Attributes of Multiple Data Entities](#batch-update-attributes-of-multiple-data-entities)
         -   [Batch Replace Entity Data](#batch-replace-entity-data)
     -   [Delete Operations](#delete-operations)
         -   [Data Relationships](#data-relationships)
-        -   [Delete a Data Entity](#delete-a-data-entity)
-        -   [Delete an Attribute from a Data Entity](#delete-an-attribute-from-a-data-entity)
-        -   [Batch Delete Multiple Data Entities](#batch-delete-multiple-data-entities)
-        -   [Batch Delete Multiple Attributes from a Data Entity](#batch-delete-multiple-attributes-from-a-data-entity)
+        -   [Delete an Entity](#delete-an-entity)
+        -   [Delete an Attribute from an Entity](#delete-an-attribute-from-an-entity)
+        -   [Batch Delete Multiple Entities](#batch-delete-multiple-entities)
+        -   [Batch Delete Multiple Attributes from an Entity](#batch-delete-multiple-attributes-from-an-entity)
         -   [Find existing data relationships](#find-existing-data-relationships)
--   [Next Steps](#next-steps)
-
 </details>
 
-# Data Entities
+# NGSI-LD CRUD Operations
 
-Within the FIWARE platform, an entity represents the state of a physical or conceptual object which exists in the real
-world.
+> “Ninety-percent of everything is crud.”
+>
+> ― Theodore Sturgeon, Venture Science Fiction Magazine
 
-## Entities within a stock management system
+**CRUD** Operations (**Create**, **Read**, **Update** and **Delete**) are the four basic functions of persistent
+storage. For a smart system based on **NGSI-LD**, **CRUD** actions allow the developer to manipulate the context data
+within the system. Every **CRUD** operation is clearly defined within the
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf), so all
+NGSI-LD compliant context brokers offer the same interface with the same NGSI-LD operations.
 
-Within our simple stock management system, we currently have four entity types. The relationships between our entities
-are defined as shown below:
+This tutorial will describe the rational behind each operation, when to use it and how to execute the various **CRUD**
+operations. Since **NGSI-LD** is based on **JSON-LD** passing of `@context` as part of each request in mandatory. For
+**CRUD** operations this is typically passed as a `Link` header, although as we have seen is also possible to pass an
+`@context` attribute as part of the body of the request if `Content-Type: application/ld+json`. However for GET
+requests, the `@context` cannot be placed in the payload body technique as GET requests have no body.
 
-![](https://fiware.github.io/tutorials.Entity-Relationships/img/entities.png)
+## Context Entity CRUD Operations
 
--   A **Store** is a real world bricks and mortar building. Stores would have properties such as:
-    -   Store name, e.g. "Checkpoint Markt"
-    -   Address, e.g. "Friedrichstraße 44, 10969 Kreuzberg, Berlin"
-    -   Physical location, e.g. _52.5075 N, 13.3903 E_
--   A **Shelf** is a real world object to hold items which we wish to sell. Each shelf would have properties such as:
-    -   Shelf name, e.g. "Wall Unit"
-    -   Physical location, e.g. _52.5075 N, 13.3903 E_
-    -   Maximum capacity
-    -   An association to the store in which the shelf is located
--   A **Product** is defined as something that we sell - it is a conceptual object. Products would have properties such
-    as:
-    -   Product name, e.g. "Vodka"
-    -   Price, e.g. 13.99 Euros
-    -   Size, e.g. Small
--   An **Inventory Item** is another conceptual entity, used to associate products, stores, shelves and physical
-    objects. It would have properties such as:
-    -   An association to the product being sold
-    -   An association to the store in which the product is being sold
-    -   An association to the shelf where the product is being displayed
-    -   Stock count, i.e. product quantity available in the warehouse
-    -   Shelf count, i.e. number of items available on the shelf
+There are four endpoints used for CRUD operations on an individual data entity. These follow the usual rules for
+hierarchical entities within RESTful applications.
 
-As you can see, each of the entities defined above contain some properties which are liable to change. For example,
-product price could change, stock could be sold and the number of items on the shelves would drop.
+For operations where the `<entity-id>` is not yet known within the context, or is unspecified, the
+`/ngsi-ld/v1/entities` endpoint is used. As an example, this is used for creating new entities.
+
+Once an `<entity-id>` is known within the context, individual data entities can be manipulated using the
+`/ngsi-ld/v1/entities/<entity-id>` endpoint.
+
+General Attribute operations on a known entity occur on the `/ngsi-ld/v1/entities/<entity-id>/attrs` endpoint and
+operations on individual attributes occur on the `/ngsi-ld/v1/entities/<entity-id>/attrs/<attr-id>`.
+
+When requesting data or modifying individual entities, the various CRUD operations map naturally to HTTP verbs.
+
+-   **GET** - for reading data
+-   **POST** - for creating new entities and attributes
+-   **PATCH** - for amending entities and attributes
+-   **DELETE** - for deleting entities and attributes
+
+## Context Entity Batch Operations
+
+Batch operations allow users to modify multiple data entities with a single request. All batch operations are mapped to
+the **POST** HTTP verb.
+
+-   `/entityOperations/create`
+-   `/entityOperations/update`
+-   `/entityOperations/upsert`
+-   `/entityOperations/delete`
+
+# Prerequisites
+
+## Docker
+
+To keep things simple all components will be run using [Docker](https://www.docker.com). **Docker** is a container
+technology which allows to different components isolated into their respective environments.
+
+-   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
+-   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
+-   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
+
+**Docker Compose** is a tool for defining and running multi-container Docker applications. A
+[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.NGSI-LD-Operations/master/docker-compose/orion-ld.yml) is
+used configure the required services for the application. This means all container services can be brought up in a
+single command. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux
+users will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
+
+## Cygwin
+
+We will start up our services using a simple bash script. Windows users should download [cygwin](http://www.cygwin.com/)
+to provide a command-line functionality similar to a Linux distribution on Windows.
 
 # Architecture
 
-This application will only make use of one FIWARE component - the
-[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). Using the Orion Context Broker is sufficient for
-an application to qualify as _“Powered by FIWARE”_.
+The demo application will send and receive NGSI-LD calls to a compliant context broker. Since the standardized NGSI-LD
+interface is available across multiple context brokers, so we only need to pick one - for example the
+[Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/). The application will therefore only make use of
+one FIWARE component.
 
-Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to store the
-context data it manages. Therefore, the architecture will consist of two components:
+Currently, the Orion Context Broker relies on open source [MongoDB](https://www.mongodb.com/) technology to keep
+persistence of the context data it holds.
+
+To promote interoperability of data exchange, NGSI-LD context brokers explicitly expose a
+[JSON-LD `@context` file](https://json-ld.org/spec/latest/json-ld/#the-context) to define the data held within the
+context entities. This defines a unique URI for every entity type and every attribute so that other services outside of
+the NGSI domain are able to pick and choose the names of their data structures. Every `@context` file must be available
+on the network. In our case the tutorial application will be used to host a series of static files.
+
+Therefore, the architecture will consist of three elements:
 
 -   The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) which will receive requests using
-    [NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2)
--   The underlying [MongoDB](https://www.mongodb.com/) database:
-    -   Used by the Orion Context Broker to store context information such as data entities, subscriptions and
+    [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
+-   The underlying [MongoDB](https://www.mongodb.com/) database :
+    -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
         registrations
+-   The **Tutorial Application** does the following:
+    -   Offers static `@context` files defining the context entities within the system.
 
-Since the two components interact by means of HTTP requests, they can be containerized and run from exposed ports.
+Since all interactions between the three elements are initiated by HTTP requests, the elements can be containerized and
+run from exposed ports.
 
-![](https://fiware.github.io/tutorials.CRUD-Operations/img/architecture.png)
+![](https://fiware.github.io/tutorials.NGSI-LD-Operations/img/architecture.png)
 
-The necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file:
+The necessary configuration information can be seen in the services section of the associated `orion-ld.yml` file:
 
 ```yaml
 orion:
-    image: fiware/orion:latest
+    image: fiware/orion-ld
     hostname: orion
-    container_name: orion
+    container_name: fiware-orion
     depends_on:
         - mongo-db
     networks:
         - default
-    expose:
-        - "1026"
     ports:
         - "1026:1026"
     command: -dbhost mongo-db -logLevel DEBUG
+    healthcheck:
+        test: curl --fail -s http://orion:1026/version || exit 1
 ```
 
 ```yaml
@@ -150,278 +189,219 @@ mongo-db:
         - "27017:27017"
     networks:
         - default
-    command: --bind_ip_all --smallfiles
+    command: --nojournal
 ```
 
-Both containers reside on the same network - the Orion Context Broker is listening on port `1026` and MongoDB is
-listening on the default port `271071`. For the sake of this tutorial, we have also made the two ports available from
-outside the network so that cUrl or Postman can access them without having to be run from inside the network. The
-command-line initialization should be self explanatory.
-
-# Prerequisites
-
-## Docker
-
-To keep things simple both components will be run using [Docker](https://www.docker.com). **Docker** is a container
-technology which allows to package each component with its environment and run it in isolation.
-
--   To install Docker on Windows follow the instructions [here](https://docs.docker.com/docker-for-windows/)
--   To install Docker on Mac follow the instructions [here](https://docs.docker.com/docker-for-mac/)
--   To install Docker on Linux follow the instructions [here](https://docs.docker.com/install/)
-
-**Docker Compose** is a tool for defining and running multi-container Docker applications. A
-[YAML file](https://raw.githubusercontent.com/Fiware/tutorials.Entity-Relationships/master/docker-compose.yml) is used
-configure the required services for the application. This means all container services can be brought up with a single
-command. Docker Compose is installed by default as part of Docker for Windows and Docker for Mac, however Linux users
-will need to follow the instructions found [here](https://docs.docker.com/compose/install/)
-
-You can check your current **Docker** and **Docker Compose** versions using the following commands:
-
-```console
-docker-compose -v
-docker version
+```yaml
+tutorial:
+    image: fiware/tutorials.ngsi-ld
+    hostname: tutorial
+    container_name: fiware-tutorial
+    networks:
+        default:
+            aliases:
+                - context
+    expose:
+        - 3000
 ```
 
-Please ensure that you are using Docker version 18.03 or higher and Docker Compose 1.21 or higher and upgrade if
-necessary.
-
-## Cygwin
-
-We will start up our services using a simple bash script. Windows users should download [cygwin](http://www.cygwin.com/)
-to provide a command-line functionality similar to a Linux distribution on Windows.
+The necessary configuration information can be seen in the services section of the associated `docker-compose.yml` file.
+It has been described in a [previous tutorial](https://github.com/FIWARE/tutorials.Working-with-At-Context/)
 
 # Start Up
 
-All services can be initialised from the command-line by running the bash script provided within the repository. Please
-clone the repository and create the necessary images by running the commands as shown below:
+All services can be initialised from the command-line by running the
+[services](https://github.com/FIWARE/tutorials.NGSI-LD-Operations/blob/master/services) Bash script provided within the
+repository. Please clone the repository and create the necessary images by running the commands as shown:
 
-```console
-git clone https://github.com/FIWARE/tutorials.CRUD-Operations.git
-cd tutorials.CRUD-Operations
-git checkout NGSI-v2
+```bash
+git clone https://github.com/FIWARE/tutorials.NGSI-LD-Operations.git
+cd tutorials.NGSI-LD-Operations
 
-./services start
+./services orion|scorpio
 ```
 
-This command will also import seed data from the previous
-[Store Finder tutorial](https://github.com/FIWARE/tutorials.Entity-Relationships) on startup.
-
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> **Note:** If you want to clean up and start over again you can do so with the following command:
 >
-> ```console
+> ```
 > ./services stop
 > ```
 
-# What is CRUD?
-
-**Create**, **Read**, **Update** and **Delete** are the four basic functions of persistent storage. These operations are
-usually referred to using the acronym **CRUD**. Within a database each of these operations map directly to a series of
-commands, however their relationship with a RESTful API is slightly more complex.
-
-The [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/) uses
-[NGSI-v2](https://fiware.github.io/specifications/OpenAPI/ngsiv2) to manipulate the context data. As a RESTful API,
-requests to manipulate the data held within the context follow the standard conventions found when mapping HTTP verbs to
-CRUD operations.
-
-## Entity CRUD Operations
-
-For operations where the `<entity-id>` is not yet known within the context, or is unspecified, the `/v2/entities`
-endpoint is used.
-
-Once an `<entity-id>` is known within the context, individual data entities can be manipulated using the
-`/v2/entities/<entity-id>` endpoint.
-
-It is recommended that entity identifiers should be URNs following the
-[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf),
-therefore each `id` is a URN which follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This helps making
-every `id` in the context data unique.
-
-| HTTP Verb  |                                               `/v2/entities`                                               |                                              `/v2/entities/<entity-id>`                                              |
-| ---------- | :--------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------: |
-| **POST**   |                                CREATE a new entity and add to the context.                                 |                                 CREATE or UPDATE an attribute of a specified entity.                                 |
-| **GET**    | READ entity data from the context. This will return data from multiple entities. The data can be filtered. | READ entity data from a specified entity. This will return data from a single entity only. The data can be filtered. |
-| **PUT**    |                                                    :x:                                                     |                                                         :x:                                                          |
-| **PATCH**  |                                                    :x:                                                     |                                                         :x:                                                          |
-| **DELETE** |                                                    :x:                                                     |                                          DELETE an entity from the context                                           |
-
-A complete list of entity endpoints can be found in the
-[NGSI v2 Swagger Specification](https://fiware.github.io/specifications/OpenAPI/ngsiv2#/Entities)
-
-## Attribute CRUD Operations
-
-To perform CRUD operations on attributes, the `<entity-id>` must be known. Each attribute is effectively a key-value
-pair.
-
-There are three endpoints:
-
--   `/v2/entities/<entity-id>/attrs` is only used for a patch operation to update one or more exisiting attributes.
--   `/v2/entities/<entity-id>/attrs/<attribute>` is used to manipulate an attribute as a whole.
--   `/v2/entities/<entity-id>/attrs/<attribute>/value` is used to read or update the `value` of an attribute, leaving
-    the `type` untouched.
-
-| HTTP Verb   |                           `.../attrs`                           |                `.../attrs/<attribute>`                |                              `.../attrs/<attribute>/value`                               |
-| ----------- | :-------------------------------------------------------------: | :---------------------------------------------------: | :--------------------------------------------------------------------------------------: |
-| **POST**    |                               :x:                               |                          :x:                          |                                           :x:                                            |
-| **GET**     |                               :x:                               |                          :x:                          | READ the value of an attribute from a specified entity. This will return a single field. |
-| **PUT**     |                               :x:                               |                          :x:                          |              UPDATE the value of single attribute from a specified entity.               |
-| **PATCH**   | UPDATE one or more existing attributes from an existing entity. |                          :x:                          |                                           :x:                                            |
-| **DELETE**. |                               :x:                               | DELETE an existing attribute from an existing entity. |                                           :x:                                            |
-
-A complete list of attribute endpoints can be found in the
-[NGSI v2 Swagger Specification](https://fiware.github.io/specifications/OpenAPI/ngsiv2#/Attributes)
-
-## Batch CRUD Operations
-
-Additionally the Orion Context Broker has a convenience batch operation endpoint `/v2/op/update` to manipulate multiple
-entities in a single operation.
-
-Batch operations are always triggered by a POST request where the payload is an object with two properties:
-
--   `actionType` specifies the kind of action to invoke (e.g. `delete`)
--   `entities` is an array of objects holding the list of entities to update, along with the relevant entity data used
-    to perform the operation.
-
-# Example CRUD Operations using FIWARE
-
-The following examples assume that the Orion Context Broker is listening on port 1026 of `localhost`, and the initial
-seed data has been imported from the previous tutorial.
-
-All examples refer to the **Product** entity as defined in the stock management system. CRUD operations will therefore
-relate to adding, reading, amending and deleting a product or series of products. This is a typical use case for a store
-regional manager, for example setting prices and deciding what products can be sold. The actual responses you receive in
-each case will depend on the state of the context data in your system at the time. If you find that you have already
-deleted an entity by mistake, you can restore the initial context by reloading the data from the command-line
-
-```console
-./import-data
-```
+---
 
 ## Create Operations
 
 Create Operations map to HTTP POST.
 
--   The `/v2/entities` endpoint is used for creating new entities
--   The `/v2/entities/<entity>` endpoint is used for adding new attributes
+-   The `/ngsi-ld/v1/entities` endpoint is used for creating new entities
+-   The `/ngsi-ld/v1/entities/<entity-id>/attrs` endpoint is used for adding new attributes
 
-Any newly created entity must have `id` and `type` attributes, other attributes are optional and will depend on the
-system being modelled. If additional attributes are present though, each should specify both a `type` and a `value`.
+Any newly created entity must have `id` and `type` attributes and a valid `@context` definition. All other attributes
+are optional and will depend on the system being modelled. If additional attributes are present though, each should
+specify both a `type` and a `value`.
 
-The response will be **204 - No Content** if the operation is successful or **422 - Unprocessable Entity** if the
-operation fails.
+The response will be **201 - Created** if the operation is successful or **409 - Conflict** if the operation fails.
 
 ### Create a New Data Entity
 
-This example adds a new **Product** entity ("Lemonade" at 99 cents) to the context.
+This example adds a new **TemperatureSensor** entity to the context.
 
 #### :one: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/entities' \
-  --header 'Content-Type: application/json' \
-  --data ' {
-      "id":"urn:ngsi-ld:Product:010", "type":"Product",
-      "name":{"type":"Text", "value":"Lemonade"},
-      "size":{"type":"Text", "value": "S"},
-      "price":{"type":"Integer", "value": 99}
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+--data-raw '{
+      "id": "urn:ngsi-ld:TemperatureSensor:001",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 25,
+            "unitCode": "CEL"
+      }
 }'
 ```
 
-New entities can be added by making a POST request to the `/v2/entities` endpoint.
+New entities can be added by making a POST request to the `/ngsi-ld/v1/entities` endpoint.
 
-The request will fail if any of the attributes already exist in the context.
+The request will fail if the entity already exists in the context.
 
 #### :two: Request:
 
-You can check to see if the new **Product** can be found in the context by making a GET request
+You can check to see if the new **TemperatureSensor** can be found in the context by making a GET request
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
+curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
-### Create a New Attribute
+### Create New Attributes
 
-This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`.
+This example adds a new `batteryLevel` Property and a `controlledAsset` Relationship to the existing
+**TemperatureSensor** entity with `id=urn:ngsi-ld:TemperatureSensor:001`.
 
 #### :three: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
-  --header 'Content-Type: application/json' \
-  --data '{
-      "specialOffer":{"value": true}
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+--data-raw '{
+       "batteryLevel": {
+            "type": "Property",
+            "value": 0.9,
+            "unitCode": "C62"
+      },
+      "controlledAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:barn002"
+      }
 }'
 ```
 
-New attributes can be added by making a POST request to the `/v2/entities/<entity>/attrs` endpoint.
+New attributes can be added by making a POST request to the `/ngsi-ld/v1/entities/<entity>/attrs` endpoint.
 
 The payload should consist of a JSON object holding the attribute names and values as shown.
 
-If no `type` is specified a default type (`Boolean`, `Text` , `Number` or `StructuredValue`) will be assigned.
+All `type=Property` attributes must have a `value` associated with them. All `type=Relationship` attributes must have an
+`object` associated with them which holds the URN of another entity. Well-defined common metadata elements such as
+`unitCode` can be provided as strings, all other metadata should be passed as a JSON object with its own `type` and
+`value` attributes
 
 Subsequent requests using the same `id` will update the value of the attribute in the context.
 
 #### :four: Request:
 
-You can check to see if the new **Product** attribute can be found in the context by making a GET request
+You can check to see if the new **TemperatureSensor** can be found in the context by making a GET request
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product'
+curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
-As you can see there is now a boolean `specialOffer` flag attached to the "Beer" **Product** entity.
+As you can see there are now two additional attributes (`batteryLevel` and `controlledAsset`) added to the entity. These
+attributes have been defined in the `@context` as part of the **Device** model and therefore can be read using their
+short names.
 
 ### Batch Create New Data Entities or Attributes
 
-This example uses the convenience batch processing endpoint to add two new **Product** entities and one new attribute
-(`offerPrice`) to the context.
+This example uses the convenience batch processing endpoint to add three new **TemperatureSensor** entities to the
+context. Batch create uses the `/ngsi-ld/v1/entityOperations/create` endpoint.
 
 #### :five: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"append_strict",
-  "entities":[
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/ld+json' \
+--data-raw '[
     {
-      "id":"urn:ngsi-ld:Product:011", "type":"Product",
-      "name":{"type":"Text", "value":"Brandy"},
-      "size":{"type":"Text", "value": "M"},
-      "price":{"type":"Integer", "value": 1199}
+      "id": "urn:ngsi-ld:TemperatureSensor:002",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 20,
+            "unitCode": "CEL"
+      }
     },
     {
-      "id":"urn:ngsi-ld:Product:012", "type":"Product",
-      "name":{"type":"Text", "value":"Port"},
-      "size":{"type":"Text", "value": "M"},
-      "price":{"type":"Integer", "value": 1099}
+      "id": "urn:ngsi-ld:TemperatureSensor:003",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 2,
+            "unitCode": "CEL"
+      }
     },
-    {
-      "id":"urn:ngsi-ld:Product:001", "type":"Product",
-      "offerPrice":{"type":"Integer", "value": 89}
+     {
+      "id": "urn:ngsi-ld:TemperatureSensor:004",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 100,
+            "unitCode": "CEL"
+      }
     }
-  ]
-}'
+]'
 ```
 
-The request will fail if any of the attributes already exist in the context.
+The request will fail if any of the attributes already exist in the context. The response highlights which actions have
+been successful and the reason for failure (if any has occurred).
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes
-
--   `actionType=append_strict` means that the request only succeeds if all entities / attributes are new.
--   The `entities` attribute holds an array of entities we wish to create.
-
-Subsequent requests using the same data with the `actionType=append_strict` batch operation will result in an error
-response.
+```jsonld
+{
+    "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+    "success": [
+        "urn:ngsi-ld:TemperatureSensor:002",
+        "urn:ngsi-ld:TemperatureSensor:003",
+        "urn:ngsi-ld:TemperatureSensor:004"
+    ],
+    "errors": []
+}
+```
 
 ### Batch Create/Overwrite New Data Entities
 
-This example uses the convenience batch processing endpoint to add or amend two **Product** entities and one attribute
-(`offerPrice`) to the context.
+This example uses the convenience batch processing endpoint to add or amend two **TemperatureSensor** entities in the
+context.
 
 -   if an entity already exists, the request will update that entity's attributes.
 -   if an entity does not exist, a new entity will be created.
@@ -429,551 +409,526 @@ This example uses the convenience batch processing endpoint to add or amend two 
 #### :six: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"append",
-  "entities":[
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/ld+json' \
+--data-raw '[
     {
-      "id":"urn:ngsi-ld:Product:011", "type":"Product",
-      "name":{"type":"Text", "value":"Brandy"},
-      "size":{"type":"Text", "value": "M"},
-      "price":{"type":"Integer", "value": 1199}
+      "id": "urn:ngsi-ld:TemperatureSensor:002",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 21,
+            "unitCode": "CEL"
+      }
     },
     {
-      "id":"urn:ngsi-ld:Product:012", "type":"Product",
-      "name":{"type":"Text", "value":"Port"},
-      "size":{"type":"Text", "value": "M"},
-      "price":{"type":"Integer", "value": 1099}
+      "id": "urn:ngsi-ld:TemperatureSensor:003",
+      "type": "TemperatureSensor",
+      "category": {
+            "type": "Property",
+            "value": "sensor"
+      },
+      "temperature": {
+            "type": "Property",
+            "value": 27,
+            "unitCode": "CEL"
+      }
     }
-  ]
-}'
+]'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes:
+Batch processing for create/overwrite uses the `/ngsi-ld/v1/entityOperations/upsert` endpoint.
 
--   `actionType=append` means we will overwrite existing entities if they exist
--   The entities attribute holds an array of entities we wish to create/overwrite.
-
-A subsequent request containing the same data (i.e. same entities and `actionType=append`) won't change the context
-state.
+A subsequent request containing the same data (i.e. same entities and `actionType=append`) will also succeed won't
+change the context state. The `modifiedAt` metadata will be amended however.
 
 ## Read Operations
 
--   The `/v2/entities` endpoint is used for listing entities
--   The `/v2/entities/<entity>` endpoint is used for retrieving the details of a single entity
+-   The `/ngsi-ld/v1/entities` endpoint is used for listing entities
+-   The `/ngsi-ld/v1/entities/<entity>` endpoint is used for retrieving the details of a single entity.
 
-### Filtering
+For read operations the `@context` must be supplied in a `Link` header.
 
--   The options parameter (combined with the attrs parameter) can be used to filter the returned fields
--   The q parameter can be used to filter the returned entities
+#### Filtering
+
+-   The `options` parameter (combined with the `attrs` parameter) can be used to filter the returned fields
+-   The `q` parameter can be used to filter the returned entities
 
 ### Read a Data Entity (verbose)
 
-This example reads the full context from an existing **Product** entity with a known `id`.
+This example reads the full context from an existing **TemperatureSensor** entity with a known `id`.
 
 #### :seven: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010?type=Product'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'options=sysAttrs'
 ```
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:010` is "Lemonade" at 99 cents. The response is shown below:
+TemperatureSensor `urn:ngsi-ld:TemperatureSensor:001` is returned as _normalized_ NGSI-LD. Additional metadata is
+returned because `options=sysAttrs`. By default the `@context` is returned in the payload body (although this could be
+moved due to content negotiation if the `Accept:application/json` had been set. The full response is shown below:
 
-```json
+```jsonld
 {
-    "id": "urn:ngsi-ld:Product:010",
-    "type": "Product",
-    "name": { "type": "Text", "value": "Lemonade", "metadata": {} },
-    "price": { "type": "Integer", "value": 99, "metadata": {} },
-    "size": { "type": "Text", "value": "S", "metadata": {} }
+    "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+    "id": "urn:ngsi-ld:TemperatureSensor:001",
+    "type": "TemperatureSensor",
+    "createdAt": "2020-08-27T14:33:06Z",
+    "modifiedAt": "2020-08-27T14:33:10Z",
+    "category": {
+        "type": "Property",
+        "createdAt": "2020-08-27T14:33:06Z",
+        "modifiedAt": "2020-08-27T14:33:06Z",
+        "value": "sensor"
+    },
+    "temperature": {
+        "type": "Property",
+        "createdAt": "2020-08-27T14:33:06Z",
+        "modifiedAt": "2020-08-27T14:33:06Z",
+        "value": 25,
+        "unitCode": "CEL"
+    },
+    "batteryLevel": {
+        "value": 0.8,
+        "type": "Property",
+        "createdAt": "2020-08-27T14:33:10Z",
+        "modifiedAt": "2020-08-27T14:33:10Z",
+        "unitCode": "C62"
+    },
+    "controlledAsset": {
+        "object": "urn:ngsi-ld:Building:barn002",
+        "type": "Relationship",
+        "createdAt": "2020-08-27T14:33:10Z",
+        "modifiedAt": "2020-08-27T14:33:10Z"
+    }
 }
 ```
 
-Context data can be retrieved by making a GET request to the `/v2/entities/<entity>` endpoint.
+Individual context data entities can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/<entity>`
+endpoint.
 
 ### Read an Attribute from a Data Entity
 
-This example reads the value of a single attribute (`name`) from an existing **Product** entity with a known `id`.
+This example reads the value of a single attribute (`temperature`) from an existing **TemperatureSensor** entity with a
+known `id`.
 
 #### :eight: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/name/value'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'attrs=temperature'
 ```
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is shown below:
+The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response is shown below:
 
-```json
-"Beer"
+```jsonld
+{
+    "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+    "id": "urn:ngsi-ld:TemperatureSensor:001",
+    "type": "TemperatureSensor",
+    "temperature": {
+        "type": "Property",
+        "value": 25,
+        "unitCode": "CEL"
+    }
+}
 ```
 
-Context data can be retrieved by making a GET request to the `/v2/entities/<entity>/attrs/<attribute>/value` endpoint.
+Because `options=keyValues` was not used this is the normalized response including the metadata such as `unitCode`.
+Context data can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/<entity-id>` endpoint and selecting
+the `attrs` using a comma separated list.
 
 ### Read a Data Entity (key-value pairs)
 
-This example reads the key-value pairs of two attributes (`name` and `price`) from the context of existing **Product**
-entities with a known `id`.
+This example reads the key-value pairs  from the context of an existing **TemperatureSensor** entities with a known `id`.
 
 #### :nine: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=keyValues&attrs=name,price'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-H 'Link: <http://context-provider:3000/data-models/json-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/json' \
+-d 'options=keyValues'
 ```
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is shown below:
+The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response is shown below:
 
 ```json
 {
-    "id": "urn:ngsi-ld:Product:001",
-    "type": "Product",
-    "name": "Beer",
-    "price": 99
+    "id": "urn:ngsi-ld:TemperatureSensor:001",
+    "type": "TemperatureSensor",
+    "category": "sensor",
+    "temperature": 25,
+    "batteryLevel": 0.8,
+    "controlledAsset": "urn:ngsi-ld:Building:barn002"
 }
 ```
 
-Combine the `options=keyValues` parameter with the `attrs` parameter to retrieve key-value pairs.
+The response contains an unfiltered list of context data from an entity containing all of the attributes of the
+`urn:ngsi-ld:TemperatureSensor:001`. The payload body does not contain an `@context` attribute since the
+`Accept: application/json` was set.
+
+Combine the `options=keyValues` parameter with the `attrs` parameter to retrieve a limited set of key-value pairs.
 
 ### Read Multiple attributes values from a Data Entity
 
-This example reads the value of two attributes (`name` and `price`) from the context of existing **Product** entities
-with a known ID.
+This example reads the value of two attributes (`category` and `temperature`) from the context of an existing
+**TemperatureSensor** entity with a known ID.
 
 #### :one::zero: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product&options=values&attrs=name,price'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+-H 'Link: <http://context-provider:3000/data-models/json-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/json' \
+-d 'options=keyValues' \
+-d 'attrs=category,temperature'
 ```
 
 #### Response:
 
-Product `urn:ngsi-ld:Product:001` is "Beer" at 99 cents. The response is shown below:
+The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response is shown below:
 
 ```json
-["Beer", 99]
+{
+    "id": "urn:ngsi-ld:TemperatureSensor:001",
+    "type": "TemperatureSensor",
+    "category": "sensor",
+    "temperature": 25
+}
 ```
 
-Combine the `options=values` parameter and the `attrs` parameter to return a list of values in an array.
+Combine the `options=keyValues` parameter and the `attrs` parameter to return a list of values.
 
 ### List all Data Entities (verbose)
 
-This example lists the full context of all **Product** entities.
+This example lists the full context of all **TemperatureSensor** entities.
 
 #### :one::one: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities?type=Product'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'type=TemperatureSensor'
 ```
 
-### Response:
+#### Response:
 
-On start-up the context held nine products, three more have been added by create operations so the full context will now
-contain twelve products.
+On start-up the context was empty, four **TemperatureSensor** entities have been added by create operations so the full
+context will now contain four sensors.
 
-```json
+```jsonld
 [
     {
-        "id": "urn:ngsi-ld:Product:001",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Beer", "metadata": {} },
-        "offerPrice": { "type": "Integer", "value": 89, "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} },
-        "specialOffer": { "type": "Boolean", "value": true, "metadata": {} }
+        "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+        "id": "urn:ngsi-ld:TemperatureSensor:004",
+        "type": "TemperatureSensor",
+        "category": {
+            "type": "Property",
+            "value": "sensor"
+        },
+        "temperature": {
+            "type": "Property",
+            "value": 100,
+            "unitCode": "CEL"
+        }
     },
     {
-        "id": "urn:ngsi-ld:Product:002",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Red Wine", "metadata": {} },
-        "price": { "type": "Integer", "value": 1099, "metadata": {} },
-        "size": { "type": "Text", "value": "M", "metadata": {} }
+        "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+        "id": "urn:ngsi-ld:TemperatureSensor:002",
+        "type": "TemperatureSensor",
+        "category": {
+            "type": "Property",
+            "value": "sensor"
+        },
+        "temperature": {
+            "type": "Property",
+            "value": 21,
+            "unitCode": "CEL"
+        }
     },
     {
-        "id": "urn:ngsi-ld:Product:003",
-        "type": "Product",
-        "name": { "type": "Text", "value": "White Wine", "metadata": {} },
-        "price": { "type": "Integer", "value": 1499, "metadata": {} },
-        "size": { "type": "Text", "value": "M", "metadata": {} }
+        "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+        "id": "urn:ngsi-ld:TemperatureSensor:003",
+        "type": "TemperatureSensor",
+        "category": {
+            "type": "Property",
+            "value": "sensor"
+        },
+        "temperature": {
+            "type": "Property",
+            "value": 27,
+            "unitCode": "CEL"
+        }
     },
     {
-        "id": "urn:ngsi-ld:Product:004",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Vodka", "metadata": {} },
-        "price": { "type": "Integer", "value": 5000, "metadata": {} },
-        "size": { "type": "Text", "value": "XL", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:005",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Lager", "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:006",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Whisky", "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:007",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Gin", "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:008",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Apple Juice", "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:009",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Orange Juice", "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:010",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Lemonade", "metadata": {} },
-        "price": { "type": "Integer", "value": 99, "metadata": {} },
-        "size": { "type": "Text", "value": "S", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:011",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Brandy", "metadata": {} },
-        "price": { "type": "Integer", "value": 1199, "metadata": {} },
-        "size": { "type": "Text", "value": "M", "metadata": {} }
-    },
-    {
-        "id": "urn:ngsi-ld:Product:012",
-        "type": "Product",
-        "name": { "type": "Text", "value": "Port", "metadata": {} },
-        "price": { "type": "Integer", "value": 1099, "metadata": {} },
-        "size": { "type": "Text", "value": "M", "metadata": {} }
+        "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
+        "id": "urn:ngsi-ld:TemperatureSensor:001",
+        "type": "TemperatureSensor",
+        "batteryLevel": {
+            "type": "Property",
+            "value": 0.8,
+            "unitCode": "C62"
+        },
+        "category": {
+            "type": "Property",
+            "value": "sensor"
+        },
+        "controlledAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:barn002"
+        },
+        "temperature": {
+            "type": "Property",
+            "value": 25,
+            "unitCode": "CEL"
+        }
     }
 ]
 ```
 
 ### List all Data Entities (key-value pairs)
 
-This example lists the `name` and `price` attributes of all **Product** entities.
+This example lists the `temperature` attribute of all **TemperatureSensor** entities.
 
 #### :one::two: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=keyValues&attrs=name,price'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+-H 'Link: <http://context-provider:3000/data-models/json-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/json' \
+-d 'type=TemperatureSensor' \
+-d 'options=keyValues' \
+-d 'attrs=temperature'
 ```
 
 #### Response:
 
-On start-up the context held nine products, three more have been added by create operations so the full context will now
-contain twelve products.
+The full context contains four sensors, they are returned in a random order:
 
 ```json
 [
     {
-        "id": "urn:ngsi-ld:Product:001",
-        "type": "Product",
-        "name": "Beer",
-        "price": 99
+        "id": "urn:ngsi-ld:TemperatureSensor:004",
+        "type": "TemperatureSensor",
+        "temperature": 100
     },
     {
-        "id": "urn:ngsi-ld:Product:002",
-        "type": "Product",
-        "name": "Red Wine",
-        "price": 1099
+        "id": "urn:ngsi-ld:TemperatureSensor:002",
+        "type": "TemperatureSensor",
+        "temperature": 21
     },
     {
-        "id": "urn:ngsi-ld:Product:003",
-        "type": "Product",
-        "name": "White Wine",
-        "price": 1499
+        "id": "urn:ngsi-ld:TemperatureSensor:003",
+        "type": "TemperatureSensor",
+        "temperature": 27
     },
     {
-        "id": "urn:ngsi-ld:Product:004",
-        "type": "Product",
-        "name": "Vodka",
-        "price": 5000
-    },
-    {
-        "id": "urn:ngsi-ld:Product:005",
-        "type": "Product",
-        "name": "Lager",
-        "price": 99
-    },
-    {
-        "id": "urn:ngsi-ld:Product:006",
-        "type": "Product",
-        "name": "Whisky",
-        "price": 99
-    },
-    {
-        "id": "urn:ngsi-ld:Product:007",
-        "type": "Product",
-        "name": "Gin",
-        "price": 99
-    },
-    {
-        "id": "urn:ngsi-ld:Product:008",
-        "type": "Product",
-        "name": "Apple Juice",
-        "price": 99
-    },
-    {
-        "id": "urn:ngsi-ld:Product:009",
-        "type": "Product",
-        "name": "Orange Juice",
-        "price": 99
-    },
-    {
-        "id": "urn:ngsi-ld:Product:010",
-        "type": "Product",
-        "name": "Lemonade",
-        "price": 99
-    },
-    {
-        "id": "urn:ngsi-ld:Product:011",
-        "type": "Product",
-        "name": "Brandy",
-        "price": 1199
-    },
-    {
-        "id": "urn:ngsi-ld:Product:012",
-        "type": "Product",
-        "name": "Port",
-        "price": 1099
+        "id": "urn:ngsi-ld:TemperatureSensor:001",
+        "type": "TemperatureSensor",
+        "temperature": 25
     }
 ]
 ```
 
-Full context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities` endpoint
+Full context data for a specified entity type can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/` endpoint
 and supplying the `type` parameter, combine this with the `options=keyValues` parameter and the `attrs` parameter to
 retrieve key-values.
 
-### List Data Entity by ID
+### Filter Data Entities by ID
 
-This example lists the `id` and `type` of all **Product** entities.
+This example lists selected data from two **TemperatureSensor** entities chosen by `id`. Note that every `id` must be
+unique, so `type` is not required for this request. To filter by `id` add the entries in a comma delimted list.
 
 #### :one::three: Request:
 
 ```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/'' \
+-H 'Link: <http://context-provider:3000/data-models/json-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/json' \
+-d 'id=urn:ngsi-ld:TemperatureSensor:001,urn:ngsi-ld:TemperatureSensor:002' \
+-d 'options=keyValues' \
+-d 'attrs=temperature'
 ```
 
 #### Response:
 
-On start-up the context held nine products, three more have been added by create operations so the full context will now
-contain twelve products.
+The response details the selected attributes from the selected entities.
 
 ```json
 [
     {
-        "id": "urn:ngsi-ld:Product:001",
-        "type": "Product"
+        "id": "urn:ngsi-ld:TemperatureSensor:002",
+        "type": "TemperatureSensor",
+        "temperature": 21
     },
     {
-        "id": "urn:ngsi-ld:Product:002",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:003",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:004",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:005",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:006",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:007",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:008",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:009",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:010",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:011",
-        "type": "Product"
-    },
-    {
-        "id": "urn:ngsi-ld:Product:012",
-        "type": "Product"
+        "id": "urn:ngsi-ld:TemperatureSensor:001",
+        "type": "TemperatureSensor",
+        "temperature": 25
     }
 ]
 ```
 
-Context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities` endpoint and
-supplying the `type` parameter. Combine this with `options=count` and `attrs=id` to return the `id` attributes of the
-given `type`.
-
 ## Update Operations
 
-Overwrite operations are mapped to HTTP PUT. HTTP PATCH can be used to update several attributes at once.
+Overwrite operations are mapped to HTTP PATCH:
 
--   The `/v2/entities/<entity>/attrs/<attribute>/value` endpoint is used to update an attribute
--   The `/v2/entities/<entity>/attrs` endpoint is used to update multiple attributes
+-   The `/ngsi-ld/v1/entities/<entity-id>/attrs/<attribute>` endpoint is used to update an attribute
+-   The `/ngsi-ld/v1/entities/<entity-id>/attrs` endpoint is used to update multiple attributes
 
 ### Overwrite the value of an Attribute value
 
-This example updates the value of the price attribute of the Entity with `id=urn:ngsi-ld:Product:001`
+This example updates the value of the `category` attribute of the Entity with `id=urn:ngsi-ld:TemperatureSensor:001`
 
 #### :one::four: Request:
 
 ```console
-curl -iX PUT \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/price/value' \
-  --header 'Content-Type: text/plain' \
-  --data 89
+curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+--data-raw '{
+    "value": ["sensor", "actuator"],
+    "type": "Property"
+}'
 ```
 
-Existing attribute values can be altered by making a PUT request to the `/v2/entities/<entity>/attrs/<attribute>/value`
-endpoint.
+Existing attribute values can be altered by making a PATCH request to the
+`/ngsi-ld/v1/entities/<entity-id>/attrs/<attribute>` endpoint. The appropriate `@context` should be supplied as a `Link`
+header.
 
 ### Overwrite Multiple Attributes of a Data Entity
 
-This example simultaneously updates the values of both the price and name attributes of the Entity with
-`id=urn:ngsi-ld:Product:001`.
+This example simultaneously updates the values of both the `category` and `controlledAsset` attributes of the Entity
+with `id=urn:ngsi-ld:TemperatureSensor:001`.
 
 #### :one::five: Request:
 
 ```console
-curl -iX PATCH \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs' \
-  --header 'Content-Type: application/json' \
-  --data ' {
-      "price":{"type":"Integer", "value": 89},
-      "name": {"type":"Text", "value": "Ale"}
+curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+--data-raw '{
+      "category": {
+            "value": [
+                  "sensor",
+                  "actuator"
+            ],
+            "type": "Property"
+      },
+      "controlledAsset": {
+            "type": "Relationship",
+            "object": "urn:ngsi-ld:Building:barn001"
+      }
 }'
 ```
 
-### Batch Overwrite Attributes of Multiple Data Entities
+### Batch Update Attributes of Multiple Data Entities
 
-This example uses the convenience batch processing endpoint to update existing products.
+This example uses the convenience batch processing endpoint to update existing sensors.
 
 #### :one::six: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"update",
-  "entities":[
-    {
-      "id":"urn:ngsi-ld:Product:001", "type":"Product",
-      "price":{"type":"Integer", "value": 1199}
-    },
-    {
-      "id":"urn:ngsi-ld:Product:002", "type":"Product",
-      "price":{"type":"Integer", "value": 1199},
-      "size": {"type":"Text", "value": "L"}
+curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'options=update'
+--data-raw '[
+  {
+    "id": "urn:ngsi-ld:TemperatureSensor:003",
+    "type": "TemperatureSensor",
+    "category": {
+      "type": "Property",
+      "value": [
+        "actuator",
+        "sensor"
+      ]
     }
-  ]
-}'
+  },
+  {
+    "id": "urn:ngsi-ld:TemperatureSensor:004",
+    "type": "TemperatureSensor",
+    "category": {
+      "type": "Property",
+      "value": [
+        "actuator",
+        "sensor"
+      ]
+    }
+  }
+]'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=append` means we
-will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to
-update.
+Batch processing uses the `/ngsi-ld/v1/entityOperations/upsert` endpoint. The payload body holds an array of the
+entities and attributes we wish to update.The `options=update` parameter indicates we will not remove existing
+attributes if they already exist and have not been included in the payload.
 
-### Batch Create/Overwrite Attributes of Multiple Data Entities
+An alternative would be to use the `/ngsi-ld/v1/entityOperations/update` endpoint. Unlike `upsert`, the `update`
+operation will not silently create any new entities - it fails if the entities do not already exist.
 
-This example uses the convenience batch processing endpoint to update existing products.
+### Batch Replace Entity Data
+
+This example uses the convenience batch processing endpoint to replace entity data of existing sensors.
 
 #### :one::seven: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"append",
-  "entities":[
-    {
-      "id":"urn:ngsi-ld:Product:001", "type":"Product",
-      "price":{"type":"Integer", "value": 1199}
-    },
-    {
-      "id":"urn:ngsi-ld:Product:002", "type":"Product",
-      "price":{"type":"Integer", "value": 1199},
-      "specialOffer": {"type":"Boolean", "value":  true}
+curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/update' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-d 'options=replace'
+--data-raw '[
+  {
+    "id": "urn:ngsi-ld:TemperatureSensor:003",
+    "type": "TemperatureSensor",
+    "category": {
+      "type": "Property",
+      "value": [
+        "actuator",
+        "sensor"
+      ]
     }
-  ]
-}'
+  },
+  {
+    "id": "urn:ngsi-ld:TemperatureSensor:004",
+    "type": "TemperatureSensor",
+    "temperature": {
+      "type": "Property",
+      "value": [
+        "actuator",
+        "sensor"
+      ]
+    }
+  }
+]'
 ```
 
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=append` means we
-will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities we wish to
-update.
-
-### Batch Replace Entity Data
-
-This example uses the convenience batch processing endpoint to replace entity data of existing products.
-
-#### :one::eight: Request:
-
-```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"replace",
-  "entities":[
-    {
-      "id":"urn:ngsi-ld:Product:010", "type":"Product",
-      "price":{"type":"Integer", "value": 1199}
-    }
-  ]
-}'
-```
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=replace` means we
-will overwrite existing entities if they exist whereas the `entities` attribute holds an array of entities whose data we
-wish to replace.
+Batch processing uses the `/ngsi-ld/v1/entityOperations/update` endpoint with a payload with the - `options=replace`
+parameter, this means we will overwrite existing entities. `/ngsi-ld/v1/entityOperations/upsert` could also be used if
+new entities are also to be created.
 
 ## Delete Operations
 
 Delete Operations map to HTTP DELETE.
 
--   The `/v2/entities/<entity>` endpoint can be used to delete an entity
--   The `/v2/entities/<entity>/attrs/<attribute>` endpoint can be used to delete an attribute
+-   The `/ngsi-ld/v1/entities/<entity-id>` endpoint can be used to delete an entity
+-   The `/ngsi-ld/v1/entities/<entity-id>/attrs/<attribute>` endpoint can be used to delete an attribute
 
 The response will be **204 - No Content** if the operation is successful or **404 - Not Found** if the operation fails.
 
@@ -987,126 +942,117 @@ request.
 
 ### Delete an Entity
 
-This example deletes the entity with `id=urn:ngsi-ld:Product:001` from the context.
+This example deletes the entity with `id=urn:ngsi-ld:TemperatureSensor:004` from the context.
 
-#### :one::nine: Request:
+#### :one::eight: Request:
 
 ```console
-curl -iX DELETE \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:010'
+curl -iX DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:004'
 ```
 
-Entities can be deleted by making a DELETE request to the `/v2/entities/<entity>` endpoint.
+Entities can be deleted by making a DELETE request to the `/ngsi-ld/v1/entities/<entity>` endpoint.
 
 Subsequent requests using the same `id` will result in an error response since the entity no longer exists in the
 context.
 
 ### Delete an Attribute from an Entity
 
-This example removes the `specialOffer` attribute from the entity with `id=urn:ngsi-ld:Product:001`.
+This example removes the `batteryLevel` attribute from the entity with `id=urn:ngsi-ld:TemperatureSensor:001`.
+
+#### :one::nine: Request:
+
+```console
+curl -L -X DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/batteryLevel' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
+```
+
+Attributes can be deleted by making a DELETE request to the `/ngsi-ld/v1/entities/<entity>/attrs/<attribute>` endpoint. It is
+important to supply the appropriate `@context` in the request in the form of a `Link` header to ensure that the
+attribute name can be recognised.
+
+If the entity does not exist within the context or the attribute cannot be found on the entity, the result will be an
+error response.
+
+### Batch Delete Multiple Entities
+
+This example uses the convenience batch processing endpoint to delete some **TemperatureSensor** entities.
 
 #### :two::zero: Request:
 
 ```console
-curl -iX DELETE \
-  --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001/attrs/specialOffer'
+curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
+-H 'Content-Type: application/json' \
+--data-raw '[
+  "urn:ngsi-ld:TemperatureSensor:002",
+  "urn:ngsi-ld:TemperatureSensor:003"
+]'
 ```
 
-Attributes can be deleted by making a DELETE request to the `/v2/entities/<entity>/attrs/<attribute>` endpoint.
-
-If the attribute does not exist in the context, the result will be an error response.
-
-### Batch Delete Multiple Entities
-
-This example uses the convenience batch processing endpoint to delete some **Product** entities.
-
-#### :two::one: Request:
-
-```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"delete",
-  "entities":[
-    {
-      "id":"urn:ngsi-ld:Product:001", "type":"Product"
-    },
-    {
-      "id":"urn:ngsi-ld:Product:002", "type":"Product"
-    }
-  ]
-}'
-```
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=delete` means we
-will delete something from the context and the `entities` attribute holds the `id` of the entities we wish to delete.
+Batch processing uses the `/ngsi-ld/v1/entityOperations/delete` endpoint with a payload consisting of an array of
+elements to delete.
 
 If an entity does not exist in the context, the result will be an error response.
 
 ### Batch Delete Multiple Attributes from an Entity
 
-This example uses the convenience batch processing endpoint to delete some attributes from a **Product** entity.
+This example uses the PATCH `/ngsi-ld/v1/entities/<entity-id>/attrs` endpoint to delete some attributes from a
+**TemperatureSensor** entity.
+
+#### :two::one: Request:
+
+```console
+curl -L -X PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
+-H 'Content-Type: application/json' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+--data-raw '{
+      "category": {
+            "value": null,
+            "type": "Property"
+      },
+      "controlledAsset": {
+            "type": "Relationship",
+            "object": null
+      }
+}'
+```
+
+If a value is set to `null` the attribute is deleted.
+
+### Find existing data relationships
+
+This example returns a header indicating whether any linked data relationships remain against the entity
+`urn:ngsi-ld:Building:barn002`
 
 #### :two::two: Request:
 
 ```console
-curl -iX POST \
-  --url 'http://localhost:1026/v2/op/update' \
-  --header 'Content-Type: application/json' \
-  --data '{
-  "actionType":"delete",
-  "entities":[
-    {
-      "id":"urn:ngsi-ld:Product:003", "type":"Product",
-      "price":{},
-      "name": {}
-    }
-  ]
-}'
-```
-
-Batch processing uses the `/v2/op/update` endpoint with a payload with two attributes - `actionType=delete` means we
-will delete something from the context and the `entities` attribute holds an array of attributes we wish to delete.
-
-If any attribute does not exist in the context, the result will be an error response.
-
-### Find existing data relationships
-
-This example returns the key of all entities directly associated with the `urn:ngsi-ld:Product:001`.
-
-#### :two::three: Request:
-
-```console
-curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?q=refProduct==urn:ngsi-ld:Product:001&options=count&attrs=type'
+curl -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor&limit=0&count=true&q=controlledAsset==%22urn:ngsi-ld:Building:barn002%22' \
+-H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
+-H 'Accept: application/json'
 ```
 
 #### Response:
 
 ```json
-[
-    {
-        "id": "urn:ngsi-ld:InventoryItem:001",
-        "type": "InventoryItem"
-    }
-]
+[]
 ```
 
--   If this request returns an empty array, the entity has no associates - it can be safely deleted
--   If the response lists a series of **InventoryItem** entities they should be deleted before the associated
-    **Product** entity is removed from the context.
+Because the `limit=0` parameter has been used **no entities** are listed in the payload body, however the `count=true`
+means that the count is passed as a header instead:
 
-Note that we deleted **Product** `urn:ngsi-ld:Product:001` earlier, so what we see above is actually a dangling
-reference, i.e. the returned **InventoryItem** references a **Product** that no longer exists.
+```text
+NGSILD-Results-Count: 1
+```
+
+If `limit` was not present the payload would hold the details of every matching entity instead.
 
 # Next Steps
 
 Want to learn how to add more complexity to your application by adding advanced features? You can find out by reading
-the other [tutorials in this series](https://fiware-tutorials.rtfd.io)
+the other [tutorials in this series](https://ngsi-ld-tutorials.rtfd.io)
 
 ---
 
 ## License
 
-[MIT](LICENSE) © 2018-2020 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020 FIWARE Foundation e.V.
