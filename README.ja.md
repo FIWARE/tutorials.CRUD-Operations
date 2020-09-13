@@ -904,10 +904,9 @@ curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 #### :one::six: リクエスト:
 
 ```console
-curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert?options=update' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--d 'options=update'
 --data-raw '[
   {
     "id": "urn:ngsi-ld:TemperatureSensor:003",
@@ -950,10 +949,9 @@ curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 #### :one::seven: リクエスト:
 
 ```console
-curl -G -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/update' \
+curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=replace' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--d 'options=replace'
 --data-raw '[
   {
     "id": "urn:ngsi-ld:TemperatureSensor:003",
