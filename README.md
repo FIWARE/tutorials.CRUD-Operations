@@ -214,12 +214,13 @@ It has been described in a [previous tutorial](https://github.com/FIWARE/tutoria
 # Start Up
 
 All services can be initialised from the command-line by running the
-[services](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/master/services) Bash script provided within the
+[services](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/NGSI-LD/services) Bash script provided within the
 repository. Please clone the repository and create the necessary images by running the commands as shown:
 
 ```bash
 git clone https://github.com/FIWARE/tutorials.CRUD-Operations.git
 cd tutorials.CRUD-Operations
+git checkout NGSI-LD
 
 ./services orion|scorpio
 ```
