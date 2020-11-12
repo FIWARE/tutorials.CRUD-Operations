@@ -22,6 +22,15 @@ waitForOrion () {
 	done
 }
 
+waitForContext () {
+	echo -e "\n⏳ Waiting for \033[1m@context\033[0m to be available\n"
+	while [ `docker run --network fiware_default --rm curlimages/curl -s -o /dev/null -w %{http_code} 'http://context-provider:3000/data-models/ngsi-context.jsonld'` -eq 000 ]
+	do 
+	  echo -e "@context HTTP state: " `curl -s -o /dev/null -w %{http_code} 'http://context-provider:3000/data-models/ngsi-context.jsonld'` " (waiting for 200)"
+	  sleep 1
+	done
+}
+
 waitForScorpio () {
 	echo -e "\n⏳ Waiting for \033[1;34mScorpio\033[0m to respond\n"
 	waitSeconds=30
@@ -78,6 +87,7 @@ case "${command}" in
 		docker-compose --log-level ERROR -f docker-compose/orion-ld.yml -p fiware up -d --remove-orphans
 		addDatabaseIndex
 		displayServices
+		waitForContext
 		waitForOrion
 		;;
 	"scorpio")
@@ -86,6 +96,7 @@ case "${command}" in
 		echo -e "- \033[1;34mScorpio\033[0m is the context broker\n"
 		docker-compose --log-level ERROR -f docker-compose/scorpio-aaio.yml -p fiware up -d --remove-orphans
 		displayServices scorpio
+		waitForContext
 		waitForScorpio
 		;;
 	"stop")
