@@ -13,7 +13,7 @@
 温度センサ・モデルに基づいて、温度センサを表す一連のエンティティが作成、変更、削除されます。
 
 このチュートリアルでは、全体で [cUrl](https://ec.haxx.se/) コマンドを使用していますが、
-[Postman のドキュメント](https://fiware.github.io/tutorials.CRUD-Operations/ngsi-ld)としても利用できます。
+[Postman のドキュメント](https://fiware.github.io/tutorials.CRUD-Operations/ngsi-ld.html)としても利用できます。
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cc52b59aaf5a55d04b42)
 

@@ -14,7 +14,7 @@ series of entities representing temperature sensors are created, modified and de
 model defined in an [earlier tutorial](https://github.com/FIWARE/tutorials.Understanding-At-Context).
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
-[Postman documentation](https://fiware.github.io/tutorials.CRUD-Operations/ngsi-ld).
+[Postman documentation](https://fiware.github.io/tutorials.CRUD-Operations/ngsi-ld.html).
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/cc52b59aaf5a55d04b42)
 
