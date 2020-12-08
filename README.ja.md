@@ -178,7 +178,7 @@ mongo-db:
         - "27017:27017"
     networks:
         - default
-    command: --bind_ip_all --smallfiles
+
 ```
 
 どちらのコンテナも同じネットワークに常駐しています。Orion Context Broker は
