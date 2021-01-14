@@ -51,14 +51,6 @@ waitForMongo () {
 	done
 }
 
-waitForMongo () {
-	echo -e "\n⏳ Waiting for \033[1mMongoDB\033[0m to be available\n"
-	while ! [ `docker inspect --format='{{.State.Health.Status}}' db-mongo` == "healthy" ]
-	do 
-		sleep 1
-	done
-}
-
 waitForOrion () {
 	echo -e "\n⏳ Waiting for \033[1;34mOrion\033[0m to be available\n"
 
