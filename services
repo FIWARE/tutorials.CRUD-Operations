@@ -45,6 +45,14 @@ waitForOrion () {
 	done
 }
 
+waitForMongo () {
+	echo -e "\n⏳ Waiting for \033[1mMongoDB\033[0m to be available\n"
+	while ! [ `docker inspect --format='{{.State.Health.Status}}' db-mongo` == "healthy" ]
+	do 
+		sleep 1
+	done
+}
+
 waitForScorpio () {
 	echo -e "\n⏳ Waiting for \033[1;34mScorpio\033[0m to respond\n"
 	getHeartbeat "${SCORPIO}"
@@ -119,6 +127,7 @@ case "${command}" in
 		echo -e "- \033[1mTutorial\033[0m holds the @context"
 		echo ""
 		docker-compose --log-level ERROR -f docker-compose/orion-ld.yml -p fiware up -d --remove-orphans
+		waitForMongo
 		addDatabaseIndex
 		displayServices fiware
 		waitForOrion
