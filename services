@@ -105,8 +105,8 @@ addDatabaseIndex () {
 
 stoppingContainers () {
 	echo "Stopping containers"
-	docker-compose --env-file=.env --log-level ERROR -f docker-compose/orion-ld.yml -p fiware down -v --remove-orphans
-	docker-compose --env-file=.env --log-level ERROR -f docker-compose/scorpio-aaio.yml -p fiware down -v --remove-orphans
+	docker-compose --log-level ERROR -f docker-compose/orion-ld.yml -p fiware down -v --remove-orphans
+	docker-compose --log-level ERROR -f docker-compose/scorpio-aaio.yml -p fiware down -v --remove-orphans
 }
 
 displayServices () {
@@ -144,7 +144,7 @@ case "${command}" in
 		echo -e "- \033[1;34mOrion\033[0m is the context broker"
 		echo -e "- \033[1mTutorial\033[0m holds the @context"
 		echo ""
-		docker-compose --env-file=.env --log-level ERROR -f docker-compose/orion-ld.yml -p fiware up -d --remove-orphans
+		docker-compose --log-level ERROR -f docker-compose/orion-ld.yml -p fiware up -d --remove-orphans
 		waitForMongo
 		addDatabaseIndex
 		displayServices fiware
@@ -158,22 +158,25 @@ case "${command}" in
 		echo -e "- \033[1;34mScorpio\033[0m is the context broker"
 		echo -e "- \033[1mTutorial\033[0m holds the @context"
 		echo ""
-		docker-compose --env-file=.env --log-level ERROR -f docker-compose/scorpio-aaio.yml -p fiware up -d --remove-orphans
+		docker-compose --log-level ERROR -f docker-compose/scorpio-aaio.yml -p fiware up -d --remove-orphans
 		displayServices fiware
 		waitForScorpio
 		export CONTEXT_BROKER=scorpio:9090
 		waitForContext
 		;;
 	"stop")
+		export $(cat .env | grep "#" -v)
 		stoppingContainers
 		;;
 	"start")
+		export $(cat .env | grep "#" -v)
 		./services orion
 		;;
 	"create")
+		export $(cat .env | grep "#" -v)
 		echo "Pulling Docker images"
-		docker-compose --env-file=.env --log-level ERROR -f docker-compose/orion-ld.yml pull
-		docker-compose --env-file=.env --log-level ERROR -f docker-compose/scorpio-aaio.yml pull
+		docker-compose --log-level ERROR -f docker-compose/orion-ld.yml pull
+		docker-compose --log-level ERROR -f docker-compose/scorpio-aaio.yml pull
 		;;
 	*)
 		echo "Command not Found."
