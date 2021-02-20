@@ -55,7 +55,7 @@
         -   [データ・エンティティから複数の属性値の読み取り](#read-multiple-attributes-values-from-a-data-entity)
         -   [すべてのデータ・エンティティ(詳細)を一覧表示](#list-all-data-entities-verbose)
         -   [すべてのデータ・エンティティ(キー値のペア)を一覧表示](#list-all-data-entities-key-value-pairs)
-        -   [ID でデータ・エンティティを一覧表示](#list-data-entity-by-id)
+        -   [Type でデータ・エンティティを一覧表示](#list-data-entity-by-type)
     -   [更新 (Update) オペレーション](#update-operations)
         -   [属性の値を上書き](#overwrite-the-value-of-an-attribute-value)
         -   [データ・エンティティの複数の属性を上書き](#overwrite-multiple-attributes-of-a-data-entity)
@@ -900,9 +900,9 @@ curl -X GET \
 得できます。`options=keyValues` パラメータおよび `attrs` パラメータと組み合わせ
 て、キーと値を取得します。
 
-<a name="list-data-entity-by-id"></a>
+<a name="list-data-entity-by-type"></a>
 
-### ID でデータ・エンティティを一覧表示
+### Type でデータ・エンティティを一覧表示
 
 この例では、すべての **Prodcut** エンティティの `id` と `type` が一覧表示されま
 す。
@@ -913,10 +913,6 @@ curl -X GET \
 curl -X GET \
   --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=__NONE'
 ```
-
-> **注:** NGSIv2 仕様では、`attrs=` は "データが応答に含まれる属性名のコンマ区切りのリスト" である必要があると指定
-> されています。`id` と `type` を属性名として使用することはできません。`__NONE` などの属性に存在しない名前を
-> `attrs=` パラメータに指定すると、一致する属性はなく、常にエンティティの ID と Type のみを取得できす。
 
 #### レスポンス :
 
@@ -978,8 +974,12 @@ curl -X GET \
 
 指定されたエンティティ・タイプのコンテキスト・データは、`/v2/entities` エンドポ
 イントへの GET リクエストを行い、`type` パラメータを指定することによって取得でき
-ます。これと、`options=count`, `attrs=id` を組み合わせ id て指定された `type` の
+ます。これと、`options=count`, `attrs=__NONE` を組み合わせ id て指定された `type` の
 `id` 属性を返します。
+
+> **注:** NGSIv2 仕様では、`attrs=` は "データが応答に含まれる属性名のコンマ区切りのリスト" である必要があると指定
+> されています。`id` と `type` を属性名として使用することはできません。`__NONE` などの属性に存在しない名前を
+> `attrs=` パラメータに指定すると、一致する属性はなく、常にエンティティの ID と Type のみを取得できす。
 
 <a name="update-operations"></a>
 
