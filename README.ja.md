@@ -911,8 +911,12 @@ curl -X GET \
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
+  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=__NONE'
 ```
+
+> **注:** NGSIv2 仕様では、`attrs=` は "データが応答に含まれる属性名のコンマ区切りのリスト" である必要があると指定
+> されています。`id` と `type` を属性名として使用することはできません。`__NONE` などの属性に存在しない名前を
+> `attrs=` パラメータに指定すると、一致する属性はなく、常にエンティティの ID と Type のみを取得できす。
 
 #### レスポンス :
 

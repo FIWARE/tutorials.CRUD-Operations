@@ -777,8 +777,13 @@ This example lists the `id` and `type` of all **Product** entities.
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
+  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=__NONE'
 ```
+
+> **Note:** The NGSIv2 specification specifies that `attrs=` has to be a "comma-separated list of attribute names
+> whose data are to be included in the response". `id` and `type` are not allowed to be used as attribute names. If you
+> specify a name that does not exist in attributes, such as `__NONE` to the `attrs=` parameter, No attribute will match
+> and you will always retrieve only the id and type of the entity.
 
 #### Response:
 
