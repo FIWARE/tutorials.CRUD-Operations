@@ -47,7 +47,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
         -   [Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity)
         -   [List all Data Entities (verbose)](#list-all-data-entities-verbose)
         -   [List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs)
-        -   [List Data Entity by ID](#list-data-entity-by-id)
+        -   [List Data Entity by type](#list-data-entity-by-type)
     -   [Update Operations](#update-operations)
         -   [Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value)
         -   [Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity)
@@ -769,7 +769,7 @@ Full context data for a specified entity type can be retrieved by making a GET r
 and supplying the `type` parameter, combine this with the `options=keyValues` parameter and the `attrs` parameter to
 retrieve key-values.
 
-### List Data Entity by ID
+### List Data Entity by type
 
 This example lists the `id` and `type` of all **Product** entities.
 
@@ -777,7 +777,7 @@ This example lists the `id` and `type` of all **Product** entities.
 
 ```console
 curl -X GET \
-  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=id'
+  --url 'http://localhost:1026/v2/entities/?type=Product&options=count&attrs=__NONE'
 ```
 
 #### Response:
@@ -839,8 +839,13 @@ contain twelve products.
 ```
 
 Context data for a specified entity type can be retrieved by making a GET request to the `/v2/entities` endpoint and
-supplying the `type` parameter. Combine this with `options=count` and `attrs=id` to return the `id` attributes of the
-given `type`.
+supplying the `type` parameter. Combine this with `options=count` and `attrs=__NONE` to return the `id` attributes of
+the given `type`.
+
+> **Note:** The NGSIv2 specification specifies that `attrs=` has to be a "comma-separated list of attribute names
+> whose data are to be included in the response". `id` and `type` are not allowed to be used as attribute names. If you
+> specify a name that does not exist in attributes, such as `__NONE` to the `attrs=` parameter, No attribute will match
+> and you will always retrieve only the id and type of the entity.
 
 ## Update Operations
 
