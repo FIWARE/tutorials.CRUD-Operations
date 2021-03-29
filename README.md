@@ -31,33 +31,27 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
     -   [Docker](#docker)
     -   [Cygwin](#cygwin)
 -   [Architecture](#architecture)
--   [Start Up](#start-up)
-    -   [Create Operations](#create-operations)
-        -   [Create a New Data Entity](#create-a-new-data-entity)
-        -   [Create New Attributes](#create-new-attributes)
-        -   [Batch Create New Data Entities or Attributes](#batch-create-new-data-entities-or-attributes)
-        -   [Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities)
-    -   [Read Operations](#read-operations)
-        -   [Filtering](#filtering)
-        -   [Read a Data Entity (verbose)](#read-a-data-entity-verbose)
-        -   [Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity)
-        -   [Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs)
-        -   [Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity)
-        -   [List all Data Entities (verbose)](#list-all-data-entities-verbose)
-        -   [List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs)
-        -   [Filter Data Entities by ID](#filter-data-entities-by-id)
-    -   [Update Operations](#update-operations)
-        -   [Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value)
-        -   [Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity)
-        -   [Batch Update Attributes of Multiple Data Entities](#batch-update-attributes-of-multiple-data-entities)
-        -   [Batch Replace Entity Data](#batch-replace-entity-data)
-    -   [Delete Operations](#delete-operations)
-        -   [Data Relationships](#data-relationships)
-        -   [Delete an Entity](#delete-an-entity)
-        -   [Delete an Attribute from an Entity](#delete-an-attribute-from-an-entity)
-        -   [Batch Delete Multiple Entities](#batch-delete-multiple-entities)
-        -   [Batch Delete Multiple Attributes from an Entity](#batch-delete-multiple-attributes-from-an-entity)
-        -   [Find existing data relationships](#find-existing-data-relationships)
+-   [Start Up](#start-up) - [Create Operations](#create-operations) -
+[Create a New Data Entity](#create-a-new-data-entity) - [Create New Attributes](#create-new-attributes) -
+[Batch Create New Data Entities or Attributes](#batch-create-new-data-entities-or-attributes) -
+[Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities) -
+[Read Operations](#read-operations) - [Filtering](#filtering) -
+[Read a Data Entity (verbose)](#read-a-data-entity-verbose) -
+[Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity) -
+[Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs) -
+[Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity) -
+[List all Data Entities (verbose)](#list-all-data-entities-verbose) -
+[List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs) -
+[Filter Data Entities by ID](#filter-data-entities-by-id) - [Update Operations](#update-operations) -
+[Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value) -
+[Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity) -
+[Batch Update Attributes of Multiple Data Entities](#batch-update-attributes-of-multiple-data-entities) -
+[Batch Replace Entity Data](#batch-replace-entity-data) - [Delete Operations](#delete-operations) -
+[Data Relationships](#data-relationships) - [Delete an Entity](#delete-an-entity) -
+[Delete an Attribute from an Entity](#delete-an-attribute-from-an-entity) -
+[Batch Delete Multiple Entities](#batch-delete-multiple-entities) -
+[Batch Delete Multiple Attributes from an Entity](#batch-delete-multiple-attributes-from-an-entity) -
+[Find existing data relationships](#find-existing-data-relationships)
 </details>
 
 # NGSI-LD CRUD Operations
@@ -749,9 +743,9 @@ The full context contains four sensors, they are returned in a random order:
 ]
 ```
 
-Full context data for a specified entity type can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/` endpoint
-and supplying the `type` parameter, combine this with the `options=keyValues` parameter and the `attrs` parameter to
-retrieve key-values.
+Full context data for a specified entity type can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/`
+endpoint and supplying the `type` parameter, combine this with the `options=keyValues` parameter and the `attrs`
+parameter to retrieve key-values.
 
 ### Filter Data Entities by ID
 
@@ -967,8 +961,8 @@ curl -L -X DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Tempera
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
-Attributes can be deleted by making a DELETE request to the `/ngsi-ld/v1/entities/<entity>/attrs/<attribute>` endpoint. It is
-important to supply the appropriate `@context` in the request in the form of a `Link` header to ensure that the
+Attributes can be deleted by making a DELETE request to the `/ngsi-ld/v1/entities/<entity>/attrs/<attribute>` endpoint.
+It is important to supply the appropriate `@context` in the request in the form of a `Link` header to ensure that the
 attribute name can be recognised.
 
 If the entity does not exist within the context or the attribute cannot be found on the entity, the result will be an
