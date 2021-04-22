@@ -1,5 +1,5 @@
 [![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png)](https://www.fiware.org/developers)
-[![NGSI LD](https://img.shields.io/badge/NGSI-LD-d6604d.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)
+[![NGSI LD](https://img.shields.io/badge/NGSI-LD-d6604d.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@
 [![Documentation](https://img.shields.io/readthedocs/ngsi-ld-tutorials.svg)](https://ngsi-ld-tutorials.rtfd.io)
 
 このチュートリアルでは、 **NGSI-LD** ユーザに CRUD 操作について説明します。このチュートリアルでは、
-[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)で詳しく
+[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)で詳しく
 説明されているように、コンテキストを修正するさまざまな方法の使用例の概要を説明しています。以前のチュートリアルで定義した
 温度センサ・モデルに基づいて、温度センサを表す一連のエンティティが作成、変更、削除されます。
 
@@ -69,7 +69,7 @@
 **CRUD** 操作 (**Create**, **Read**, **Update**, **Delete**) は、永続ストレージの4つの基本機能です。**NGSI-LD** に
 基づくスマート・システムの場合、**CRUD** アクションにより、開発者はシステム内のコンテキスト・データを操作できます。
 すべての **CRUD** 操作は
-[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.03.01_60/gs_cim009v010301p.pdf)
+[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
 内で明確に定義されているため、すべての NGSI-LD 準拠の Context Broker は、同じ NGSI-LD 操作で同じインターフェースを
 提供します。
 
@@ -165,7 +165,7 @@ NGSI ドメイン外の他のサービスは、データ構造の名前を選択
 
 したがって、アーキテクチャは3つの要素から構成されます:
 
--   [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/gitlab/NGSI-LD/NGSI-LD/raw/master/spec/updated/full_api.json)
+-   [NGSI-LD](https://forge.etsi.org/swagger/ui/?url=https://forge.etsi.org/rep/NGSI-LD/NGSI-LD/raw/master/spec/updated/generated/full_api.json)
     を使ってリクエストを受け取る [Orion Context Broker](https://fiware-orion.readthedocs.io/en/latest/)
 -   基礎となる [MongoDB](https://www.mongodb.com/) データベース :
     -   データ・エンティティ、サブスクリプション、レジストレーションなどのコンテキスト・データ情報を保持するために
