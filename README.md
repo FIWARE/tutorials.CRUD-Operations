@@ -336,7 +336,7 @@ context. Batch create uses the `/ngsi-ld/v1/entityOperations/create` endpoint.
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Accept: application/ld+json' \
+-H 'Accept: application/json' \
 --data-raw '[
     {
       "id": "urn:ngsi-ld:TemperatureSensor:002",
@@ -384,15 +384,11 @@ The request will fail if any of the attributes already exist in the context. The
 been successful and the reason for failure (if any has occurred).
 
 ```jsonld
-{
-    "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
-    "success": [
-        "urn:ngsi-ld:TemperatureSensor:002",
-        "urn:ngsi-ld:TemperatureSensor:003",
-        "urn:ngsi-ld:TemperatureSensor:004"
-    ],
-    "errors": []
-}
+[
+  "urn:ngsi-ld:TemperatureSensor:002",
+  "urn:ngsi-ld:TemperatureSensor:003",
+  "urn:ngsi-ld:TemperatureSensor:004"
+]
 ```
 
 ### Batch Create/Overwrite New Data Entities

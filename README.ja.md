@@ -368,7 +368,7 @@ curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context-provider:3000/data-models/ngsi-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--H 'Accept: application/ld+json' \
+-H 'Accept: application/json' \
 --data-raw '[
     {
       "id": "urn:ngsi-ld:TemperatureSensor:002",
@@ -416,15 +416,11 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
 (発生した場合) が強調表示されます。
 
 ```jsonld
-{
-    "@context": "http://context-provider:3000/data-models/ngsi-context.jsonld",
-    "success": [
-        "urn:ngsi-ld:TemperatureSensor:002",
-        "urn:ngsi-ld:TemperatureSensor:003",
-        "urn:ngsi-ld:TemperatureSensor:004"
-    ],
-    "errors": []
-}
+[
+  "urn:ngsi-ld:TemperatureSensor:002",
+  "urn:ngsi-ld:TemperatureSensor:003",
+  "urn:ngsi-ld:TemperatureSensor:004"
+]
 ```
 
 <a name="batch-createoverwrite-new-data-entities"/>
