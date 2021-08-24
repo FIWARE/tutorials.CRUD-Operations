@@ -211,16 +211,12 @@ mongo-db:
 ```
 
 ```yaml
-tutorial:
-    image: fiware/tutorials.ngsi-ld
-    hostname: iot-sensors
-    container_name: fiware-tutorial
-    networks:
-        default:
-            aliases:
-                - context
-    expose:
-        - 3000
+ld-context:
+    image: httpd:alpine
+    hostname: context
+    container_name: fiware-ld-context
+    ports:
+        - "3004:80"
 ```
 
 必要な設定情報は、関連する `docker-compose.yml` ファイルの services セクションで確認できます。
