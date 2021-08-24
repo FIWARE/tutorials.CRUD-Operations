@@ -931,17 +931,17 @@
 		{
 			"id": "cf7510d0-cd8d-4838-b501-5ceb827d7e72",
 			"key": "ngsi-context.jsonld",
-			"value": "http://context//ngsi-context.jsonld"
+			"value": "http://context/ngsi-context.jsonld"
 		},
 		{
 			"id": "063f2fbe-2cb2-4c0b-8a6e-9fdde2e2f364",
 			"key": "json-context.jsonld",
-			"value": "http://context//json-context.jsonld"
+			"value": "http://context/json-context.jsonld"
 		},
 		{
 			"id": "1503fe11-014a-4ff8-bd80-770a5a3f244b",
 			"key": "json-context2.jsonld",
-			"value": "http://context//alternate-context.jsonld"
+			"value": "http://context/alternate-context.jsonld"
 		}
 	],
 	"protocolProfileBehavior": {}
