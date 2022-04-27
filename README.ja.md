@@ -1,5 +1,4 @@
-[![FIWARE Banner](https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png)](https://www.fiware.org/developers)
-[![NGSI LD](https://img.shields.io/badge/NGSI-LD-d6604d.svg)](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
+# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -170,8 +169,7 @@ NGSI ドメイン外の他のサービスは、データ構造の名前を選択
 -   基礎となる [MongoDB](https://www.mongodb.com/) データベース :
     -   データ・エンティティ、サブスクリプション、レジストレーションなどのコンテキスト・データ情報を保持するために
         Orion Context Broker によって使用されます
--   **チュートリアル・アプリケーション**は次のことを行います。
-    -   システム内のコンテキスト・エンティティを定義する静的な `@context` ファイルを提供します
+-   **チュートリアル・アプリケーション**は次のことを行います:
 
 3つの要素間のすべての対話は HTTP リクエストによって開始されるため、要素をコンテナ化して、公開されたポートから
 実行できます。
@@ -227,7 +225,7 @@ ld-context:
 # 起動
 
 すべてのサービスは、リポジトリ内で提供される
-[services](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/master/services) Bash スクリプトを実行して、
+[services](https://github.com/FIWARE/tutorials.CRUD-Operations/blob/NGSI-LD/services) Bash スクリプトを実行して、
 コマンドラインから初期化できます。以下のようにコマンドを実行して、リポジトリのクローンを作成して必要なイメージを
 作成してください :
 
