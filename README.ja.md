@@ -128,8 +128,6 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
 FIWARE"_ と認定するには、Orion Context Broker を使用するだけで十分です。
 
 現在、Orion Context Broker はオープンソースの
-
-現在、Orion Context Broker はオープンソースの
 [MongoDB](https://www.mongodb.com/) テクノロジに依存して、
 管理しているコンテキストデータを格納しています。
 したがって、アーキテクチャは 2つの要素で構成されます :
