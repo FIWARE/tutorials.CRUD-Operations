@@ -149,7 +149,6 @@ Therefore, the architecture will consist of three elements:
     -   Used by the Orion Context Broker to hold context data information such as data entities, subscriptions and
         registrations
 -   An HTTP **Web-Server** which offers static `@context` files defining the context entities within the system.
--   The **Tutorial Application** does the following:
 
 Since all interactions between the three elements are initiated by HTTP requests, the elements can be containerized and
 run from exposed ports.
@@ -1046,4 +1045,4 @@ the other [tutorials in this series](https://ngsi-ld-tutorials.rtfd.io)
 
 ## License
 
-[MIT](LICENSE) © 2020 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020-2023 FIWARE Foundation e.V.
