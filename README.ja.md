@@ -1,4 +1,4 @@
-# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@
 [![Documentation](https://img.shields.io/readthedocs/ngsi-ld-tutorials.svg)](https://ngsi-ld-tutorials.rtfd.io)
 
 このチュートリアルでは、 **NGSI-LD** ユーザに CRUD 操作について説明します。このチュートリアルでは、
-[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)で詳しく
+[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)で詳しく
 説明されているように、コンテキストを修正するさまざまな方法の使用例の概要を説明しています。以前のチュートリアルで定義した
 温度センサ・モデルに基づいて、温度センサを表す一連のエンティティが作成、変更、削除されます。
 
@@ -69,7 +69,7 @@
 **CRUD** 操作 (**Create**, **Read**, **Update**, **Delete**) は、永続ストレージの4つの基本機能です。**NGSI-LD** に
 基づくスマート・システムの場合、**CRUD** アクションにより、開発者はシステム内のコンテキスト・データを操作できます。
 すべての **CRUD** 操作は
-[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
+[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)
 内で明確に定義されているため、すべての NGSI-LD 準拠の Context Broker は、同じ NGSI-LD 操作で同じインターフェースを
 提供します。
 
