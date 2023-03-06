@@ -103,7 +103,7 @@ FIWARE プラットフォーム内では、エンティティは、実世界に�
     -   棚(shelf)が置かれているストア(store)への関連付け
 -   **Product** : 製品は販売するものとして定義されています。それは概念的なオブジ
     ェクトです。製品には次のような特性があります :
-    -   name : 製品の名前。例えば、"Vodka"
+    -   name : 製品の名前。例えば、"Melons"
     -   price : 製品の価格。例えば、13.99 ユーロ
     -   size : 製品のサイズ。例えば、小さい
 -   **Inventory Item** : インベントリ項目は製品、店舗、棚、および物理的な物を関
@@ -456,7 +456,7 @@ curl -X GET \
   --url 'http://localhost:1026/v2/entities/urn:ngsi-ld:Product:001?type=Product'
 ```
 
-ご覧のように、 "Beer" **Product** エンティティにブール値の `specialOffer` フラグ
+ご覧のように、 "Apples" **Product** エンティティにブール値の `specialOffer` フラグ
 が付けられています。
 
 <a name="batch-create-new-data-entities-or-attributes"></a>
@@ -619,11 +619,11 @@ curl -X GET \
 
 #### レスポンス :
 
-**Product** `urn:ngsi-ld:Product:001` は 99 セントの"Beer"です。レスポンスは以下
+**Product** `urn:ngsi-ld:Product:001` は 99 セントの"Apples"です。レスポンスは以下
 のようになります :
 
 ```json
-"Beer"
+"Apples"
 ```
 
 コンテキスト・データは、`/v2/entities/<entity>/attrs/<attribute>/value` エンドポ
@@ -645,14 +645,14 @@ curl -X GET \
 
 #### レスポンス :
 
-**Product** `urn:ngsi-ld:Product:001` は 99 セントの"Beer"です。レスポンスは以下
+**Product** `urn:ngsi-ld:Product:001` は 99 セントの"Apples"です。レスポンスは以下
 のようになります :
 
 ```json
 {
     "id": "urn:ngsi-ld:Product:001",
     "type": "Product",
-    "name": "Beer",
+    "name": "Apples",
     "price": 99
 }
 ```
@@ -676,11 +676,11 @@ curl -X GET \
 
 #### レスポンス :
 
-**Product** `urn:ngsi-ld:Product:001` は 99 セントの"Beer"です。レスポンスは以下
+**Product** `urn:ngsi-ld:Product:001` は 99 セントの"Apples"です。レスポンスは以下
 のようになります :
 
 ```json
-["Beer", 99]
+["Apples", 99]
 ```
 
 `options=values` パラメータと `attrs` パラメータを組み合わせることで、配列内の値
@@ -710,7 +710,7 @@ curl -X GET \
     {
         "id": "urn:ngsi-ld:Product:001",
         "type": "Product",
-        "name": { "type": "Text", "value": "Beer", "metadata": {} },
+        "name": { "type": "Text", "value": "Apples", "metadata": {} },
         "offerPrice": { "type": "Integer", "value": 89, "metadata": {} },
         "price": { "type": "Integer", "value": 99, "metadata": {} },
         "size": { "type": "Text", "value": "S", "metadata": {} },
@@ -719,56 +719,56 @@ curl -X GET \
     {
         "id": "urn:ngsi-ld:Product:002",
         "type": "Product",
-        "name": { "type": "Text", "value": "Red Wine", "metadata": {} },
+        "name": { "type": "Text", "value": "Bananas", "metadata": {} },
         "price": { "type": "Integer", "value": 1099, "metadata": {} },
         "size": { "type": "Text", "value": "M", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:003",
         "type": "Product",
-        "name": { "type": "Text", "value": "White Wine", "metadata": {} },
+        "name": { "type": "Text", "value": "Coconuts", "metadata": {} },
         "price": { "type": "Integer", "value": 1499, "metadata": {} },
         "size": { "type": "Text", "value": "M", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:004",
         "type": "Product",
-        "name": { "type": "Text", "value": "Vodka", "metadata": {} },
+        "name": { "type": "Text", "value": "Melons", "metadata": {} },
         "price": { "type": "Integer", "value": 5000, "metadata": {} },
         "size": { "type": "Text", "value": "XL", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:005",
         "type": "Product",
-        "name": { "type": "Text", "value": "Lager", "metadata": {} },
+        "name": { "type": "Text", "value": "Kiwi Fruits", "metadata": {} },
         "price": { "type": "Integer", "value": 99, "metadata": {} },
         "size": { "type": "Text", "value": "S", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:006",
         "type": "Product",
-        "name": { "type": "Text", "value": "Whisky", "metadata": {} },
+        "name": { "type": "Text", "value": "Strawberries", "metadata": {} },
         "price": { "type": "Integer", "value": 99, "metadata": {} },
         "size": { "type": "Text", "value": "S", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:007",
         "type": "Product",
-        "name": { "type": "Text", "value": "Gin", "metadata": {} },
+        "name": { "type": "Text", "value": "Raspberries", "metadata": {} },
         "price": { "type": "Integer", "value": 99, "metadata": {} },
         "size": { "type": "Text", "value": "S", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:008",
         "type": "Product",
-        "name": { "type": "Text", "value": "Apple Juice", "metadata": {} },
+        "name": { "type": "Text", "value": "Pineapples", "metadata": {} },
         "price": { "type": "Integer", "value": 99, "metadata": {} },
         "size": { "type": "Text", "value": "S", "metadata": {} }
     },
     {
         "id": "urn:ngsi-ld:Product:009",
         "type": "Product",
-        "name": { "type": "Text", "value": "Orange Juice", "metadata": {} },
+        "name": { "type": "Text", "value": "Oranges", "metadata": {} },
         "price": { "type": "Integer", "value": 99, "metadata": {} },
         "size": { "type": "Text", "value": "S", "metadata": {} }
     },
@@ -820,55 +820,55 @@ curl -X GET \
     {
         "id": "urn:ngsi-ld:Product:001",
         "type": "Product",
-        "name": "Beer",
+        "name": "Apples",
         "price": 99
     },
     {
         "id": "urn:ngsi-ld:Product:002",
         "type": "Product",
-        "name": "Red Wine",
+        "name": "Bananas",
         "price": 1099
     },
     {
         "id": "urn:ngsi-ld:Product:003",
         "type": "Product",
-        "name": "White Wine",
+        "name": "Coconuts",
         "price": 1499
     },
     {
         "id": "urn:ngsi-ld:Product:004",
         "type": "Product",
-        "name": "Vodka",
+        "name": "Melons",
         "price": 5000
     },
     {
         "id": "urn:ngsi-ld:Product:005",
         "type": "Product",
-        "name": "Lager",
+        "name": "Kiwi Fruits",
         "price": 99
     },
     {
         "id": "urn:ngsi-ld:Product:006",
         "type": "Product",
-        "name": "Whisky",
+        "name": "Strawberries",
         "price": 99
     },
     {
         "id": "urn:ngsi-ld:Product:007",
         "type": "Product",
-        "name": "Gin",
+        "name": "Raspberries",
         "price": 99
     },
     {
         "id": "urn:ngsi-ld:Product:008",
         "type": "Product",
-        "name": "Apple Juice",
+        "name": "Pineapples",
         "price": 99
     },
     {
         "id": "urn:ngsi-ld:Product:009",
         "type": "Product",
-        "name": "Orange Juice",
+        "name": "Oranges",
         "price": 99
     },
     {
