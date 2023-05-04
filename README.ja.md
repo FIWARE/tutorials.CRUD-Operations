@@ -150,7 +150,7 @@ FIWARE"_ と認定するには、Orion Context Broker を使用するだけで�
 
 ```yaml
 orion:
-    image: fiware/orion:latest
+    image: quay.io/fiware/orion:latest
     hostname: orion
     container_name: orion
     depends_on:
@@ -280,7 +280,7 @@ git checkout NGSI-v2
 、`/v2/entities/<entity-id>` エンドポイントを使用してオペレーションできます。
 
 エンティティ識別子は、
-[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.04.01_60/gs_cim009v010401p.pdf)
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)
 ガイドラインに従った URNs であることが推奨されます。
 したがって、各 `id` は、標準形式に従った URN です :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、コンテキスト・データ内のすべて
