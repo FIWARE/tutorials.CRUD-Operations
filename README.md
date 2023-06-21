@@ -232,7 +232,7 @@ Once an `<entity-id>` is known within the context, individual data entities can 
 `/v2/entities/<entity-id>` endpoint.
 
 It is recommended that entity identifiers should be URNs following the
-[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf),
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf),
 therefore each `id` is a URN which follows a standard format: `urn:ngsi-ld:<entity-type>:<entity-id>`. This helps making
 every `id` in the context data unique.
 
