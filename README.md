@@ -1,4 +1,4 @@
-# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -8,7 +8,7 @@
 
 This tutorial teaches **NGSI-LD** users about CRUD Operations. The tutorial outlines example usage of the various ways
 of amending context as detailed within the
-[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf). A
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf). A
 series of entities representing temperature sensors are created, modified and deleted based on the temperature sensor
 model defined in an [earlier tutorial](https://github.com/FIWARE/tutorials.Understanding-At-Context).
 
@@ -32,27 +32,33 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
     -   [Docker](#docker)
     -   [Cygwin](#cygwin)
 -   [Architecture](#architecture)
--   [Start Up](#start-up) - [Create Operations](#create-operations) -
-[Create a New Data Entity](#create-a-new-data-entity) - [Create New Attributes](#create-new-attributes) -
-[Batch Create New Data Entities or Attributes](#batch-create-new-data-entities-or-attributes) -
-[Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities) -
-[Read Operations](#read-operations) - [Filtering](#filtering) -
-[Read a Data Entity (verbose)](#read-a-data-entity-verbose) -
-[Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity) -
-[Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs) -
-[Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity) -
-[List all Data Entities (verbose)](#list-all-data-entities-verbose) -
-[List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs) -
-[Filter Data Entities by ID](#filter-data-entities-by-id) - [Update Operations](#update-operations) -
-[Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value) -
-[Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity) -
-[Batch Update Attributes of Multiple Data Entities](#batch-update-attributes-of-multiple-data-entities) -
-[Batch Replace Entity Data](#batch-replace-entity-data) - [Delete Operations](#delete-operations) -
-[Data Relationships](#data-relationships) - [Delete an Entity](#delete-an-entity) -
-[Delete an Attribute from an Entity](#delete-an-attribute-from-an-entity) -
-[Batch Delete Multiple Entities](#batch-delete-multiple-entities) -
-[Batch Delete Multiple Attributes from an Entity](#batch-delete-multiple-attributes-from-an-entity) -
-[Find existing data relationships](#find-existing-data-relationships)
+-   [Start Up](#start-up)
+    -  [Create Operations](#create-operations)
+         -  [Create a New Data Entity](#create-a-new-data-entity)
+         -  [Create New Attributes](#create-new-attributes)
+         -   [Batch Create New Data Entities or Attributes](#batch-create-new-data-entities-or-attributes)
+         -   [Batch Create/Overwrite New Data Entities](#batch-createoverwrite-new-data-entities)
+    -   [Read Operations](#read-operations)
+        -  [Filtering](#filtering)
+        -  [Read a Data Entity (verbose)](#read-a-data-entity-verbose)
+        -  [Read an Attribute from a Data Entity](#read-an-attribute-from-a-data-entity)
+        -  [Read a Data Entity (key-value pairs)](#read-a-data-entity-key-value-pairs)
+        -  [Read Multiple attributes values from a Data Entity](#read-multiple-attributes-values-from-a-data-entity)
+        -  [List all Data Entities (verbose)](#list-all-data-entities-verbose)
+        -  [List all Data Entities (key-value pairs)](#list-all-data-entities-key-value-pairs)
+        -  [Filter Data Entities by ID](#filter-data-entities-by-id)
+     -  [Update Operations](#update-operations)
+         -  [Overwrite the value of an Attribute value](#overwrite-the-value-of-an-attribute-value)
+         -  [Overwrite Multiple Attributes of a Data Entity](#overwrite-multiple-attributes-of-a-data-entity)
+         -  [Batch Update Attributes of Multiple Data Entities](#batch-update-attributes-of-multiple-data-entities)
+         -  [Batch Replace Entity Data](#batch-replace-entity-data)
+     -  [Delete Operations](#delete-operations)
+         -  [Data Relationships](#data-relationships)
+         -  [Delete an Entity](#delete-an-entity)
+         -  [Delete an Attribute from an Entity](#delete-an-attribute-from-an-entity)
+         -  [Batch Delete Multiple Entities](#batch-delete-multiple-entities)
+         -  [Batch Delete Multiple Attributes from an Entity](#batch-delete-multiple-attributes-from-an-entity)
+         -  [Find existing data relationships](#find-existing-data-relationships)
 </details>
 
 # NGSI-LD CRUD Operations
@@ -64,7 +70,7 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 **CRUD** Operations (**Create**, **Read**, **Update** and **Delete**) are the four basic functions of persistent
 storage. For a smart system based on **NGSI-LD**, **CRUD** actions allow the developer to manipulate the context data
 within the system. Every **CRUD** operation is clearly defined within the
-[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_CIM009v010601p.pdf), so all
+[NGSI-LD specification](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf), so all
 NGSI-LD compliant context brokers offer the same interface with the same NGSI-LD operations.
 
 This tutorial will describe the rational behind each operation, when to use it and how to execute the various **CRUD**
