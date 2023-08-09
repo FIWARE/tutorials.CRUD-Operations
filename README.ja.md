@@ -235,7 +235,7 @@ git clone https://github.com/FIWARE/tutorials.CRUD-Operations.git
 cd tutorials.CRUD-Operations
 git checkout NGSI-LD
 
-./services orion|scorpio
+./services [orion|scorpio|stellio]
 ```
 
 > **注 :** クリーンアップして最初からやり直す場合は、次のコマンドで実行できます :
