@@ -805,7 +805,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 #### :one::three: リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/'' \
+curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/json-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
 -d 'id=urn:ngsi-ld:TemperatureSensor:001,urn:ngsi-ld:TemperatureSensor:002' \
