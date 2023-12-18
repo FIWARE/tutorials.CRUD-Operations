@@ -206,7 +206,8 @@ git checkout NGSI-v2
 This command will also import seed data from the previous
 [Store Finder tutorial](https://github.com/FIWARE/tutorials.Entity-Relationships) on startup.
 
-> :information_source: **Note:** If you want to clean up and start over again you can do so with the following command:
+> [!NOTE]
+> If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
 > ./services stop
