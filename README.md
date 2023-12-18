@@ -214,7 +214,8 @@ git checkout NGSI-LD
 ./services [orion|scorpio|stellio]
 ```
 
-> **Note:** If you want to clean up and start over again you can do so with the following command:
+> [!NOTE]
+> If you want to clean up and start over again you can do so with the following command:
 >
 > ```
 > ./services stop
@@ -239,7 +240,7 @@ The response will be **201 - Created** if the operation is successful or **409 -
 
 This example adds a new **TemperatureSensor** entity to the context.
 
-#### :one: Request:
+#### 1️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -264,7 +265,7 @@ New entities can be added by making a POST request to the `/ngsi-ld/v1/entities`
 
 The request will fail if the entity already exists in the context.
 
-#### :two: Request:
+#### 2️⃣ Request:
 
 You can check to see if the new **TemperatureSensor** can be found in the context by making a GET request
 
@@ -278,7 +279,7 @@ curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 This example adds a new `batteryLevel` Property and a `controlledAsset` Relationship to the existing
 **TemperatureSensor** entity with `id=urn:ngsi-ld:TemperatureSensor:001`.
 
-#### :three: Request:
+#### 3️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
@@ -308,7 +309,7 @@ All `type=Property` attributes must have a `value` associated with them. All `ty
 
 Subsequent requests using the same `id` will update the value of the attribute in the context.
 
-#### :four: Request:
+#### 4️⃣ Request:
 
 You can check to see if the new **TemperatureSensor** can be found in the context by making a GET request
 
@@ -326,7 +327,7 @@ short names.
 This example uses the convenience batch processing endpoint to add three new **TemperatureSensor** entities to the
 context. Batch create uses the `/ngsi-ld/v1/entityOperations/create` endpoint.
 
-#### :five: Request:
+#### 5️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
@@ -399,7 +400,7 @@ context.
 -   if an entity already exists, the request will update that entity's attributes.
 -   if an entity does not exist, a new entity will be created.
 
-#### :six: Request:
+#### 6️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
@@ -457,7 +458,7 @@ For read operations the `@context` must be supplied in a `Link` header.
 
 This example reads the full context from an existing **TemperatureSensor** entity with a known `id`.
 
-#### :seven: Request:
+#### 7️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -515,7 +516,7 @@ endpoint.
 This example reads the value of a single attribute (`temperature`) from an existing **TemperatureSensor** entity with a
 known `id`.
 
-#### :eight: Request:
+#### 8️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -548,7 +549,7 @@ the `attrs` using a comma separated list.
 
 This example reads the key-value pairs from the context of an existing **TemperatureSensor** entities with a known `id`.
 
-#### :nine: Request:
+#### 9️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -583,7 +584,7 @@ Combine the `options=keyValues` parameter with the `attrs` parameter to retrieve
 This example reads the value of two attributes (`category` and `temperature`) from the context of an existing
 **TemperatureSensor** entity with a known `id`.
 
-#### :one::zero: Request:
+#### 1️⃣0️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -612,7 +613,7 @@ Combine the `options=keyValues` parameter and the `attrs` parameter to return a 
 
 This example lists the full context of all **TemperatureSensor** entities.
 
-#### :one::one: Request:
+#### 1️⃣1️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -699,7 +700,7 @@ context will now contain four sensors.
 
 This example lists the `temperature` attribute of all **TemperatureSensor** entities.
 
-#### :one::two: Request:
+#### 1️⃣2️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -748,7 +749,7 @@ parameter to retrieve key-values.
 This example lists selected data from two **TemperatureSensor** entities chosen by `id`. Note that every `id` must be
 unique, so `type` is not required for this request. To filter by `id` add the entries in a comma delimited list.
 
-#### :one::three: Request:
+#### 1️⃣3️⃣ Request:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -789,7 +790,7 @@ Overwrite operations are mapped to HTTP PATCH:
 
 This example updates the value of the `category` attribute of the Entity with `id=urn:ngsi-ld:TemperatureSensor:001`
 
-#### :one::four: Request:
+#### 1️⃣4️⃣ Request:
 
 ```console
 curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category' \
@@ -810,7 +811,7 @@ header.
 This example simultaneously updates the values of both the `category` and `controlledAsset` attributes of the Entity
 with `id=urn:ngsi-ld:TemperatureSensor:001`.
 
-#### :one::five: Request:
+#### 1️⃣5️⃣ Request:
 
 ```console
 curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
@@ -835,7 +836,7 @@ curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 
 This example uses the convenience batch processing endpoint to update existing sensors.
 
-#### :one::six: Request:
+#### 1️⃣6️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert?options=update' \
@@ -878,7 +879,7 @@ operation will not silently create any new entities - it fails if the entities d
 
 This example uses the convenience batch processing endpoint to replace entity data of existing sensors.
 
-#### :one::seven: Request:
+#### 1️⃣7️⃣ Request:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=replace' \
@@ -935,7 +936,7 @@ request.
 
 This example deletes the entity with `id=urn:ngsi-ld:TemperatureSensor:004` from the context.
 
-#### :one::eight: Request:
+#### 1️⃣8️⃣ Request:
 
 ```console
 curl -iX DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:004'
@@ -950,7 +951,7 @@ context.
 
 This example removes the `batteryLevel` attribute from the entity with `id=urn:ngsi-ld:TemperatureSensor:001`.
 
-#### :one::nine: Request:
+#### 1️⃣9️⃣ Request:
 
 ```console
 curl -L -X DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/batteryLevel' \
@@ -968,7 +969,7 @@ error response.
 
 This example uses the convenience batch processing endpoint to delete some **TemperatureSensor** entities.
 
-#### :two::zero: Request:
+#### 2️⃣0️⃣ Request:
 
 ```console
 curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
@@ -989,7 +990,7 @@ If an entity does not exist in the context, the result will be an error response
 This example uses the PATCH `/ngsi-ld/v1/entities/<entity-id>/attrs` endpoint to delete some attributes from a
 **TemperatureSensor** entity.
 
-#### :two::one: Request:
+#### 2️⃣1️⃣ Request:
 
 ```console
 curl -L -X PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
@@ -1014,7 +1015,7 @@ If a value is set to `null` the attribute is deleted.
 This example returns a header indicating whether any linked data relationships remain against the entity
 `urn:ngsi-ld:Building:barn002`
 
-#### :two::two: Request:
+#### 2️⃣2️⃣ Request:
 
 ```console
 curl -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor&limit=0&count=true&q=controlledAsset==%22urn:ngsi-ld:Building:barn002%22' \

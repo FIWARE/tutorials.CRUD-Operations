@@ -267,7 +267,7 @@ git checkout NGSI-LD
 
 この例では、新しい **TemperatureSensor** エンティティをコンテキストに追加します。
 
-#### :one: リクエスト:
+#### 1️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -292,7 +292,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
 
 エンティティが既にコンテキストに存在する場合、リクエストは失敗します。
 
-#### :two: リクエスト:
+#### 2️⃣ リクエスト:
 
 GET リクエストを行うことで、新しい **TemperatureSensor** がコンテキスト内で見つかるかどうかを確認できます。
 
@@ -308,7 +308,7 @@ curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 この例では、`id=urn:ngsi-ld:TemperatureSensor:001` を使用して、既存の **TemperatureSensor** エンティティに新しい
 `batteryLevel` プロパティと `controlAsset` リレーションシップを追加します。
 
-#### :three: リクエスト:
+#### 3️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
@@ -338,7 +338,7 @@ JSON オブジェクトとして渡す必要があります。
 
 同じもの `id` を使用する後続のリクエストは、コンテキスト内の属性の値を更新します。
 
-#### :four: リクエスト:
+#### 4️⃣ リクエスト:
 
 GET リクエストを行うことで、新しい **TemperatureSensor** がコンテキスト内で見つかるかどうかを確認できます。
 
@@ -357,7 +357,7 @@ curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 この例では、便利なバッチ処理エンドポイントを使用して、3つの新しい **TemperatureSensor** エンティティをコンテキストに
 追加します。バッチ作成は `/ngsi-ld/v1/entityOperations/create` エンドポイントを使用します。
 
-#### :five: リクエスト:
+#### 5️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
@@ -432,7 +432,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
 -   エンティティがすでに存在する場合、リクエストはそのエンティティの属性を更新します
 -   エンティティが存在しない場合は、新しいエンティティが作成されます
 
-#### :six: リクエスト:
+#### 6️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
@@ -496,7 +496,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 
 この例では、既知の `id` を持つ既存の **TemperatureSensor** エンティティから完全なコンテキストを読み取ります。
 
-#### :seven: リクエスト:
+#### 7️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -557,7 +557,7 @@ TemperatureSensor `urn:ngsi-ld:TemperatureSensor:001` は、正規化された N
 この例では、既知の `id` を持つ既存の **TemperatureSensor** エンティティから単一の属性 (`temperature`)
 の値を読み取ります。
 
-#### :eight: リクエスト:
+#### 8️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -592,7 +592,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 この例では、既知の `id` を持つ既存の **TemperatureSensor** エンティティのコンテキストからキーと値のペアを読み取ります。
 
-#### :nine: リクエスト:
+#### 9️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -629,7 +629,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 この例では、既知の `id` を持つ既存の **TemperatureSensor** エンティティのコンテキストから2つの属性 (`category` および
 `temperature`) の値を読み取ります。
 
-#### :one::zero: リクエスト:
+#### 1️⃣0️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
@@ -661,7 +661,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 この例では、すべての **TemperatureSensor** エンティティの完全なコンテキストを一覧表示します。
 
-#### :one::one: リクエスト:
+#### 1️⃣1️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -750,7 +750,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 
 この例では、すべての **TemperatureSensor** エンティティの `temperature` 属性を一覧表示します。
 
-#### :one::two: リクエスト:
+#### 1️⃣2️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -802,7 +802,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 `id` は一意である必要があるため、このリクエストでは `type` は必要ありません。`id` でフィルタリングするには、
 エントリをカンマ区切りのリストに追加します。
 
-#### :one::three: リクエスト:
+#### 1️⃣3️⃣ リクエスト:
 
 ```console
 curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
@@ -847,7 +847,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 
 この例では、`id=urn:ngsi-ld:TemperatureSensor:001` の id を持つエンティティの `category` 属性の値を更新します。
 
-#### :one::four: リクエスト:
+#### 1️⃣4️⃣ リクエスト:
 
 ```console
 curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/category' \
@@ -869,7 +869,7 @@ curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 この例では、`id=urn:ngsi-ld:TemperatureSensor:001` の id を持つエンティティの `category` と `controlledAsset`
 の両方の値を同時に更新します。
 
-#### :one::five: リクエスト:
+#### 1️⃣5️⃣ リクエスト:
 
 ```console
 curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
@@ -896,7 +896,7 @@ curl -iX PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatur
 
 この例では、便利なバッチ処理エンドポイントを使用して、既存のセンサを更新します。
 
-#### :one::six: リクエスト:
+#### 1️⃣6️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert?options=update' \
@@ -941,7 +941,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert?options=
 
 この例では、便利なバッチ処理エンドポイントを使用して、既存のセンサのエンティティ・データを置き換えます。
 
-#### :one::seven: リクエスト:
+#### 1️⃣7️⃣ リクエスト:
 
 ```console
 curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=replace' \
@@ -1003,7 +1003,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/update?options=
 
 この例では、コンテキストから `id=urn:ngsi-ld:TemperatureSensor:004` の id を持つエンティティを削除します。
 
-#### :one::eight: リクエスト:
+#### 1️⃣8️⃣ リクエスト:
 
 ```console
 curl -iX DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:004'
@@ -1020,7 +1020,7 @@ curl -iX DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 この例では、`id=urn:ngsi-ld:TemperatureSensor:001` の id を持つエンティティから `batteryLevel` 属性を削除します。
 
-#### :one::nine: リクエスト:
+#### 1️⃣9️⃣ リクエスト:
 
 ```console
 curl -L -X DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs/batteryLevel' \
@@ -1038,7 +1038,7 @@ curl -L -X DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Tempera
 
 この例では、便利なバッチ処理エンドポイントを使用して、いくつかの **TemperatureSensor** エンティティを削除します。
 
-#### :two::zero: リクエスト:
+#### 2️⃣0️⃣ リクエスト:
 
 ```console
 curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
@@ -1061,7 +1061,7 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
 この例では、PATCH `/ngsi-ld/v1/entities/<entity-id>/attrs` エンドポイントを使用して、**TemperatureSensor**
 エンティティから一部の属性を削除します。
 
-#### :two::one: リクエスト:
+#### 2️⃣1️⃣ リクエスト:
 
 ```console
 curl -L -X PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
@@ -1088,7 +1088,7 @@ curl -L -X PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperat
 この例では、リンクされたデータのリレーションシップがエンティティ `urn:ngsi-ld:Building:barn002`
 に対して残っているかどうかを示すヘッダを返します。
 
-#### :two::two: リクエスト:
+#### 2️⃣2️⃣ リクエスト:
 
 ```console
 curl -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/?type=TemperatureSensor&limit=0&count=true&q=controlledAsset==%22urn:ngsi-ld:Building:barn002%22' \
