@@ -313,7 +313,7 @@ operation fails.
 
 This example adds a new **Product** entity ("Lemonade" at 99 cents) to the context.
 
-#### :one: Request:
+#### 1️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -331,7 +331,7 @@ New entities can be added by making a POST request to the `/v2/entities` endpoin
 
 The request will fail if any of the attributes already exist in the context.
 
-#### :two: Request:
+#### 2️⃣ Request:
 
 You can check to see if the new **Product** can be found in the context by making a GET request
 
@@ -344,7 +344,7 @@ curl -X GET \
 
 This example adds a new `specialOffer` attribute to the existing **Product** entity with `id=urn:ngsi-ld:Product:001`.
 
-#### :three: Request:
+#### 3️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -363,7 +363,7 @@ If no `type` is specified a default type (`Boolean`, `Text` , `Number` or `Struc
 
 Subsequent requests using the same `id` will update the value of the attribute in the context.
 
-#### :four: Request:
+#### 4️⃣ Request:
 
 You can check to see if the new **Product** attribute can be found in the context by making a GET request
 
@@ -379,7 +379,7 @@ As you can see there is now a boolean `specialOffer` flag attached to the "Apple
 This example uses the convenience batch processing endpoint to add two new **Product** entities and one new attribute
 (`offerPrice`) to the context.
 
-#### :five: Request:
+#### 5️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -426,7 +426,7 @@ This example uses the convenience batch processing endpoint to add or amend two 
 -   if an entity already exists, the request will update that entity's attributes.
 -   if an entity does not exist, a new entity will be created.
 
-#### :six: Request:
+#### 6️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -473,7 +473,7 @@ state.
 
 This example reads the full context from an existing **Product** entity with a known `id`.
 
-#### :seven: Request:
+#### 7️⃣  Request:
 
 ```console
 curl -X GET \
@@ -500,7 +500,7 @@ Context data can be retrieved by making a GET request to the `/v2/entities/<enti
 
 This example reads the value of a single attribute (`name`) from an existing **Product** entity with a known `id`.
 
-#### :eight: Request:
+#### 8️⃣  Request:
 
 ```console
 curl -X GET \
@@ -522,7 +522,7 @@ Context data can be retrieved by making a GET request to the `/v2/entities/<enti
 This example reads the key-value pairs of two attributes (`name` and `price`) from the context of existing **Product**
 entities with a known `id`.
 
-#### :nine: Request:
+#### 9️⃣ Request:
 
 ```console
 curl -X GET \
@@ -549,7 +549,7 @@ Combine the `options=keyValues` parameter with the `attrs` parameter to retrieve
 This example reads the value of two attributes (`name` and `price`) from the context of existing **Product** entities
 with a known ID.
 
-#### :one::zero: Request:
+#### 1️⃣0️⃣ Request:
 
 ```console
 curl -X GET \
@@ -570,7 +570,7 @@ Combine the `options=values` parameter and the `attrs` parameter to return a lis
 
 This example lists the full context of all **Product** entities.
 
-#### :one::one: Request:
+#### 1️⃣1️⃣ Request:
 
 ```console
 curl -X GET \
@@ -677,7 +677,7 @@ contain twelve products.
 
 This example lists the `name` and `price` attributes of all **Product** entities.
 
-#### :one::two: Request:
+#### 1️⃣2️⃣ Request:
 
 ```console
 curl -X GET \
@@ -774,7 +774,7 @@ retrieve key-values.
 
 This example lists the `id` and `type` of all **Product** entities.
 
-#### :one::three: Request:
+#### 1️⃣3️⃣ Request:
 
 ```console
 curl -X GET \
@@ -859,7 +859,7 @@ Overwrite operations are mapped to HTTP PUT. HTTP PATCH can be used to update se
 
 This example updates the value of the price attribute of the Entity with `id=urn:ngsi-ld:Product:001`
 
-#### :one::four: Request:
+#### 1️⃣4️⃣ Request:
 
 ```console
 curl -iX PUT \
@@ -876,7 +876,7 @@ endpoint.
 This example simultaneously updates the values of both the price and name attributes of the Entity with
 `id=urn:ngsi-ld:Product:001`.
 
-#### :one::five: Request:
+#### 1️⃣5️⃣ Request:
 
 ```console
 curl -iX PATCH \
@@ -892,7 +892,7 @@ curl -iX PATCH \
 
 This example uses the convenience batch processing endpoint to update existing products.
 
-#### :one::six: Request:
+#### 1️⃣6️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -922,7 +922,7 @@ update.
 
 This example uses the convenience batch processing endpoint to update existing products.
 
-#### :one::seven: Request:
+#### 1️⃣7️⃣  Request:
 
 ```console
 curl -iX POST \
@@ -952,7 +952,7 @@ update.
 
 This example uses the convenience batch processing endpoint to replace entity data of existing products.
 
-#### :one::eight: Request:
+#### 1️⃣8️⃣  Request:
 
 ```console
 curl -iX POST \
@@ -994,7 +994,7 @@ request.
 
 This example deletes the entity with `id=urn:ngsi-ld:Product:001` from the context.
 
-#### :one::nine: Request:
+#### 1️⃣9️⃣ Request:
 
 ```console
 curl -iX DELETE \
@@ -1010,7 +1010,7 @@ context.
 
 This example removes the `specialOffer` attribute from the entity with `id=urn:ngsi-ld:Product:001`.
 
-#### :two::zero: Request:
+#### 2️⃣0️⃣ Request:
 
 ```console
 curl -iX DELETE \
@@ -1025,7 +1025,7 @@ If the attribute does not exist in the context, the result will be an error resp
 
 This example uses the convenience batch processing endpoint to delete some **Product** entities.
 
-#### :two::one: Request:
+#### 2️⃣1️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -1053,7 +1053,7 @@ If an entity does not exist in the context, the result will be an error response
 
 This example uses the convenience batch processing endpoint to delete some attributes from a **Product** entity.
 
-#### :two::two: Request:
+#### 2️⃣2️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -1080,7 +1080,7 @@ If any attribute does not exist in the context, the result will be an error resp
 
 This example returns the key of all entities directly associated with the `urn:ngsi-ld:Product:001`.
 
-#### :two::three: Request:
+#### 2️⃣3️⃣ Request:
 
 ```console
 curl -X GET \
