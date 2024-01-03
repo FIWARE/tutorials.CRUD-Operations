@@ -75,7 +75,7 @@ waitForScorpio () {
 	while [ "${response}" -eq 000 ]
 	do
 		echo -e "Context Broker HTTP state: ${response} (waiting for 500)"
-		pause 60
+		pause 6
 		getHeartbeat "${SCORPIO}"
 	done
 }
