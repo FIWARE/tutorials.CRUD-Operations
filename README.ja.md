@@ -1,4 +1,4 @@
-# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
+# CRUD Operations[<img src="https://img.shields.io/badge/NGSI-LD-d6604d.svg" width="90"  align="left" />](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.08.01_60/gs_cim009v010801p.pdf)[<img src="https://fiware.github.io/tutorials.CRUD-Operations/img/fiware.png" align="left" width="162">](https://www.fiware.org/)<br/>
 
 [![FIWARE Core Context Management](https://nexus.lab.fiware.org/repository/raw/public/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
 [![License: MIT](https://img.shields.io/github/license/fiware/tutorials.CRUD-Operations.svg)](https://opensource.org/licenses/MIT)
@@ -7,7 +7,7 @@
 [![Documentation](https://img.shields.io/readthedocs/ngsi-ld-tutorials.svg)](https://ngsi-ld-tutorials.rtfd.io)
 
 このチュートリアルでは、 **NGSI-LD** ユーザに CRUD 操作について説明します。このチュートリアルでは、
-[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf)で詳しく
+[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.08.01_60/gs_cim009v010801p.pdf)で詳しく
 説明されているように、コンテキストを修正するさまざまな方法の使用例の概要を説明しています。以前のチュートリアルで定義した
 温度センサ・モデルに基づいて、温度センサを表す一連のエンティティが作成、変更、削除されます。
 
@@ -69,7 +69,7 @@
 **CRUD** 操作 (**Create**, **Read**, **Update**, **Delete**) は、永続ストレージの4つの基本機能です。**NGSI-LD** に
 基づくスマート・システムの場合、**CRUD** アクションにより、開発者はシステム内のコンテキスト・データを操作できます。
 すべての **CRUD** 操作は
-[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.07.01_60/gs_cim009v010701p.pdf)
+[NGSI-LD 仕様](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.08.01_60/gs_cim009v010801p.pdf)
 内で明確に定義されているため、すべての NGSI-LD 準拠の Context Broker は、同じ NGSI-LD 操作で同じインターフェースを
 提供します。
 
@@ -410,7 +410,7 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
 コンテキストに属性がすでに存在する場合、リクエストは失敗します。レスポンスでは、成功したアクションと失敗の理由
 (発生した場合) が強調表示されます。
 
-```jsonld
+```json
 {
     "@context": "http://context/ngsi-context.jsonld",
     "success": [
@@ -511,7 +511,7 @@ TemperatureSensor `urn:ngsi-ld:TemperatureSensor:001` は、正規化された N
 `Accept:application/json` が設定されている場合、コンテント・ネゴシエーションにより移動される可能性があります。
 完全なレスポンスは以下のとおりです:
 
-```jsonld
+```json
 {
     "@context": "http://context/ngsi-context.jsonld",
     "id": "urn:ngsi-ld:TemperatureSensor:001",
@@ -569,7 +569,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 
 センサ `urn:ngsi-ld:TemperatureSensor:001` の読み取り値は 25°C です。レスポンスは次のとおりです:
 
-```jsonld
+```json
 {
     "@context": "http://context/ngsi-context.jsonld",
     "id": "urn:ngsi-ld:TemperatureSensor:001",
@@ -674,7 +674,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 起動時にコンテキストは空で、4つの **TemperatureSensor** エンティティが作成操作によって追加されているため、
 完全なコンテキストには4つのセンサが含まれています。
 
-```jsonld
+```json
 [
     {
         "@context": "http://context/ngsi-context.jsonld",
