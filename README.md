@@ -220,6 +220,7 @@ git checkout NGSI-LD
 ```
 
 > [!NOTE]
+>
 > If you want to clean up and start over again you can do so with the following command:
 >
 > ```
