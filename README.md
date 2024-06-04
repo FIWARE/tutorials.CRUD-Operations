@@ -211,6 +211,7 @@ This command will also import seed data from the previous
 [Store Finder tutorial](https://github.com/FIWARE/tutorials.Entity-Relationships) on startup.
 
 > [!NOTE]
+>
 > If you want to clean up and start over again you can do so with the following command:
 >
 > ```console
@@ -478,7 +479,7 @@ state.
 
 This example reads the full context from an existing **Product** entity with a known `id`.
 
-#### 7️⃣  Request:
+#### 7️⃣ Request:
 
 ```console
 curl -X GET \
@@ -505,7 +506,7 @@ Context data can be retrieved by making a GET request to the `/v2/entities/<enti
 
 This example reads the value of a single attribute (`name`) from an existing **Product** entity with a known `id`.
 
-#### 8️⃣  Request:
+#### 8️⃣ Request:
 
 ```console
 curl -X GET \
@@ -849,10 +850,11 @@ supplying the `type` parameter. Combine this with `options=count` and `attrs=__N
 the given `type`.
 
 > [!NOTE]
-> The NGSIv2 specification specifies that `attrs=` has to be a "comma-separated list of attribute names whose
-> data are to be included in the response". `id` and `type` are not allowed to be used as attribute names. If you
-> specify a name that does not exist in attributes, such as `__NONE` to the `attrs=` parameter, No attribute will match
-> and you will always retrieve only the `id` and `type` of the entity.
+>
+> The NGSI-v2 specification specifies that `attrs=` has to be a "comma-separated list of attribute names whose data are
+> to be included in the response". `id` and `type` are not allowed to be used as attribute names. If you specify a name
+> that does not exist in attributes, such as `__NONE` to the `attrs=` parameter, No attribute will match and you will
+> always retrieve only the `id` and `type` of the entity.
 
 ## Update Operations
 
@@ -928,7 +930,7 @@ update.
 
 This example uses the convenience batch processing endpoint to update existing products.
 
-#### 1️⃣7️⃣  Request:
+#### 1️⃣7️⃣ Request:
 
 ```console
 curl -iX POST \
@@ -958,7 +960,7 @@ update.
 
 This example uses the convenience batch processing endpoint to replace entity data of existing products.
 
-#### 1️⃣8️⃣  Request:
+#### 1️⃣8️⃣ Request:
 
 ```console
 curl -iX POST \
