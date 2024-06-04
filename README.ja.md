@@ -34,7 +34,7 @@
 -   [アーキテクチャ](#architecture)
 -   [前提条件](#prerequisites)
     -   [Docker](#docker)
-    -   [Cygwin](#cygwin)
+    -   [WSL](#wsl)
 -   [起動](#start-up)
 -   [CRUD とは？](#what-is-crud)
     -   [エンティティ CRUD オペレーション](#entity-crud-operations)
@@ -226,12 +226,10 @@ docker version
 Docker バージョン 20.10 以降と Docker Compose 1.29 以上を使用していることを確認
 し、必要に応じてアップグレードしてください。
 
-<a name="cygwin"></a>
-
-## Cygwin
+## WSL
 
 シンプルな bash スクリプトを使用してサービスを開始します。Windows ユーザは
-[cygwin](http://www.cygwin.com/) をダウンロードして、Windows 上の Linux ディスト
+[を使用して Windows に Linux をインストールする方法](https://learn.microsoft.com/ja-jp/windows/wsl/install) をダウンロードして、Windows 上の Linux ディスト
 リビューションと同様のコマンドライン機能を提供する必要があります。
 
 <a name="start-up"></a>
