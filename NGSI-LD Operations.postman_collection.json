@@ -20,7 +20,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -56,7 +56,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -93,7 +93,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							},
 							{
@@ -135,7 +135,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							},
 							{
@@ -199,7 +199,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -233,7 +233,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -267,7 +267,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{nsgi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							},
 							{
@@ -309,7 +309,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{nsgi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							},
 							{
@@ -356,7 +356,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -390,7 +390,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{nsgi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							},
 							{
@@ -439,7 +439,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{nsgi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							},
 							{
@@ -517,7 +517,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -555,7 +555,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -593,7 +593,7 @@
 							{
 								"key": "Link",
 								"type": "text",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
 							}
 						],
 						"body": {
@@ -634,7 +634,7 @@
 							},
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -720,7 +720,7 @@
 						"header": [
 							{
 								"key": "Link",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\"",
 								"type": "text"
 							}
 						],
@@ -786,7 +786,7 @@
 							{
 								"key": "Link",
 								"type": "text",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
 							}
 						],
 						"body": {
@@ -819,7 +819,7 @@
 							{
 								"key": "Link",
 								"type": "text",
-								"value": "<{{ngsi-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
+								"value": "<{{user-context.jsonld}}>; rel=\"http://www.w3.org/ns/json-ld#context\"; type=\"application/ld+json\""
 							},
 							{
 								"key": "Accept",
@@ -916,6 +916,10 @@
 		{
 			"key": "ngsi-context.jsonld",
 			"value": "http://context/ngsi-context.jsonld"
+		},
+		{
+			"key": "user-context.jsonld",
+			"value": "http://context/user-context.jsonld"
 		},
 		{
 			"key": "json-context.jsonld",
