@@ -393,7 +393,7 @@ been successful and the reason for failure (if any has occurred).
 {
     "@context": [
         "http://context/user-context.jsonld",
-        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.7.jsonld"
+        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.8.jsonld"
     ],
     "success": [
         "urn:ngsi-ld:TemperatureSensor:002",
@@ -1053,4 +1053,4 @@ the other [tutorials in this series](https://ngsi-ld-tutorials.rtfd.io)
 
 ## License
 
-[MIT](LICENSE) © 2020-2024 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020-2025 FIWARE Foundation e.V.
