@@ -409,18 +409,11 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/create' \
 (発生した場合) が強調表示されます。
 
 ```json
-{
-    "@context": [
-        "http://context/user-context.jsonld",
-        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.8.jsonld"
-    ],
-    "success": [
-        "urn:ngsi-ld:TemperatureSensor:002",
-        "urn:ngsi-ld:TemperatureSensor:003",
-        "urn:ngsi-ld:TemperatureSensor:004"
-    ],
-    "errors": []
-}
+[
+    "urn:ngsi-ld:TemperatureSensor:002",
+    "urn:ngsi-ld:TemperatureSensor:003",
+    "urn:ngsi-ld:TemperatureSensor:004"
+]
 ```
 
 <a name="batch-createoverwrite-new-data-entities"/>

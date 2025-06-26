@@ -390,18 +390,11 @@ The request will fail if any of the attributes already exist in the context. The
 been successful and the reason for failure (if any has occurred).
 
 ```json
-{
-    "@context": [
-        "http://context/user-context.jsonld",
-        "https://uri.etsi.org/ngsi-ld/v1/ngsi-ld-core-context-v1.8.jsonld"
-    ],
-    "success": [
-        "urn:ngsi-ld:TemperatureSensor:002",
-        "urn:ngsi-ld:TemperatureSensor:003",
-        "urn:ngsi-ld:TemperatureSensor:004"
-    ],
-    "errors": []
-}
+[
+    "urn:ngsi-ld:TemperatureSensor:002",
+    "urn:ngsi-ld:TemperatureSensor:003",
+    "urn:ngsi-ld:TemperatureSensor:004"
+]
 ```
 
 ### Batch Create/Overwrite New Data Entities
