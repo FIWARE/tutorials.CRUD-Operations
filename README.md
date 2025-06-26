@@ -497,7 +497,7 @@ moved due to content negotiation if the `Accept:application/json` had been set. 
         "unitCode": "CEL"
     },
     "batteryLevel": {
-        "value": 0.8,
+        "value": 0.9,
         "type": "Property",
         "createdAt": "2020-08-27T14:33:10Z",
         "modifiedAt": "2020-08-27T14:33:10Z",

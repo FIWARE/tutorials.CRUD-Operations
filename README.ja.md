@@ -525,7 +525,7 @@ TemperatureSensor `urn:ngsi-ld:TemperatureSensor:001` は、正規化された N
         "unitCode": "CEL"
     },
     "batteryLevel": {
-        "value": 0.8,
+        "value": 0.9,
         "type": "Property",
         "createdAt": "2020-08-27T14:33:10Z",
         "modifiedAt": "2020-08-27T14:33:10Z",
