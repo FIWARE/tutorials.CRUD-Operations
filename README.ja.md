@@ -278,7 +278,7 @@ git checkout NGSI-v2
 、`/v2/entities/<entity-id>` エンドポイントを使用してオペレーションできます。
 
 エンティティ識別子は、
-[NGSI-LD specification](https://cim.etsi.org/NGSI-LD/official/0--1.html)
+[NGSI-LD specification](https://cim.etsi.org/NGSI-LD/official/front-page.html)
 ガイドラインに従った URNs であることが推奨されます。
 したがって、各 `id` は、標準形式に従った URN です :
 `urn:ngsi-ld:<entity-type>:<entity-id>`。これは、コンテキスト・データ内のすべて
