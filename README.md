@@ -279,7 +279,8 @@ The request will fail if the entity already exists in the context.
 You can check to see if the new **TemperatureSensor** can be found in the context by making a GET request
 
 ```console
-curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -L -X GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -323,7 +324,8 @@ Subsequent requests using the same `id` will update the value of the attribute i
 You can check to see if the new **TemperatureSensor** can be found in the context by making a GET request
 
 ```console
-curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -L -X GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -466,7 +468,8 @@ This example reads the full context from an existing **TemperatureSensor** entit
 #### 7️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -d 'options=sysAttrs'
 ```
@@ -523,9 +526,10 @@ known `id`.
 #### 8️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--d 'attrs=temperature'
+-d 'pick=id,type,temperature'
 ```
 
 #### Response:
@@ -544,7 +548,7 @@ The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response
 }
 ```
 
-Because `options=keyValues` was not used this is the normalized response including the metadata such as `unitCode`.
+Because `format=simplified` was not used this is the normalized response including the metadata such as `unitCode`.
 Context data can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/<entity-id>` endpoint and selecting
 the `attrs` using a comma separated list.
 
@@ -555,10 +559,11 @@ This example reads the key-value pairs from the context of an existing **Tempera
 #### 9️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
--d 'options=keyValues'
+-d 'format=simplified'
 ```
 
 #### Response:
@@ -580,7 +585,7 @@ The response contains an unfiltered list of context data from an entity containi
 `urn:ngsi-ld:TemperatureSensor:001`. The payload body does not contain an `@context` attribute since the
 `Accept: application/json` was set.
 
-Combine the `options=keyValues` parameter with the `attrs` parameter to retrieve a limited set of key-value pairs.
+Combine the `format=simplified` parameter with the `attrs` parameter to retrieve a limited set of key-value pairs.
 
 ### Read Multiple attributes values from a Data Entity
 
@@ -590,11 +595,12 @@ This example reads the value of two attributes (`category` and `temperature`) fr
 #### 1️⃣0️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
--d 'options=keyValues' \
--d 'attrs=category,temperature'
+-d 'format=simplified' \
+-d 'pick=id,type,category,temperature'
 ```
 
 #### Response:
@@ -610,7 +616,7 @@ The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response
 }
 ```
 
-Combine the `options=keyValues` parameter and the `attrs` parameter to return a list of values.
+Combine the `format=simplified` parameter and the `attrs` parameter to return a list of values.
 
 ### List all Data Entities (verbose)
 
@@ -619,7 +625,8 @@ This example lists the full context of all **TemperatureSensor** entities.
 #### 1️⃣1️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -d 'type=TemperatureSensor'
 ```
@@ -702,12 +709,13 @@ This example lists the `temperature` attribute of all **TemperatureSensor** enti
 #### 1️⃣2️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
 -d 'type=TemperatureSensor' \
--d 'options=keyValues' \
--d 'attrs=temperature'
+-d 'format=simplified' \
+-d 'pick=id,type,temperature'
 ```
 
 #### Response:
@@ -740,7 +748,7 @@ The full context contains four sensors, they are returned in a random order:
 ```
 
 Full context data for a specified entity type can be retrieved by making a GET request to the `/ngsi-ld/v1/entities/`
-endpoint and supplying the `type` parameter, combine this with the `options=keyValues` parameter and the `attrs`
+endpoint and supplying the `type` parameter, combine this with the `format=simplified` parameter and the `attrs`
 parameter to retrieve key-values.
 
 ### Filter Data Entities by ID
@@ -751,12 +759,13 @@ unique, so `type` is not required for this request. To filter by `id` add the en
 #### 1️⃣3️⃣ Request:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
 -d 'id=urn:ngsi-ld:TemperatureSensor:001,urn:ngsi-ld:TemperatureSensor:002' \
--d 'options=keyValues' \
--d 'attrs=temperature'
+-d 'format=simplified' \
+-d 'pick=id,type,temperature'
 ```
 
 #### Response:
@@ -971,7 +980,8 @@ This example uses the convenience batch processing endpoint to delete some **Tem
 #### 2️⃣0️⃣ Request:
 
 ```console
-curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
+curl -L -X POST \
+  'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
 -H 'Content-Type: application/json' \
 --data-raw '[
   "urn:ngsi-ld:TemperatureSensor:002",
@@ -992,7 +1002,8 @@ This example uses the PATCH `/ngsi-ld/v1/entities/<entity-id>/attrs` endpoint to
 #### 2️⃣1️⃣ Request:
 
 ```console
-curl -L -X PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
+curl -L -X PATCH \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 --data-raw '{

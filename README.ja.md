@@ -295,7 +295,8 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entities/' \
 GET リクエストを行うことで、新しい **TemperatureSensor** がコンテキスト内で見つかるかどうかを確認できます。
 
 ```console
-curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -L -X GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -341,7 +342,8 @@ JSON オブジェクトとして渡す必要があります。
 GET リクエストを行うことで、新しい **TemperatureSensor** がコンテキスト内で見つかるかどうかを確認できます。
 
 ```console
-curl -L -X GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -L -X GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"'
 ```
 
@@ -493,7 +495,8 @@ curl -iX POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/upsert' \
 #### 7️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -d 'options=sysAttrs'
 ```
@@ -553,9 +556,10 @@ TemperatureSensor `urn:ngsi-ld:TemperatureSensor:001` は、正規化された N
 #### 8️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
--d 'attrs=temperature'
+-d 'pick=id,type,temperature'
 ```
 
 #### レスポンス:
@@ -574,7 +578,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 }
 ```
 
-`options=keyValues` が使用されなかったため、これは `unitCode` などのメタデータを含む正規化されたレスポンスです。
+`format=simplified` が使用されなかったため、これは `unitCode` などのメタデータを含む正規化されたレスポンスです。
 コンテキスト。データは、`/ngsi-ld/v1/entities/<entity-id>` エンドポイントに GET リクエストを行い、カンマ区切りの
 リストを使用して `attrs` を選択することで取得できます。
 
@@ -587,10 +591,11 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 #### 9️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
--d 'options=keyValues'
+-d 'format=simplified'
 ```
 
 #### レスポンス:
@@ -612,7 +617,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 フィルタリングされていないリストが含まれています。`Accept: application/json` が設定されているため、ペイロード本体には
 `@context` 属性が含まれていません。
 
-`attrs` パラメータと `options=keyValues` パラメータを組み合わせて、キーと値のペアの限られたセットを取得します。
+`attrs` パラメータと `format=simplified` パラメータを組み合わせて、キーと値のペアの限られたセットを取得します。
 
 <a name="read-multiple-attributes-values-from-a-data-entity"/>
 
@@ -624,11 +629,12 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 #### 1️⃣0️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
--d 'options=keyValues' \
--d 'attrs=category,temperature'
+-d 'format=simplified' \
+-d 'pick=id,type,category,temperature'
 ```
 
 #### レスポンス:
@@ -644,7 +650,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 }
 ```
 
-`options=keyValues` パラメータと `attrs` パラメータを組み合わせて、値のリストを返します。
+`format=simplified` パラメータと `attrs` パラメータを組み合わせて、値のリストを返します。
 
 <a name="list-all-data-entities-verbose"/>
 
@@ -656,7 +662,8 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Temperatu
 #### 1️⃣1️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -d 'type=TemperatureSensor'
 ```
@@ -741,12 +748,13 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 #### 1️⃣2️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
 -d 'type=TemperatureSensor' \
--d 'options=keyValues' \
--d 'attrs=temperature'
+-d 'format=simplified' \
+-d 'pick=id,type,temperature'
 ```
 
 #### レスポンス:
@@ -779,7 +787,7 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 ```
 
 指定されたエンティティ・タイプの完全なコンテキスト・データは、`/ngsi-ld/v1/entities/` エンドポイントに GET リクエストを行い、
-`type` パラメータを指定し、これに キー・バリューを取得するための `options=keyValues` パラメータと `attrs`
+`type` パラメータを指定し、これに キー・バリューを取得するための `format=simplified` パラメータと `attrs`
 パラメータを組み合わせています。
 
 <a name="filter-data-entities-by-id"/>
@@ -793,12 +801,13 @@ curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
 #### 1️⃣3️⃣ リクエスト:
 
 ```console
-curl -G -iX GET 'http://localhost:1026/ngsi-ld/v1/entities/' \
+curl -G -iX GET \
+  'http://localhost:1026/ngsi-ld/v1/entities/' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
 -d 'id=urn:ngsi-ld:TemperatureSensor:001,urn:ngsi-ld:TemperatureSensor:002' \
--d 'options=keyValues' \
--d 'attrs=temperature'
+-d 'format=simplified' \
+-d 'pick=id,type,temperature'
 ```
 
 #### レスポンス:
@@ -1029,7 +1038,8 @@ curl -L -X DELETE 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:Tempera
 #### 2️⃣0️⃣ リクエスト:
 
 ```console
-curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
+curl -L -X POST \
+  'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
 -H 'Content-Type: application/json' \
 --data-raw '[
   "urn:ngsi-ld:TemperatureSensor:002",
@@ -1052,7 +1062,8 @@ curl -L -X POST 'http://localhost:1026/ngsi-ld/v1/entityOperations/delete' \
 #### 2️⃣1️⃣ リクエスト:
 
 ```console
-curl -L -X PATCH 'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
+curl -L -X PATCH \
+  'http://localhost:1026/ngsi-ld/v1/entities/urn:ngsi-ld:TemperatureSensor:001/attrs' \
 -H 'Content-Type: application/json' \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 --data-raw '{
