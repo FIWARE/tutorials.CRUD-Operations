@@ -15,9 +15,9 @@
 
 This tutorial teaches **NGSI-LD** users about CRUD Operations. The tutorial outlines example usage of the various ways
 of amending context as detailed within the
-[NGSI-LD specification](https://cim.etsi.org/NGSI-LD/official/front-page.html). A
-series of entities representing temperature sensors are created, modified and deleted based on the temperature sensor
-model defined in an [earlier tutorial](https://github.com/FIWARE/tutorials.Understanding-At-Context).
+[NGSI-LD specification](https://cim.etsi.org/NGSI-LD/official/front-page.html). A series of entities representing
+temperature sensors are created, modified and deleted based on the temperature sensor model defined in an
+[earlier tutorial](https://github.com/FIWARE/tutorials.Understanding-At-Context).
 
 The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also available as
 [Postman documentation](https://fiware.github.io/tutorials.CRUD-Operations/ngsi-ld.html).
@@ -71,8 +71,8 @@ The tutorial uses [cUrl](https://ec.haxx.se/) commands throughout, but is also a
 **CRUD** Operations (**Create**, **Read**, **Update** and **Delete**) are the four basic functions of persistent
 storage. For a smart system based on **NGSI-LD**, **CRUD** actions allow the developer to manipulate the context data
 within the system. Every **CRUD** operation is clearly defined within the
-[NGSI-LD specification](https://cim.etsi.org/NGSI-LD/official/front-page.html), so all
-NGSI-LD compliant context brokers offer the same interface with the same NGSI-LD operations.
+[NGSI-LD specification](https://cim.etsi.org/NGSI-LD/official/front-page.html), so all NGSI-LD compliant context brokers
+offer the same interface with the same NGSI-LD operations.
 
 This tutorial will describe the rational behind each operation, when to use it and how to execute the various **CRUD**
 operations. Since **NGSI-LD** is based on **JSON-LD** passing of `@context` as part of each request in mandatory. For
@@ -392,11 +392,7 @@ The request will fail if any of the attributes already exist in the context. The
 been successful and the reason for failure (if any has occurred).
 
 ```json
-[
-    "urn:ngsi-ld:TemperatureSensor:002",
-    "urn:ngsi-ld:TemperatureSensor:003",
-    "urn:ngsi-ld:TemperatureSensor:004"
-]
+["urn:ngsi-ld:TemperatureSensor:002", "urn:ngsi-ld:TemperatureSensor:003", "urn:ngsi-ld:TemperatureSensor:004"]
 ```
 
 ### Batch Create/Overwrite New Data Entities
@@ -1057,4 +1053,4 @@ the other [tutorials in this series](https://ngsi-ld-tutorials.rtfd.io)
 
 ## License
 
-[MIT](LICENSE) © 2020-2025 FIWARE Foundation e.V.
+[MIT](LICENSE) © 2020-2026 FIWARE Foundation e.V.
