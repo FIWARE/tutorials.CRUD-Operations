@@ -5,6 +5,10 @@
     🍇 🍉 🍊 🍎 🍐 🍌 🍍 🍏 🍐 🍑 🍒 🍓 🫐
 </h1>
 
+> "Ninety-percent of everything is crud."
+>
+> — Theodore Sturgeon
+
 ## CRUD Operations
 
 [![FIWARE Core Context Management](https://fiware.github.io/catalogue/badges/chapters/core.svg)](https://github.com/FIWARE/catalogue/blob/master/core/README.md)
