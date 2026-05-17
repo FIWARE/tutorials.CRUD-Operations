@@ -1109,6 +1109,18 @@ curl -X GET \
     {
         "id": "urn:ngsi-ld:InventoryItem:001",
         "type": "InventoryItem"
+    },
+    {
+        "id": "urn:ngsi-ld:InventoryItem:004",
+        "type": "InventoryItem"
+    },
+    {
+        "id": "urn:ngsi-ld:InventoryItem:006",
+        "type": "InventoryItem"
+    },
+    {
+        "id": "urn:ngsi-ld:InventoryItem:401",
+        "type": "InventoryItem"
     }
 ]
 ```
