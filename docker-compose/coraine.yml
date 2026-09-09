@@ -42,6 +42,7 @@ services:
       - none
       - --apiPlugins
       - admin
+      - --distributed
 
   # Tutorial acts as a series of dummy IoT Sensors over HTTP and connects to the Coraine Broker
   tutorial:
@@ -50,5 +51,3 @@ services:
       - DUMMY_DEVICES_PORT=${TUTORIAL_DUMMY_DEVICE_PORT} # Port used by the dummy IOT devices to receive commands
       - DUMMY_DEVICES_TRANSPORT=HTTP # Default transport used by dummy Io devices
       - CONTEXT_BROKER=http://coraine:${CORAINE_PORT}/ngsi-ld/v1 # URL of the context broker to update context
-
-
