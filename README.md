@@ -570,9 +570,11 @@ The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response
 {
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
-    "category": "sensor",
+    "category": {
+        "vocab": "sensor"
+    },
     "temperature": 25,
-    "batteryLevel": 0.8,
+    "batteryLevel": 0.9,
     "controlledAsset": "urn:ngsi-ld:Building:barn002"
 }
 ```
@@ -607,7 +609,9 @@ The sensor `urn:ngsi-ld:TemperatureSensor:001` is reading at 25°C. The response
 {
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
-    "category": "sensor",
+    "category": {
+        "vocab": "sensor"
+    },
     "temperature": 25
 }
 ```
