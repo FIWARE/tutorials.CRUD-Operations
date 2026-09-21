@@ -606,9 +606,11 @@ curl -G -iX GET \
 {
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
-    "category": "sensor",
+    "category": {
+        "vocab": "sensor"
+    },
     "temperature": 25,
-    "batteryLevel": 0.8,
+    "batteryLevel": 0.9,
     "controlledAsset": "urn:ngsi-ld:Building:barn002"
 }
 ```
@@ -645,7 +647,9 @@ curl -G -iX GET \
 {
     "id": "urn:ngsi-ld:TemperatureSensor:001",
     "type": "TemperatureSensor",
-    "category": "sensor",
+    "category": {
+        "vocab": "sensor"
+    },
     "temperature": 25
 }
 ```
@@ -798,6 +802,10 @@ curl -G -iX GET \
 `id` は一意である必要があるため、このリクエストでは `type` は必要ありません。`id` でフィルタリングするには、
 エントリをカンマ区切りのリストに追加します。
 
+`id` のリストだけではクエリとして十分ではありません。NGSI-LD では `type`、`attrs`、`q`、GeoQuery、`local=true` の
+いずれか一つが必要であり、指定がない場合は `BadRequestData`(「too wide query」)が発生します。`pick` はこの要件を
+満たさないため、ここでは `type` を指定せずに要件を満たす `local=true` を使用しています。
+
 #### 1️⃣3️⃣ リクエスト:
 
 ```console
@@ -806,6 +814,7 @@ curl -G -iX GET \
 -H 'Link: <http://context/user-context.jsonld>; rel="http://www.w3.org/ns/json-ld#context"; type="application/ld+json"' \
 -H 'Accept: application/json' \
 -d 'id=urn:ngsi-ld:TemperatureSensor:001,urn:ngsi-ld:TemperatureSensor:002' \
+-d 'local=true' \
 -d 'format=simplified' \
 -d 'pick=id,type,temperature'
 ```
