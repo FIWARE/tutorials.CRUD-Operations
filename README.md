@@ -753,10 +753,8 @@ This example lists selected data from two **TemperatureSensor** entities chosen 
 unique, so `type` is not required for this request. To filter by `id` add the entries in a comma delimited list.
 
 A list of `id` values is not on its own enough to make a query. NGSI-LD requires at least one of `type`, `attrs`, `q`,
-a GeoQuery or `local=true`, and raises `BadRequestData` ("too wide query") without one - see clause 10.4.3.4 of the
-NGSI-LD API specification. `pick` does not count: it selects which members of an entity are returned, not which
-entities are. `local=true` is used here because it satisfies the requirement without naming a `type`, and `attrs`
-cannot be combined with `pick`.
+a GeoQuery or `local=true`, and raises `BadRequestData` ("too wide query") without one and `pick` does not count,
+so `local=true` is used here because it satisfies the requirement without naming a `type`.
 
 #### 1️⃣3️⃣ Request:
 
